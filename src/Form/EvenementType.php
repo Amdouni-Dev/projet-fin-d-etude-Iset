@@ -23,7 +23,7 @@ class EvenementType extends AbstractType
             ->add('description',TextareaType::class,['label'=>'Modifiez la description de votre evenement'])
 //            ->add('image')
             ->add('image', FileType::class, [
-                'label' => 'Merci de recharger  l\image de votre evenement ',
+                'label' => 'Merci de recharger  l\'image de votre evenement ',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [

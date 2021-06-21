@@ -2,7 +2,7 @@
 {#    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}">#}
 {#    <button class="btn">Delete</button>#}
 {#</form>#}
-<form method="post" action="{{ path('deleteEv', {'id': e.id}) }}" onsubmit="return confirm('Etes vous sur de supprimer cette evenement ?');">
+<form method="post" action="{{ path('deleteEv', {'id': e.id}) }}" onsubmit="return confirm('Etes vous sur de supprimer cet evenement ?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ e.id) }}">
     <button  class="btn btn-danger"><i class="fa fa-trash"></i></button>
 </form>

@@ -416,7 +416,8 @@
 
 
         {% for e in evenements |sort|reverse %}
-            {% if e.isValid %}
+            {% if e.isValid and e.isDeleted !=1  %}
+      
 {#            {% if app.user is not same as e.user %}#}
 {#                <p class="event--content-program"><a href="{{ path('user_participer_events',{"id":e.id}) }}"  title="participer">Participer</a></p>#}
 

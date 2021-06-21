@@ -151,14 +151,14 @@ class ActiviteController extends AbstractController
      * @param $id1
      * @param UserRepository $userRepository
      * @param AssociationRepository $associationRepository
-     * @param ActiviteRepository $activiteRepository
+
      * @param $id
      * @param Request $request
      * @param UserInterface $user
      * @param PublicationRepository $publicationRepository
      * @return Response
      */
-    public function resoudre($id1,UserRepository $userRepository,AssociationRepository $associationRepository,ActiviteRepository $activiteRepository,$id,Request $request, UserInterface $user,PublicationRepository $publicationRepository): Response
+    public function resoudre($id1,UserRepository $userRepository,AssociationRepository $associationRepository,$id,Request $request, UserInterface $user,PublicationRepository $publicationRepository): Response
     {
 try{
         $activite=new Activite();

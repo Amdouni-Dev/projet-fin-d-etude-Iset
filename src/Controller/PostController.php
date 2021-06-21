@@ -284,6 +284,7 @@ class PostController extends AbstractController
      */
     public function newpublication(Request $request, UserRepository $repository): Response
     {
+        try{
         $multimedia = new Mutimedia();
         $pub = new Publication();
         $form1 = $this->createForm(PublicationType::class, $pub);
@@ -326,6 +327,9 @@ class PostController extends AbstractController
 
         }
         return $this->render('publicationsU/newpub.html.twig', ['form' => $form->createView(), 'form1' => $form1->createView()]);
+        }catch (\Exception $e){
+            echo "Exception Found - " . $e->getMessage() . "<br/>";
+        }
     }
 
     /**

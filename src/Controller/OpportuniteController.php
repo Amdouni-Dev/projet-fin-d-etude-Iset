@@ -77,35 +77,42 @@ class OpportuniteController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="opportunite_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Opportunite $opportunite
+     * @return Response
      */
     public function edit(Request $request, Opportunite $opportunite): Response
     {
-        $form = $this->createForm(OpportuniteType::class, $opportunite);
-        $form->handleRequest($request);
+        try {
+            $form = $this->createForm(OpportuniteType::class, $opportunite);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $file=$form->get('image')->getData();
-            $fileName=md5(uniqid()).'.'.$file->guessExtension();
+            if ($form->isSubmitted() && $form->isValid()) {
+                $file = $form->get('image')->getData();
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
-            try {
-                $file->move(
-                    $this->getParameter('images_directory'),
-                    $fileName
-                );
-            } catch (FileException $e) {
-                // ... handle exception if something happens during file upload
+                try {
+                    $file->move(
+                        $this->getParameter('images_directory'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $opportunite->setImage($fileName);
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirectToRoute('opportunite_index');
             }
-            $opportunite->setImage($fileName);
-            $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('opportunite_index');
+            return $this->render('proprietaireAssociation/opportunites/modifierOp.html.twig', [
+                'opportuniteform' => $form->createView(),
+                'opportunite' => $opportunite,
+
+            ]);
+        }catch (\Exception $e){
+            echo "Exception Found - " . $e->getMessage() . "<br/>";
         }
-
-        return $this->render('proprietaireassociation/opportunites/formOpportunite.html.twig', [
-            'opportuniteform'=>$form->createView(),
-            'opportunite' => $opportunite,
-
-        ]);
     }
 //
 //    /**

@@ -29,6 +29,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints\File;
 
 
 /**
@@ -176,7 +177,7 @@ try{
                 'choices'=>($a
 
                 ),
-                'label' => "Choisissez le titre de votre association  "
+                'label' => "Choisissez une association  "
             ])
             ->add('description', TextareaType::class, [
                 'attr' => [
@@ -188,7 +189,18 @@ try{
             ])
 
 
-            ->add('video', FileType::class, ['label' => 'Chargez votre video'])
+            ->add('video', FileType::class, ['label' => 'Chargez votre video',
+             'constraints' => [
+        new File([
+            'maxSize' => '5M',
+            'mimeTypes' => [
+                'mp4',
+
+            ],
+            'mimeTypesMessage' => 'svp rechargez une video mp4',
+        ])
+    ],
+            ])
             ->getForm();
         $form->handleRequest($request);
 

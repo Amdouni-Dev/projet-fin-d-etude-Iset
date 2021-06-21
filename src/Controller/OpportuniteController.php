@@ -111,8 +111,8 @@ class OpportuniteController extends AbstractController
                 'opportunite' => $opportunite,
 
             ]);
-        }catch (\Exception $e){
-            echo "probléme : " . $e->getMessage() . "<br/>";
+        }catch (\Exception $ex){
+            echo "Exception Found - " . $ex->getMessage() . "<br/>";
         }
     }
 //

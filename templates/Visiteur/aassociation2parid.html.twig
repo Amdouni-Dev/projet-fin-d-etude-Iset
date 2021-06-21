@@ -564,7 +564,7 @@
     <p style="margin-top: 20px" id="h1" data-shadow='evenements recentes'>Voir les evenements recentes de : {{ ass.titre }} </p>
 
     <div class="row">
-        {% for e in events |sort|reverse | filter(events => events.isValid) %}
+        {% for e in events |sort|reverse | filter(events => events.isValid)| filter(events => not events.isDeleted)  %}
             {% if ass.id is same as e.association.id %}
             <div style="width: auto;margin: 10px;" class="event">
                 <div style="width: 80px;height: auto" class="event--img">

@@ -11,6 +11,7 @@ use App\Repository\ActiviteRepository;
 use App\Repository\ActualiteRepository;
 use App\Repository\AssociationRepository;
 use App\Repository\OpportuniteRepository;
+use Doctrine\DBAL\Driver\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -142,7 +143,6 @@ class OpportuniteController extends AbstractController
      */
     public function newPR($id,Association $association,AssociationRepository $associationRepository,OpportuniteRepository $opportuniteRepository,UserInterface $user,Request $request,EntityManagerInterface $manager): Response
     {
-        try {
 
 
         $opportunite = new Opportunite();
@@ -209,6 +209,7 @@ $ass=$associationRepository->find($id);
                     $fileName
                 );
             } catch (FileException $e) {
+                $e->getMessage();
                 // ... handle exception if something happens during file upload
             }
             $opportunite->setImage($fileName);
@@ -238,9 +239,9 @@ $ass=$associationRepository->find($id);
             'opportunite' => $opportunite,
 
         ]);
-        }catch (\Exception $exception){
-            $exception->getMessage();
-        }
+
+
+
     }
 
 

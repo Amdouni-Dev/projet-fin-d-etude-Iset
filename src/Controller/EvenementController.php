@@ -210,7 +210,7 @@ class EvenementController extends AbstractController
 //            $entityManager = $this->getDoctrine()->getManager();
             $manager->persist($evenement);
             $manager->flush();
-            $this->addFlash('success', 'evenement  bien été enregistrée.');
+            $this->addFlash('success', 'evenement  bien été enregistré.');
 
             return $this->redirectToRoute('evenement_index');
         }
@@ -226,10 +226,15 @@ class EvenementController extends AbstractController
 
         ]);
     }
+
     /**
      * @Route("/{id}/edit", name="evenement_edit", methods={"GET","POST"})
+
+     * @param Request $request
+     * @param Evenement $evenement
+     * @return Response
      */
-    public function edit(ActualiteRepository $actualiteRepository,Request $request, Evenement $evenement): Response
+    public function edit(Request $request, Evenement $evenement): Response
     {
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
@@ -252,10 +257,10 @@ class EvenementController extends AbstractController
             return $this->redirectToRoute('evenement_index');
         }
 
-        return $this->render('proprietaireassociation/evenements/formEvenement.html.twig', [
+        return $this->render('templates/proprietaireAssociation/evenements/formEvenement.html.twig', [
             'evenementform'=>$form->createView(),
             'evenement' => $evenement,
-            'actualites'=>$actualiteRepository->findAll(),
+
         ]);
     }
     /**

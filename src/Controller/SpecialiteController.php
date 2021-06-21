@@ -139,6 +139,7 @@ class SpecialiteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $specialite->setIsValid(0);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('specialite_index');

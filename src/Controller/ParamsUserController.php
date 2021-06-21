@@ -159,7 +159,7 @@ class ParamsUserController extends BaseController
                 $user->setLogo($fileName);
 
             }
-
+$user->setValidcv(0);
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();

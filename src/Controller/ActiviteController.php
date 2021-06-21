@@ -29,7 +29,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints\Image;
 
 
 /**
@@ -189,12 +188,7 @@ try{
             ])
 
 
-            ->add('video', FileType::class, ['mapped'=>false,
-                'constraints' => [
-                    new Image([
-                        'maxSize' => '5M',
-                    ])
-              ],'label' => 'Chargez votre video'])
+            ->add('video', FileType::class, ['label' => 'Chargez votre video'])
             ->getForm();
         $form->handleRequest($request);
 

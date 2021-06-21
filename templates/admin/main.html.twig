@@ -2210,7 +2210,7 @@ permet aux jeunes  d'avoir des chances egales a travers la mise en ligne de leur
 
     <div class="row">
 
-        {% for o in opportunitesAll| filter(opportunites => opportunites.isValid) |sort((a, b) => a.dateLimite <=> b.dateLimite)  %}
+        {% for o in opportunitesAll| filter(opportunites => opportunites.isValid) | filter(opportunites => not opportunites.isDeleted)|sort((a, b) => a.dateLimite <=> b.dateLimite)  %}
 
         <div   style="margin-left: 20px;">
             <div>
@@ -2242,10 +2242,10 @@ permet aux jeunes  d'avoir des chances egales a travers la mise en ligne de leur
     </div>
     <br/>
 
-    <p style="margin-top: 20px" id="h1" data-shadow='evenements recentes'>evenements recentes</p>
+    <p style="margin-top: 20px" id="h1" data-shadow='evenements recentes'>evenements recents</p>
 
     <div class="row">
-    {% for e in evenementsAll | filter(evenementsAll => evenementsAll.isValid) |sort|reverse %}
+    {% for e in evenementsAll | filter(evenementsAll => evenementsAll.isValid) | filter(evenementsAll => not evenementsAll.isDeleted) |sort|reverse %}
     <div style="width: auto;margin: 10px;" class="event">
         <div style="width: 80px;height: auto" class="event--img">
             <a href="{{ asset('uploads/images/'  ~ e.image) }}" onclick="if (!lightboxLoaded) return false" class="w-fancybox">

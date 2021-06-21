@@ -150,66 +150,65 @@ class OpportuniteController extends AbstractController
     public function newPR($id,AssociationRepository $associationRepository,UserInterface $user,Request $request,EntityManagerInterface $manager): Response
     {
 
+        try {
 
-        $opportunite = new Opportunite();
+
+            $opportunite = new Opportunite();
 //$association=new Association();
-$ass=$associationRepository->find($id);
-        $form=$this->createFormBuilder($opportunite)
+            $ass = $associationRepository->find($id);
+            $form = $this->createFormBuilder($opportunite)
+                ->add('titre',
+                    TextType::class, [
+                        'required' => true,
+                        'label' => "Entrez le titre de votre oppoptunite",
+                        'attr' => ['class' => 'form-control']
+                    ])
+                ->add('region',
+                    TextType::class, [
+                        'required' => true,
+                        'label' => "Entrez le region ",
+                        'attr' => ['class' => 'form-control']
+                    ])
+                ->add('domaineConcerne',
+                    TextType::class, [
+                        'required' => true,
+                        'label' => "Entrez le domaine concerné",
+                        'attr' => ['class' => 'form-control']
+                    ])
+                ->add('lienFormPostul',
+                    TextType::class, [
+                        'required' => true,
+                        'label' => "Entrez le lien de formulaire pour postuler",
+                        'attr' => ['class' => 'form-control']
+                    ])
+                ->add('typeOffre',
+                    TextType::class, [
+                        'required' => true,
+                        'label' => "Entrez le type d\'offre ",
+                        'attr' => ['class' => 'form-control']
+                    ])
+                ->add('dateLimite',
+                    DateType::class, [
+                        'required' => true,
+                        'label' => "Entrez la date limite",
+
+                    ])
+                ->add('image', FileType::class, ['label' => 'Chargez votre image'])
+                ->add('description', TextareaType::class, [
+                    'attr' => [
+                        'class' => 'form-control',
+                        'rows' => "9",
+                        'cols' => "45"
+                    ],
+                    'label' => "Entrez la description detaillé de cette oportunité  "
+                ])
+                ->getForm();
+            $form->handleRequest($request);
 
 
-            ->add('titre',
-                TextType::class, [
-                    'required' => true,
-                    'label' => "Entrez le titre de votre oppoptunite",
-                    'attr' => ['class' => 'form-control']
-                ])
-            ->add('region',
-                TextType::class, [
-                    'required' => true,
-                    'label' => "Entrez le region ",
-                    'attr' => ['class' => 'form-control']
-                ])
-            ->add('domaineConcerne',
-                TextType::class, [
-                    'required' => true,
-                    'label' => "Entrez le domaine concerné",
-                    'attr' => ['class' => 'form-control']
-                ])
-            ->add('lienFormPostul',
-                TextType::class, [
-                    'required' => true,
-                    'label' => "Entrez le lien de formulaire pour postuler",
-                    'attr' => ['class' => 'form-control']
-                ])
-            ->add('typeOffre',
-                TextType::class, [
-                    'required' => true,
-                    'label' => "Entrez le type d\'offre ",
-                    'attr' => ['class' => 'form-control']
-                ])
-            ->add('dateLimite',
-                DateType::class, [
-                    'required' => true,
-                    'label' => "Entrez la date limite",
-
-                ])
-            ->add('image',FileType::class,['label'=>'Chargez votre image' ])
-            ->add('description', TextareaType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'rows' => "9",
-                    'cols' => "45"
-                ],
-                'label' => "Entrez la description detaillé de cette oportunité  "
-            ])
-            ->getForm();
-        $form->handleRequest($request);
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $file=$form->get('image')->getData();
-            $fileName=md5(uniqid()).'.'.$file->guessExtension();
-            try {
+            if ($form->isSubmitted() && $form->isValid()) {
+                $file = $form->get('image')->getData();
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
                 try {
                     $file->move(
                         $this->getParameter('images_directory'),
@@ -219,38 +218,36 @@ $ass=$associationRepository->find($id);
                     $e->getMessage();
                     // ... handle exception if something happens during file upload
                 }
-            } catch(\Exception $exception)
-            {
-             return   $exception->getCode();
-            }
-            $opportunite->setImage($fileName);
-            $opportunite->setLanceur($user);
-            $opportunite->setIsValid(0);
+                $opportunite->setImage($fileName);
+                $opportunite->setLanceur($user);
+                $opportunite->setIsValid(0);
 //$opportunite->setDateLimite(date_create('Y-m-d H:i:s'));
-            $opportunite->setAssociation($ass);
-            $opportunite=$form->getData();
+                $opportunite->setAssociation($ass);
+                $opportunite = $form->getData();
 
 
 //            $entityManager = $this->getDoctrine()->getManager();
-            $manager->persist($opportunite);
-            $manager->flush();
-            $this->addFlash('success', 'Opportunité  bien été enregistrée.');
+                $manager->persist($opportunite);
+                $manager->flush();
+                $this->addFlash('success', 'Opportunité  bien été enregistrée.');
 
-            return $this->redirectToRoute('opportunite_index');
+                return $this->redirectToRoute('opportunite_index');
 
-        }
+            }
 
 //        return $this->render("admin/association/associationform.html.twig", ['associationform'=>$form->createView(),
 //            'associations' => $associationRepository->findAll(),
 //            'form' => $form->createView(),
 //
 //        ]);
-        return $this->render('proprietaireassociation/opportunites/formOpportunite.html.twig', [
-            'opportuniteform'=>$form->createView(),
-            'opportunite' => $opportunite,
+            return $this->render('proprietaireassociation/opportunites/formOpportunite.html.twig', [
+                'opportuniteform' => $form->createView(),
+                'opportunite' => $opportunite,
 
-        ]);
-
+            ]);
+        }catch (\Exception $e){
+            echo "Exception Found - " . $e->getMessage() . "<br/>";
+        }
 
 
     }

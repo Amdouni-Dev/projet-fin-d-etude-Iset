@@ -29,7 +29,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints\File;
 
 
 /**
@@ -189,18 +188,7 @@ try{
             ])
 
 
-            ->add('video', FileType::class, ['label' => 'Chargez votre video',
-             'constraints' => [
-        new File([
-            'maxSize' => '5M',
-            'mimeTypes' => [
-                'mp4',
-
-            ],
-            'mimeTypesMessage' => 'svp rechargez une video mp4',
-        ])
-    ],
-            ])
+            ->add('video', FileType::class, ['label' => 'Chargez votre video'])
             ->getForm();
         $form->handleRequest($request);
 

@@ -140,13 +140,19 @@ class OpportuniteController extends AbstractController
     ///////////////////////////*************** Proprietaire*****************////////////////
     /**
      * @Route("/newOP/{id}", name="OP_new", methods={"GET","POST"})
+     * @param $id
+     * @param AssociationRepository $associationRepository
+     * @param UserInterface $user
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
      */
-    public function newPR($id,AssociationRepository $associationRepository,OpportuniteRepository $opportuniteRepository,UserInterface $user,Request $request,EntityManagerInterface $manager): Response
+    public function newPR($id,AssociationRepository $associationRepository,UserInterface $user,Request $request,EntityManagerInterface $manager): Response
     {
 
 
         $opportunite = new Opportunite();
-$association=new Association();
+//$association=new Association();
 $ass=$associationRepository->find($id);
         $form=$this->createFormBuilder($opportunite)
 

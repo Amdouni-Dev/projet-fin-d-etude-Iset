@@ -63,7 +63,10 @@
                                                 <td>{{ s.description }}</td>
 
                                                 <td><a class="btn btn-primary" href="{{ path('specialite_edit',{"id":s.id}) }}"><i class="fa fa-edit"></i></a></td>
-                                                <td><a class="btn btn-danger" href="{{ path('Delete__specialite',{"id":s.id}) }}"><i class="fa fa-trash"></i></a></td>
+                                                <td>
+{#                                                    <a class="btn btn-danger" href="{{ path('Delete__specialite',{"id":s.id}) }}"><i class="fa fa-trash"></i></a>#}
+                                                    {{ include('jeune/_delete_form.html.twig') }}
+                                                </td>
 
                                                 {#                                                                        <td>{%  if categorie.categorieParente %} {{ categorie.categorieParente.libelle }} {% endif %}</td>#}
                                             </tr>

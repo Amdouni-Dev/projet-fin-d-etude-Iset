@@ -6,6 +6,7 @@ namespace App\Controller;
 
 
 
+use App\Entity\Evenement;
 use App\Entity\Specialite;
 
 use App\Form\SpecialiteType;
@@ -168,7 +169,7 @@ class SpecialiteController extends AbstractController
 
 
         $entityManager->flush();
-        return $this->redirectToRoute('specialite_index_admin');
+        return $this->redirectToRoute('specialite_index');
 
 
     }
@@ -184,5 +185,17 @@ class SpecialiteController extends AbstractController
         $entityManager->flush();
         return $this->json(["message"=>"success","value"=>$specialite->getIsValid()]);
     }
+    /**
+     * @Route("/{id}", name="deletesp", methods={"POST"})
+     */
+    public function delete(Request $request, Specialite $specialite): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$specialite->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($specialite);
+            $entityManager->flush();
+        }
 
+        return $this->redirectToRoute('specialite_index');
+    }
 }

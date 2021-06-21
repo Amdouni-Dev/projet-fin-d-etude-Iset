@@ -83,7 +83,7 @@ class OpportuniteController extends AbstractController
      */
     public function edit(Request $request, Opportunite $opportunite): Response
     {
-        try {
+
             $form = $this->createForm(OpportuniteType::class, $opportunite);
             $form->handleRequest($request);
 
@@ -101,6 +101,7 @@ class OpportuniteController extends AbstractController
                     // ... handle exception if something happens during file upload
                 }
                 $opportunite->setImage($fileName);
+                $opportunite->setIsValid(0);
                 $this->getDoctrine()->getManager()->flush();
 
                 return $this->redirectToRoute('opportunite_index');
@@ -111,9 +112,7 @@ class OpportuniteController extends AbstractController
                 'opportunite' => $opportunite,
 
             ]);
-        }catch (\Exception $ex){
-            echo "Exception Found - " . $ex->getMessage() . "<br/>";
-        }
+
     }
 //
 //    /**

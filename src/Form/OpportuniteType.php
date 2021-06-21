@@ -23,7 +23,7 @@ class OpportuniteType extends AbstractType
             ->add('description')
             ->add('TypeOffre')
             ->add('image', FileType::class, [
-                'label' => 'Entrer l\image de votre opportunité ',
+                'label' => 'Charge l\'image de votre opportunité ',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [

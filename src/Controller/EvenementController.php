@@ -252,12 +252,13 @@ class EvenementController extends AbstractController
                 // ... handle exception if something happens during file upload
             }
             $evenement->setImage($fileName);
+            $evenement->setIsValid(0);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('evenement_index');
         }
 
-        return $this->render('templates/proprietaireAssociation/evenements/formEvenement.html.twig', [
+        return $this->render('proprietaireAssociation/evenements/formEvenement.html.twig', [
             'evenementform'=>$form->createView(),
             'evenement' => $evenement,
 

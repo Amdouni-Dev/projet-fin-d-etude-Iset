@@ -142,6 +142,9 @@ class OpportuniteController extends AbstractController
      */
     public function newPR($id,Association $association,AssociationRepository $associationRepository,OpportuniteRepository $opportuniteRepository,UserInterface $user,Request $request,EntityManagerInterface $manager): Response
     {
+        try {
+
+
         $opportunite = new Opportunite();
 $association=new Association();
 $ass=$associationRepository->find($id);
@@ -222,6 +225,7 @@ $ass=$associationRepository->find($id);
             $this->addFlash('success', 'Opportunité  bien été enregistrée.');
 
             return $this->redirectToRoute('opportunite_index');
+
         }
 
 //        return $this->render("admin/association/associationform.html.twig", ['associationform'=>$form->createView(),
@@ -234,6 +238,9 @@ $ass=$associationRepository->find($id);
             'opportunite' => $opportunite,
 
         ]);
+        }catch (\Exception $exception){
+            $exception->getMessage();
+        }
     }
 
 

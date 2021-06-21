@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Actualite;
 use App\Entity\Association;
+use App\Entity\Evenement;
 use App\Entity\Opportunite;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;

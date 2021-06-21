@@ -10,6 +10,7 @@ use App\Form\OpportuniteType;
 use App\Repository\ActiviteRepository;
 use App\Repository\ActualiteRepository;
 use App\Repository\AssociationRepository;
+use App\Repository\EvenementRepository;
 use App\Repository\OpportuniteRepository;
 use Doctrine\DBAL\Driver\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -353,5 +354,15 @@ class OpportuniteController extends AbstractController
         }
 
         return $this->redirectToRoute('opportunitesAdmin');
+    }
+
+    /**
+     * @Route("/deleteoppp/{id}",name="deleteoppp")
+
+     */
+    public function deleteActiv(Opportunite $opportunite,OpportuniteRepository $opportuniteRepository){
+
+//        return $this->json(["message"=>"success","value"=>$activite->getIsDeleted()]);
+        return $this->redirectToRoute('opportunite_index');
     }
     }

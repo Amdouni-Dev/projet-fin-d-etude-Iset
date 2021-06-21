@@ -141,7 +141,7 @@ class OpportuniteController extends AbstractController
     /**
      * @Route("/newOP/{id}", name="OP_new", methods={"GET","POST"})
      */
-    public function newPR($id,Association $association,AssociationRepository $associationRepository,OpportuniteRepository $opportuniteRepository,UserInterface $user,Request $request,EntityManagerInterface $manager): Response
+    public function newPR($id,AssociationRepository $associationRepository,OpportuniteRepository $opportuniteRepository,UserInterface $user,Request $request,EntityManagerInterface $manager): Response
     {
 
 

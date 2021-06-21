@@ -105,15 +105,15 @@ class OpportuniteController extends AbstractController
 
                 return $this->redirectToRoute('opportunite_index');
             }
-        }catch (\Exception $e){
-            echo "probléme : " . $e->getMessage() . "<br/>";
-        }
+
             return $this->render('proprietaireAssociation/opportunites/modifierOp.html.twig', [
                 'opportuniteform' => $form->createView(),
                 'opportunite' => $opportunite,
 
             ]);
-
+        }catch (\Exception $e){
+            echo "probléme : " . $e->getMessage() . "<br/>";
+        }
     }
 //
 //    /**

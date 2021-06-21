@@ -1,0 +1,506 @@
+{% extends "admin/bars.html.twig" %}
+
+
+{% block contenpage %}
+<style>
+
+
+
+
+
+
+
+    .img {
+        margin-top:100px;
+float: right;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .img img {
+        width: 500px;
+
+    }
+
+    .login-container {
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
+
+    form {
+        width: 360px;
+        text-transform: uppercase;
+    }
+
+    .avatar2 {
+        width: 100px;
+
+    }
+
+    form h2 {
+        font-size: 2.9rem;
+        text-transform: uppercase;
+        margin: 15px 0;
+        color: #333;
+    }
+
+    .input-div {
+        position: relative;
+        display: grid;
+        grid-template-columns: 7% 93%;
+        margin: 25px 0;
+        padding: 5px 0;
+        border-bottom: 2px so lid #d9d9d9;
+        text-decoration: none;
+        outline: none;
+
+
+    }
+
+    .input-div:after,
+    .input-div:before {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        width: 0;
+        height: 2px;
+        background-color: var(--mainColor);
+        transition: .3s;
+        outline: none;
+    }
+
+    .input-div:after {
+        right: 50%;
+    }
+
+    .input-div:before {
+        left: 50%;
+    }
+
+    .input-div.focus .i i {
+        color: var(--mainColor);
+    }
+
+    .input-div.focus div h5 {
+        top: -5px;
+        font-size: 10px;
+
+    }
+
+    .input-div.focus:after,
+    .input-div.focus:before {
+        width: 50%;
+
+    }
+
+    .input-div.one {
+        margin-top: 0;
+    }
+
+    .input-div.two {
+        margin-bottom: 4px;
+    }
+
+    .i {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .i i {
+        color: #d9d9d9;
+        transition: .3s;
+    }
+
+    .input-div>div {
+        position: relative;
+        height: 45px;
+    }
+
+    .input-div>div h5 {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #999;
+        font-size: 18px;
+        transition: .3s;
+    }
+
+
+    .input {
+        position: absolute;
+        outline: 0;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border: none;
+        background: none;
+        padding: 0.5rem 0.7rem;
+        font-size: 1.2rem;
+        color: #555;
+        font-family: 'Source Sans Pro', sans-serif;
+
+    }
+
+
+
+    a:hover {
+        color: var(--mainColor);
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+        height: 40px;
+        border-radius: 25px;
+        text-transform: uppercase;
+        /*background-color: var(--mainColor);*/
+        color: white;
+        border: none;
+        letter-spacing: 1px;
+        margin-top: 20px;
+        transition: .5s;
+    }
+
+    .btn:hover {
+        background-color: #5245ca;
+    }
+
+    @media screen and (max-width: 1000px) {
+        form {
+            width: 290px;
+        }
+
+        .login-container h2 {
+            font-size: 2.4rem;
+            margin: 8px 0;
+        }
+
+        .img img {
+            width: 400px;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        body {
+            background-color: var(--mainColor);
+        }
+
+        .container {
+            grid-template-columns: 1fr;
+        }
+
+        .img {
+            display: none;
+        }
+
+        .wave {
+            display: none;
+        }
+
+        .login-container {
+            justify-content: center;
+            color: var(--mainColor);
+        }
+
+        .form-login {
+            padding: 40px;
+            background-color: #fff;
+            width: 420px;
+            border-radius: 8px;
+            box-shadow: 3px 3px 15px rgba(88, 34, 160, 0.2);
+        }
+    }
+</style>
+
+<div style="height: 1000px">
+
+    <div  class="container">
+        <div class="img">
+            <img src="https://i.ibb.co/JvXP8rW/phone.png" alt="">
+        </div>
+        <div class="login-container">
+            <div class="form-login">
+                <img class="avatar2" src="https://i.ibb.co/H4f3Hkv/profile.png" alt="">
+                <h2>Bienvenue cher utilisateur </h2>
+                <div class="input-div one">
+
+                    <div>
+                                                {{ form_start(userForm) }}
+                                                <div class="input-field col s6">
+                                                   {{ form_widget(userForm) }}
+
+                                                    <button type="submit" name="valider" class="btn btn-success">{{ "backend.user.register"|trans }}</button>
+
+                                                    <a class="btn btn-warning" href="{{ path('app_admin_users') }}">{{ "backend.user.cancel"|trans }}</a>
+
+
+
+
+
+
+                                                {{ form_end(userForm) }}
+                                                </div></div></div></div></div></div></div>
+{#                        <h5>Username</h5>#}
+{#                        <input class="input" type="text">#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="input-div pass">#}
+{#                    <div class="i">#}
+{#                        <i class="fas fa-lock"> </i>#}
+{#                    </div>#}
+{#                    <div class="div">#}
+{#                        <h5>Password</h5>#}
+{#                        <input class="input" type="password">#}
+{#                    </div>#}
+                </div>
+{#                <input type="submit" class="btn" value="Login">#}
+{#                <a href="#">Forgot Password?</a>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+{#    <script type="text/javascript" src="main.js"></script>#}
+
+
+
+
+<script>
+    function addcl() {
+        let parent = this.parentNode.parentNode;
+        parent.classList.add("focus");
+    }
+
+    function remcl() {
+        let parent = this.parentNode.parentNode;
+        if (this.value == "") {
+            parent.classList.remove("focus");
+        }
+    }
+
+
+    inputs.forEach(input => {
+        input.addEventListener("focus", addcl);
+        input.addEventListener("blur", remcl);
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#<style>#}
+{#    #nom{#}
+{#        text-transform: uppercase;#}
+{#    }#}
+
+{#    .btn{#}
+{#        background-color: #14b0f3;#}
+{#    }#}
+{#    .btn:hover{#}
+{#        background-color: #0093d2;#}
+{#    }#}
+
+{#    header{#}
+{#        padding: 7em 5em 4em 5em;#}
+{#    }#}
+
+{#    h1{#}
+{#        font-family: 'Source Sans Pro', Arial, sans-serif;#}
+
+{#    }#}
+
+{#    #rectangle{#}
+{#        border: solid 2px white;#}
+{#        background-color: white;#}
+{#        padding: 2em 2em 2em 2em;#}
+{#        -webkit-box-shadow: 3px 4px 4px -2px rgba(0,0,0,0.75);#}
+{#        -moz-box-shadow: 3px 4px 4px -2px rgba(0,0,0,0.75);#}
+{#        box-shadow: 3px 4px 4px -2px rgba(0,0,0,0.75);#}
+{#    }#}
+
+{#    #blanc{#}
+{#        max-width: 50%;#}
+{#        min-width: 50%;#}
+{#    }#}
+
+{#</style>#}
+
+{#    <div class="">#}
+{#        <div class="page-title">#}
+{#            <div class="title_left">#}
+{#                <h5><a href="{{ path('app_admin_users') }}">{{ "backend.user.user_listing"|trans }}</a> >> {{ "backend.menu.user"|trans }} </h5>#}
+{#            </div>#}
+{#        </div>#}
+
+
+{#        <div class="row">#}
+{#            <div class="col s12 m12 l12" style="text-align:center; color:white;">#}
+{#                <h1>Inscription</h1>#}
+{#                <p>Bienvenue sur la page d'inscription, veuillez remplir les informations ci-dessous</p>#}
+{#            </div>#}
+{#        </div>#}
+
+{#    <div style="margin-left: 400px" class="container">#}
+
+
+{#            <div  class="row" id="blanc">#}
+{#                <div class="col l12 m12 s12" id="rectangle">#}
+{#                        {{ form_start(userForm) }}#}
+{#                        <div class="input-field col s6">#}
+{#                           {{ form_widget(userForm) }}#}
+{#                        </div>#}
+
+
+{#                        <div class="ln_solid"></div>#}
+{#                        <div class="item form-group">#}
+{#                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">#}
+{#                                <a class="btn btn-warning" href="{{ path('app_admin_users') }}">{{ "backend.user.cancel"|trans }}</a>#}
+{#                                <button type="submit" name="valider" class="btn btn-success">{{ "backend.user.register"|trans }}</button>#}
+{#                            </div>#}
+{#                        </div></div>#}
+{#                        {{ form_end(userForm) }}#}
+{#                            </div>#}
+{#                    </div>#}
+
+
+
+{% endblock %}
+
+{#<!DOCTYPE html>#}
+{#<html lang="fr" dir="ltr">#}
+{#<head>#}
+{#    <meta charset="utf-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>#}
+{#    <title>Inscription</title>#}
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">#}
+{#    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">#}
+{#    <link rel="stylesheet" href="style.css">#}
+{#</head>#}
+{#<style>#}
+{#    @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600,700");#}
+
+
+{#    html{#}
+{#        min-height: 100%;#}
+{#    }#}
+
+{#    body{#}
+{#        background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);background-position: center;#}
+{#    }#}
+
+{#    #nom{#}
+{#        text-transform: uppercase;#}
+{#    }#}
+
+{#    .btn{#}
+{#        background-color: #14b0f3;#}
+{#    }#}
+{#    .btn:hover{#}
+{#        background-color: #0093d2;#}
+{#    }#}
+
+{#    header{#}
+{#        padding: 7em 5em 4em 5em;#}
+{#    }#}
+
+{#    h1{#}
+{#        font-family: 'Source Sans Pro', Arial, sans-serif;#}
+
+{#    }#}
+
+{#    #rectangle{#}
+{#        border: solid 2px white;#}
+{#        background-color: white;#}
+{#        padding: 2em 2em 2em 2em;#}
+{#        -webkit-box-shadow: 3px 4px 4px -2px rgba(0,0,0,0.75);#}
+{#        -moz-box-shadow: 3px 4px 4px -2px rgba(0,0,0,0.75);#}
+{#        box-shadow: 3px 4px 4px -2px rgba(0,0,0,0.75);#}
+{#    }#}
+
+{#    #blanc{#}
+{#        max-width: 50%;#}
+{#        min-width: 50%;#}
+{#    }#}
+
+{#</style>#}
+{#<body>#}
+
+{#<header>#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col s12 m12 l12" style="text-align:center; color:white;">#}
+{#                <i class="large material-icons">add_circle</i>#}
+{#                <h1>Inscription</h1>#}
+{#                <p>Bienvenue sur la page d'inscription, veuillez remplir les informations ci-dessous</p>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="row" id="blanc">#}
+{#            <div class="col l12 m12 s12" id="rectangle">#}
+{#                <form method="GET">#}
+{#                    {{ form_start(userForm) }}#}
+{#                    <!-- Champ prénom !-->#}
+
+
+
+{#                    <!-- Champ nom !-->#}
+
+
+
+{#                    <!-- Champ CGV !-->#}
+
+{#                    <div class="input-field col s12">#}
+{#                        <p>#}
+{#                            <label>#}
+{#                                <input class="with-gap" name="group1" type="radio"/>#}
+{#                                <span>J'accepte les conditions d'utilisations.</span>#}
+{#                            </label>#}
+{#                        </p>#}
+{#                    </div>#}
+
+{#                    <!-- Bouton envoyer !-->#}
+
+{#                    <div class="input-field col s12">#}
+{#                                                        <a class="btn btn-warning" href="{{ path('app_admin_users') }}">{{ "backend.user.cancel"|trans }}</a>#}
+
+{#                        <button class="btn waves-effect waves-light pulse" type="submit" name="valider">{{ "backend.user.register"|trans }}#}
+{#                                                        <button type="submit" name="valider" class="btn btn-success">{{ "backend.user.register"|trans }}#}
+
+{#                            <i class="material-icons right">send</i>#}
+{#                        </button>#}
+
+{#                                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">#}
+{#                                                        <a class="btn btn-warning" href="{{ path('app_admin_users') }}">{{ "backend.user.cancel"|trans }}</a>#}
+{#                                                        <a class="btn btn-warning" href="{{ path('register') }}">{{ "backend.user.register"|trans }}</a>#}
+{#                                                    </div>#}
+
+{#                    </div>#}
+{#                    {{ form_end(userForm) }}#}
+{#                </form>#}
+
+{#            </div>#}
+
+{#        </div>#}
+{#    </div>#}
+{#</header>#}
+
+
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>#}
+
+{#</body>#}
+{#</html>#}

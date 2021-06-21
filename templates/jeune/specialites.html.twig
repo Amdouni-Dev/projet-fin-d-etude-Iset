@@ -1,0 +1,83 @@
+{% extends "admin/bars.html.twig" %}
+
+
+{% block contenpage %}
+    {% if is_granted('ROLE_JEXPERT')   %}
+
+        <div style="background-color: white" class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h5> Listing </h5>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Liste des spécialites</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                {#                            <li><a href="{{ path('newAss',{'idPA':app.user.id}) }}" class="btn btn-success">NEW</a>#}
+                                <li><a href="{{ path('newSpecialite') }}" class="btn btn-success">Ajouter des spécialites</a>
+
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+{#                                <form action="{{ path('groupaction_association') }}" id="grpaction" method="post" name="grpaction">#}
+{#                                    <div class="form-group form-inline">#}
+{#                                        <select class="form-control" name="action" required id="action_select">#}
+{#                                            <option value="">Action de groupe</option>#}
+{#                                            <option value="desactiver">Desactiver</option>#}
+{#                                            <option value="activer">Activer</option>#}
+{#                                            <option value="supprimer">Supprimer</option>#}
+{#                                        </select>#}
+{#                                        <button class="btn btn-primary" type="submit">Go!!</button>#}
+{#                                    </div>#}
+
+{#                                </form>#}
+                                <table id="example" class="display table table-striped table-bordered dataminetables" >
+                                    <thead>
+                                    <th><input type="checkbox" id="select_all" name="select_all"></th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+
+
+
+
+
+                                    <th>Modifier</th>
+
+                                    <th>Suprimer</th>
+                                    </thead>
+                                    <tbody>
+                                    {% for s in specialites %}
+                                        {% if ( s.user is same  as app.user ) %}
+                                            <tr>
+                                                <td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ s.id }}"></td>
+                                                <td>{{ s.type }}</td>
+                                                <td>{{ s.description }}</td>
+
+                                                <td><a class="btn btn-primary" href="{{ path('specialite_edit',{"id":s.id}) }}"><i class="fa fa-edit"></i></a></td>
+                                                <td><a class="btn btn-danger" href="{{ path('Delete__specialite',{"id":s.id}) }}"><i class="fa fa-trash"></i></a></td>
+
+                                                {#                                                                        <td>{%  if categorie.categorieParente %} {{ categorie.categorieParente.libelle }} {% endif %}</td>#}
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <h1><strong>404</strong>  Vous n'avez pas l'acces</h1>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,245 @@
+{% extends "admin/bars.html.twig" %}
+
+
+{% block contenpage %}
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .cont {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 940px;
+            margin: auto;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px;
+        }
+        .card-header video {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            padding: 20px;
+            min-height: 180px;
+        }
+        .tag {
+            background-color: #ccc;
+            color: #fff;
+            border-radius: 50px;
+            font-size: 12px;
+            margin: 0;
+            padding: 2px 10px;
+            text-transform: uppercase;
+        }
+        .tag-teal {
+            background-color: #92d4e4;
+        }
+        .tag-purple {
+            background-color: #3d1d94;
+        }
+        .tag-pink {
+            background-color: #c62bcd;
+        }
+        .card-body h4 {
+            margin: 10px 0;
+        }
+        .card-body p {
+            font-size: 14px;
+            margin: 0 0 40px 0;
+            font-weight: 500;
+            color: rgb(70, 68, 68);
+        }
+        .user {
+            display: flex;
+
+        }
+        .user img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        .user-info h5 {
+            margin: 0;
+        }
+        .user-info small {
+            color: #888785;
+        }
+        @media (max-width: 940px) {
+            .cont {
+                grid-template-columns: 1fr;
+                justify-items: center;
+            }
+        }
+
+
+
+
+
+        .search-result-categories>li>a {
+            color: #b6b6b6;
+            font-weight: 400
+        }
+        .search-result-categories>li>a:hover {
+            background-color: #ddd;
+            color: #555
+        }
+        .search-result-categories>li>a>.glyphicon {
+            margin-right: 5px
+        }
+        .search-result-categories>li>a>.badge {
+            float: right
+        }
+        .search-results-count {
+            margin-top: 10px
+        }
+        .search-result-item {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 4px
+        }
+        .search-result-item:after,
+        .search-result-item:before {
+            content: " ";
+            display: table
+        }
+        .search-result-item:after {
+            clear: both
+        }
+        .search-result-item .image-link {
+            display: block;
+            overflow: hidden;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px
+        }
+        @media (min-width:768px) {
+            .search-result-item .image-link {
+                display: inline-block;
+                margin: -20px 0 -20px -20px;
+                float: left;
+                width: 200px
+            }
+        }
+        @media (max-width:767px) {
+            .search-result-item .image-link {
+                max-height: 200px
+            }
+        }
+        .search-result-item .image {
+            max-width: 100%
+        }
+        .search-result-item .info {
+            margin-top: 2px;
+            font-size: 12px;
+            color: #999
+        }
+        .search-result-item .description {
+            font-size: 13px
+        }
+        .search-result-item+.search-result-item {
+            margin-top: 20px
+        }
+        @media (min-width:768px) {
+            .search-result-item-body {
+                margin-left: 200px
+            }
+        }
+        .search-result-item-heading {
+            font-weight: 400
+        }
+        .search-result-item-heading>a {
+            color: #555
+        }
+        @media (min-width:768px) {
+            .search-result-item-heading {
+                margin: 0
+            }
+        }
+        .titre { margin-left : 400px ;  }
+    </style>
+
+    <div class="x_content">
+        <hr style="  border: 0;
+
+  border-bottom: 3px solid #fff;
+  border-radius: 100%;
+  width: 100%;
+">
+        <h1 style="color:#0b97c4;font-family: 'Times New Roman'" class="text-center txt1">Consulter tous les jeunes experts de la tunisie et  <b>contacter eux</b></h1>
+    </div>
+    <br/><br/>
+    <div class="cont">
+        {% for users in users|filter(users => not users.deleted) %}
+            {%  for r in users.roles %}
+                {% if r is same as "ROLE_JEXPERT" %}
+{% if users.isvalidCV %}
+                    <div class="card">
+                        <div class="card-header">
+                            <video width="200" height="150" controls>
+                                <source src="{{ asset('uploads/videos/'  ~ users.video) }}" >
+
+                            </video>
+                        </div>
+
+                        <div class="card-body">
+
+                            {% for s in specialites | filter(specialites => specialites.isValid)  %}
+                                {% if s.user.id is same as users.id %}
+
+                                    <span class="tag tag-teal">{{s.type}}   </span>
+                                {% endif %}
+                            {% endfor %}
+                            <p></p>
+                            <div class="user">
+                                <img src="{{ asset('uploads/images/'  ~ users.logo) }}" alt="" />
+                                <div class="user-info">
+                                    <h5>{{users.nomComplet }}</h5>
+
+                                    <small>{{users.email}} / {{users.numeroTel}}</small>
+
+                                </div>
+
+                            </div>
+                            </br>
+                            </br>
+                            <div class="w3-show-inline-block">
+                                {% if users.lienFbk %}
+                                <a class="btn btn-primary" style="background-color: #3b5998;" href="{{users.lienFbk}}" role="button"><i class="fab fa-facebook-f"></i></a>
+                                {% endif %}
+                                {% if users.lienInstagram  %}
+                                    <a class="btn btn-primary" style="background-color: #ac2bac;" href="{{users.lienInstagram}}" role="button"><i class="fab fa-instagram"></i></a>
+                             {% endif %}
+                                    {% if users.validcv == true  %}
+
+                                    <a class="btn btn-primary" href="{{ asset('uploads/cvs/'  ~ users.cv) }}">CV</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+{% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+
+
+    </div>
+
+
+
+
+
+{% endblock %}

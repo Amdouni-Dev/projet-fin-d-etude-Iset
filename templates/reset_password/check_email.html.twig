@@ -1,0 +1,19 @@
+{% extends 'security/login.html.twig' %}
+
+{% block title %}Password Reset Email Sent
+{% endblock %}
+
+{% block body %}
+	<div class="login_wrapper">
+		<div class="animate form login_form">
+			<section class="login_content">
+				<h1>Un e-mail a été envoyé qui contient un lien sur lequel vous pouvez cliquer pour réinitialiser votre mot de passe. Ce lien expirera dans
+					{{ tokenLifetime|date('g') }}
+					heures.</h1>
+				<h2>Si vous ne recevez pas d'e-mail, veuillez vérifier votre dossier spam ou
+					<a href="{{ path('app_forgot_password_request') }}">réessayer</a>.</h2>
+
+			</section>
+		</div>
+	</div>
+{% endblock %}

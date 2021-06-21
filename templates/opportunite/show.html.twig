@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Opportunite{% endblock %}
+
+{% block body %}
+    <h1>Opportunite</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ opportunite.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ opportunite.titre }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ opportunite.image }}</td>
+            </tr>
+            <tr>
+                <th>DateLimite</th>
+                <td>{{ opportunite.dateLimite ? opportunite.dateLimite|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Region</th>
+                <td>{{ opportunite.region }}</td>
+            </tr>
+            <tr>
+                <th>DomaineConcerne</th>
+                <td>{{ opportunite.domaineConcerne }}</td>
+            </tr>
+            <tr>
+                <th>LienFormPostul</th>
+                <td>{{ opportunite.lienFormPostul }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ opportunite.description }}</td>
+            </tr>
+            <tr>
+                <th>TypeOffre</th>
+                <td>{{ opportunite.TypeOffre }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('opportunite_index') }}">back to list</a>
+
+    <a href="{{ path('opportunite_edit', {'id': opportunite.id}) }}">edit</a>
+
+    {{ include('opportunite/_delete_form.html.twig') }}
+{% endblock %}

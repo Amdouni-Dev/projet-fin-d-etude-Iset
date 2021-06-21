@@ -1,0 +1,109 @@
+
+{% block title %}Inscription {% endblock %}
+
+{% block body %}
+    {#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"#}
+    {#          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">#}
+    {#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"#}
+    {#          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">#}
+    {#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">#}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+    {% form_theme registrationForm 'bootstrap_3_layout.html.twig' %}
+    {% include 'header.html.twig' %}
+
+    <section class=" bg-image  route" style="background-image: url({{ asset("assets/img/overlay-bg.jpg") }})">
+        <div class="overlay-mf"></div>
+        <br><br>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10">
+                    <div class="contact-mf" >
+                        <div id="contact" class="box-shadow-full"  style="margin-left: 170px">
+                            <div class="row text-center" style="margin-left: 85px">
+                                <div class="col-md-10">
+                                    <div class="title-box-2">
+                                        <h5 class="title-left">
+                                            Inscrivez vous ici
+                                        </h5>
+                                    </div>
+                                    <div>
+                                        {{ form_start(registrationForm) }}
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <div class="form-group">
+                                                    {{ form_widget(registrationForm.nom,{'attr': {'style': 'padding :20px','placeholder' : 'votre nom','font-size':' 100px'}}) }}
+                                                    <span style="color:red"> {{ form_errors(registrationForm.nom,{'attr': {'style': 'color :red'}}) }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <div class="form-group">
+                                                    {{ form_widget(registrationForm.prenom,{'attr': {'style': 'padding :20px','placeholder' : 'votre prenom ','font-size':' 100px'}}) }}
+                                                    <span style="color:red">{{ form_errors(registrationForm.prenom,{'attr': {'style': 'color :red'}}) }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <div class="form-group">
+                                                    {{ form_widget(registrationForm.adresse,{'attr': {'style': 'padding :20px','placeholder' : 'Adresse ','font-size':' 100px'}}) }}
+                                                    <span style="color:red">  {{ form_errors(registrationForm.adresse,{'attr': {'style': 'color :red'}}) }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <div class="form-group">
+                                                    {{ form_widget(registrationForm.tel,{'attr': {'style': 'padding :20px','placeholder' : 'Téléphone ','font-size':' 100px'}}) }}
+                                                    <span style="color:red">{{ form_errors(registrationForm.tel,{'attr': {'style': 'color :red'}}) }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <div class="form-group">
+                                                    {{ form_widget(registrationForm.username,{'attr': {'style': 'padding :20px','placeholder' : 'username ','font-size':' 100px'}})}}
+                                                    <span style="color:red"> {{ form_errors(registrationForm.username,{'attr': {'style': 'color:red'}})}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <div class="form-group">
+                                                    {{ form_widget(registrationForm.email,{'attr': {'style': 'padding :20px','placeholder' : 'exemple@domaine.com ','font-size':' 100px'}})}}
+                                                    <span style="color:red">  {{ form_errors(registrationForm.email,{'attr': {'style': 'color:red'}})}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <div class="form-group">
+                                                    {{form_widget(registrationForm.plainPassword,{label:'Password'})}}
+                                                    <span style="color:red">{{form_errors(registrationForm.plainPassword,{'attr': {'style': 'color:red'}})}}
+                                                </div>
+                                            </div>
+                                            {{ form_widget(registrationForm.agreeTerms) }}
+                                            <div class="col-md-12">
+                                                <button type="submit" class="button button-a button-big button-rouded">S'inscrire</button>
+                                            </div>
+                                        </div>
+                                        {{ form_end(registrationForm) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="copyright-box">
+                            <p class="copyright">&copy; Copyright <strong>FINDME</strong>. All Rights Reserved</p>
+                            <div class="credits">
+                                Developed by <a href="https://bootstrapmade.com/">GALACTECH TEAM</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+{% endblock %}

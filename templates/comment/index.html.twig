@@ -1,0 +1,49 @@
+
+
+{% include 'header.html.twig' %}
+<br><br>
+
+<!-- Photoswipe CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css">
+
+
+<body style="background-image: url({{ asset("assets/img/overlay-bg.jpg") }})">
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"#}
+{#          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">#}
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"#}
+{#          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">#}
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">#}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F7F5; padding: 2px 6px; }
+
+
+</style>
+
+<div class="example-wrapper card" style="margin-top:10%;padding: 20px" >
+
+    <h2 style="; color: #1e88e5">Commentaires</h2>
+    <p class="subtitle-a">
+    </p>
+    <div class="line-mf">
+    </div>
+    {% for commentaire in comments %}
+        <p style="color: ">Commentaire écrit par {{ commentaire.utilisateur.nom}} {{ commentaire.utilisateur.prenom}} </p>
+        <p style="margin-left: 385px;font-size: small;color: lightsteelblue;margin-top: -40px;">le {{ commentaire.DateComnt |date('d/m/Y H:i') }}</p>
+        <p style="color: #42a5f5">{{ commentaire.ContenuComnt }}</p>
+
+
+    {% endfor %}
+    {{ form_start(form) }}
+
+    {{ form_end(form) }}
+    
+    <a href="{{ path('comment',{'id':comments[1].publication.id}) }}">
+        <button class="button button-a  button-rouded" type="submit" >Commenter</button>
+    </a>
+
+
+</div>
+</body>
+

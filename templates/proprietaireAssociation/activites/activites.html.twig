@@ -1,0 +1,172 @@
+{% extends "admin/bars.html.twig" %}
+
+{% block contenpage %}
+
+
+    <div style="background-color: white" class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h5> Listing </h5>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Liste des activites</h2>
+
+                        <ul class="nav navbar-right panel_toolbox">
+                            {# <li><a href="{{ path('newAss',{'idPA':app.user.id}) }}" class="btn btn-success">NEW</a> #}
+                            {# <li><a href="{{ path('association_new') }}" class="btn btn-success">NEW</a> #}
+
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            {# <form action="{{ path('groupaction_association') }}" id="grpaction" method="post" name="grpaction"> #}
+                            {# <div class="form-group form-inline"> #}
+                            {# <select class="form-control" name="action" required id="action_select"> #}
+                            {# <option value="">Action de groupe</option> #}
+                            {# <option value="desactiver">Desactiver</option> #}
+                            {# <option value="activer">Activer</option> #}
+                            {# <option value="supprimer">Supprimer</option> #}
+                            {# </select> #}
+                            {# <button class="btn btn-primary" type="submit">Go!!</button> #}
+                            {# </div> #}
+
+                            {# </form> #}
+                            <table id="example" class="display table table-striped table-bordered dataminetables">
+                                <thead>
+                                <th><input type="checkbox" id="select_all" name="select_all"></th>
+                                <th>Association</th>
+                                <th>description</th>
+                                <th>video</th>
+
+                                <th>Etat</th>
+
+
+                                 <th>Suprimer</th>
+                                </thead>
+                                <tbody>
+                                {% for a in activites %}
+                                    {% if app.user.id == a.user.id %}
+{% if a.isDeleted !=1 %}
+                                        <tr>
+                                            <td><input type="checkbox" class="chkgrp" name="chkgrp[]"
+                                                       value="{{ a.id }}"></td>
+                                            <td>{{ a.association.titre }}</td>
+                                            <td>{{ a.description }}</td>
+{#                                            <td>{{ associations.but }}</td>#}
+                                            <td>      <a href="{{ asset('uploads/images/'  ~ a.video) }}">voir la vidéo</a>
+                                            </td>
+{#                                            <td>{{ associations.adresse }}</td>#}
+{#                                            <td>{{ associations.nombreMembre }}</td>#}
+{#                                            #}{# <td>{%  if categorie.categorieParente %} {{ categorie.categorieParente.libelle }} {% endif %}</td> #}
+{#                                            <td><a class="btn btn-primary"#}
+{#                                                   href="{{ path('OP_new',{"id":associations.id}) }}"><i#}
+{#                                                            class="fa fa-edit"></i></a></td>#}
+{#                                            <td><a class="btn btn-primary"#}
+{#                                                   href="{{ path('association_ajoutInfo',{"id":associations.id}) }}"><i#}
+{#                                                            class="fa fa-plus"></i></a></td>#}
+
+                                            {# <td> #}
+                                            {# {%  if associations.valid %} #}
+                                            {# <a class="btn btn-success activate-link" href="{{ path('changevalidite_association', {'id': associations.id}) }}"> <i class="fa fa-check"></i></a> #}
+                                            {# {% else %} #}
+                                            {# <a class="btn btn-warning activate-link" href="{{ path('changevalidite_association', {'id': associations.id}) }}"> <i class="fa fa-times"></i></a> #}
+                                            {# {% endif %} #}
+                                            {# </td> #}
+
+{#                                                 <a href="{{ path('activite_delete', {'id': a.id}) }}" class="btn btn-danger disable-btn del-link" type="submit" ><i class="fa fa-trash"></i></a>#}
+{#                                                 <form method="post" action="{{ path('activite_delete', {'id': a.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">#}
+{#                                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ a.id) }}">#}
+{#                                                     <button class="btn">Delete</button>#}
+
+
+{#                                                 </form>#}
+{#                                                 <a class="btn btn-success"#}
+{#                                                    href="{{ path('deleteActiv', {'id': a.id}) }}">#}
+{#                                                     <i class="fa fa-trash"></i></a>#}
+                                           <td>
+                                               {% if a.isValid ==1 %}
+                                                   <i  class="btn btn-success  fa fa-check"></i>
+                                                   {% else %}
+                                                       <i class=" btn btn-warning  fa fa-times"></i>
+                                               {% endif %}
+                                           </td>
+                                            <td>
+                                                {{ include('activite/_delete_form.html.twig') }}
+
+
+
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+{% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{#    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>#}
+{#    <script>#}
+{#        function delpost(d) {#}
+{#            console.log(d);#}
+{#            var r = confirm(" Êtes vous sure de vouloir supprimer cette activité ?");#}
+{#            if (r === true) {#}
+{#                $.ajax({#}
+{#                        url: "{{ path('deleteActiv') }}",#}
+{#                        type: 'post',#}
+{#                        data: {d: d},#}
+{#                        // dataType: 'json',#}
+{#                        success: function (da) {#}
+{#                            // if(da.test===true){#}
+{#                            $('#divcard').load(document.URL + ' #divcard');#}
+{#                            console.log("post supprimé")#}
+{#                            // }#}
+{#                        }#}
+{#                    }#}
+{#                )#}
+{#            }#}
+{#        }#}
+
+{#        function onClickBtnLike(event) {#}
+{#            event.preventDefault();#}
+{#            const url = this.action;#}
+{#            console.log(url);#}
+{#            var com = this.querySelector('.msg');#}
+{#            var span = this.querySelector('.c1');#}
+{#            var count = this.querySelector('.count');#}
+{#            var texte = this.querySelector('.texte');#}
+{#            console.log(texte);#}
+{#            let data = new FormData(this);#}
+{#            axios.post(url, data).then(function (response) {#}
+{#                // $('#count').load(document.URL +  ' #count');#}
+{#                console.log(response.data);#}
+{#                count.textContent = response.data.nbrcomments;#}
+{#                span.textContent = response.data.message;#}
+{#                {% if app.user %}#}
+{#                com.textContent = " Ajouté par {{ app.user.nomComplet |upper }} " + "  à " + "  " + response.data.dateajout;#}
+{#                {% endif %}#}
+{#                $('#aa').value = "";#}
+{#                // $('#msg').load(document.URL +  ' #msg');#}
+{#            }).catch(function (error) {#}
+{#                console.log(error)#}
+{#            })#}
+{#        }#}
+
+{#        document.querySelectorAll('form.comment').forEach(function (link) {#}
+{#            link.addEventListener('submit', onClickBtnLike)#}
+{#        });#}
+{#    </script>#}
+{% endblock %}

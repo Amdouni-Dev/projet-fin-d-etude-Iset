@@ -1,0 +1,9 @@
+{% for u  in users %}
+    {% for r in u.roles %}
+{% if r is same as "ROLE_CONSULTANT"  %}
+        <h1>{{ u.email }}</h1>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+
+</ol>

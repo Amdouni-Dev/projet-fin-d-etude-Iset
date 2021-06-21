@@ -1,0 +1,151 @@
+
+
+{% extends "admin/bars.html.twig" %}
+
+
+{% block contenpage %}
+    {% if is_granted('ROLE_ADMIN')   %}
+
+        <div style="background-color: white" class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h5> Listing </h5>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Liste des publications</h2>
+                            {#                        <a href="{{ path('opportunitesAdmin') }}" class="btn btn-success">Gèrer les opportunités</a>#}
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <form action="{{ path('groupaction_association') }}" id="grpaction" method="post" name="grpaction">
+                                    <div class="form-group form-inline">
+                                        <select class="form-control" name="action" required id="action_select">
+                                            <option value="">Action de groupe</option>
+                                            <option value="desactiver">Desactiver</option>
+                                            <option value="activer">Activer</option>
+                                            <option value="supprimer">Supprimer</option>
+                                        </select>
+                                        <button class="btn btn-primary" type="submit">Go!!</button>
+                                    </div>
+
+                                </form>
+                                <table id="example" class="display table table-striped table-bordered dataminetables" >
+                                    <thead>
+                                    <th><input type="checkbox" id="select_all" name="select_all"></th>
+                                    <th>Auteur</th>
+                                    <th>Date de publication</th>
+
+
+                                    <th>contenue</th>
+                                    <th>Image</th>
+{#                                    <th>Adresse</th>#}
+{#                                    <th>Nombre des membres</th>#}
+
+
+
+                                    <th>Modifier</th>
+                                    <th>Etat ?</th>
+                                    <th>Suprimer</th>
+                                    </thead>
+                                    <tbody>
+                                    {% for p in pubs  %}
+                                        <tr>
+                                            <td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ p.id }}"></td>
+                                            <td>{{ p.user.nomComplet }}</td>
+                                            <td>{{ p.datePub |date('d/m/Y H:i')}}</td>
+
+                                            <td>{{ p.contenuPub }}</td>
+                                            <td>
+{% for s in p.mutimedia %}
+                                                <a href="{{ asset('uploads/images/'  ~ s.source) }}">voir l'image</a>
+{% endfor %}
+                                            </td>
+                                                {#                                            <td>{{ associations.nombreMembre }}</td>#}
+                                            {#                                                                        <td>{%  if categorie.categorieParente %} {{ categorie.categorieParente.libelle }} {% endif %}</td>#}
+                                            <td><a class="btn btn-primary" href="{{ path('editPub',{"id":p.id}) }}"><i class="fa fa-edit"></i></a></td>
+<td>
+                                                {%  if p.isValid %}
+                                                    <a class="btn btn-success activate-link" href="{{ path('changevalidite_publication', {'id': p.id}) }}"> <i class="fa fa-check"></i></a>
+                                                {% else %}
+                                                    <a class="btn btn-warning activate-link" href="{{ path('changevalidite_publication', {'id': p.id}) }}"> <i class="fa fa-times"></i></a>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                            <a class="btn btn-danger" onclick="delpost({{ p.id }})" href="{{ path('postAdmin') }}"><i class="fa fa-trash"></i></a>
+{#                                            <td><a href="{{ path('adminPostdelete', {'id': p.id}) }}" class="btn btn-danger  del-link" type="submit" ><i class="fa fa-trash"></i></a></td>#}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <h1><strong>404</strong>  Vous n'avez pas l'acces</h1>
+    {% endif %}
+
+
+    <script>
+        function delpost(d) {
+            console.log(d);
+            var r = confirm(" Êtes vous sure de vouloir supprimer cette publication ?");
+            if (r === true) {
+                $.ajax({
+                        url: "{{ path('supprimerpost') }}",
+                        type: 'post',
+                        data: {d: d},
+                        // dataType: 'json',
+                        success: function (da) {
+                            // if(da.test===true){
+                            $('#divcard').load(document.URL + ' #divcard');
+                            console.log("post supprimé")
+                            // }
+                        }
+                    }
+                )
+            }
+        }
+
+        function onClickBtnLike(event) {
+            event.preventDefault();
+            const url = this.action;
+            console.log(url);
+            var com = this.querySelector('.msg');
+            var span = this.querySelector('.c1');
+            var count = this.querySelector('.count');
+            var texte = this.querySelector('.texte');
+            console.log(texte);
+            let data = new FormData(this);
+            axios.post(url, data).then(function (response) {
+                // $('#count').load(document.URL +  ' #count');
+                console.log(response.data);
+                count.textContent = response.data.nbrcomments;
+                span.textContent = response.data.message;
+                {% if app.user %}
+                com.textContent = " Ajouté par {{ app.user.nomComplet |upper }} " + "  à " + "  " + response.data.dateajout;
+                {% endif %}
+                $('#aa').value = "";
+                // $('#msg').load(document.URL +  ' #msg');
+            }).catch(function (error) {
+                console.log(error)
+            })
+        }
+
+        document.querySelectorAll('form.comment').forEach(function (link) {
+            link.addEventListener('submit', onClickBtnLike)
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends "admin/bars.html.twig" %}
+
+{% block contenpage %}
+    {% if is_granted('ROLE_ADMIN') or  is_granted('ROLE_PASSOCIATION') %}
+
+        <div style="background-color: white" class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h5> Listing </h5>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Liste des activites</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                {# <li><a href="{{ path('newAss',{'idPA':app.user.id}) }}" class="btn btn-success">NEW</a> #}
+
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                {# <form action="{{ path('groupaction_association') }}" id="grpaction" method="post" name="grpaction"> #}
+                                {# <div class="form-group form-inline"> #}
+                                {# <select class="form-control" name="action" required id="action_select"> #}
+                                {# <option value="">Action de groupe</option> #}
+                                {# #}
+                                {# <option value="supprimer">Supprimer</option> #}
+                                {# </select> #}
+                                {# <button class="btn btn-primary" type="submit">Go!!</button> #}
+                                {# </div> #}
+
+                                {# </form> #}
+                                <table id="example" class="display table table-striped table-bordered dataminetables">
+                                    <thead>
+                                    <th><input type="checkbox" id="select_all" name="select_all"></th>
+                                    <th>Association</th>
+                                    <th>description</th>
+
+                                    <th>video</th>
+
+
+
+                                    <th>Mettre En Ligne ?</th>
+                                    <th>Suprimer</th>
+                                    </thead>
+                                    <tbody>
+                                    {% for a in activites %}
+                                        {% if not  a.isDeleted %}
+                                        <tr>
+                                            <td><input type="checkbox" class="chkgrp" name="chkgrp[]"
+                                                       value="{{ a.id }}"></td>
+
+                                            <td>{{ a.association.titre }}</td>
+                                            <td>{{ a.description }}</td>
+                                            <td>      <a href="{{ asset('uploads/images/'  ~ a.video) }}">voir la vidéo</a>
+
+
+{#                                            <td>{{ opportunite.region }}</td>#}
+                                            <td>
+                                                {% if not a.isDeleted %}
+                                                {% if a.isValid %}
+                                                    <a class="btn btn-success activate-link"
+                                                       href="{{ path('changevalidite_activite', {'id': a.id}) }}">
+                                                        <i class="fa fa-check"></i></a>
+                                                {% else %}
+                                                    <a class="btn btn-warning activate-link"
+                                                       href="{{ path('changevalidite_activite', {'id': a.id}) }}">
+                                                        <i class="fa fa-times"></i></a>
+                                                {% endif %}
+                                                    {% else %}
+                                                    deja supprimé
+                                                        {% endif %}
+                                            </td>
+                                            <td>
+
+{#                                                    <a class="btn btn-success activate-link"#}
+{#                                                       href="{{ path('deleteActiv', {'id': a.id}) }}">#}
+{#                                                        <i class="fa fa-trash"></i></a>#}
+                                                {#                                                 <a href="{{ path('activite_delete', {'id': a.id}) }}" class="btn btn-danger disable-btn del-link" type="submit" ><i class="fa fa-trash"></i></a>#}
+                                                                                                 <form method="post" action="{{ path('activite_delete', {'id': a.id}) }}" onsubmit="return confirm('etes vous sure de supprimer cette activité?');">
+                                                                                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ a.id) }}">
+                                                                                                     <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+
+
+                                                                                                 </form>
+                                            </td>
+{#                                            #}{# <td><a class="btn btn-primary" href="{{ path('association_edit',{"id":opportunite.id}) }}"><i class="fa fa-edit"></i></a></td> #}
+
+{#                                            #}{# <td><a href="{{ path('dd', {'id': opportunite.id}) }}" class="btn btn-danger disable-btn del-link" type="submit" ><i class="fa fa-trash"></i></a></td> #}
+{#                                            <td><a href="{{ path('opAdminDelete',{"id":opportunite.id}) }}"#}
+{#                                                   class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></a>#}
+{#                                            </td>#}
+
+                                        </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+        <h1><strong>404</strong> Vous n'avez pas l'acces</h1>
+    {% endif %}
+{% endblock %}

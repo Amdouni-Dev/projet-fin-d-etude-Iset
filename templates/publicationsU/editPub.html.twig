@@ -1,0 +1,229 @@
+{% extends "admin/bars.html.twig" %}
+
+
+{% block contenpage %}
+
+    <style>
+
+        section button {
+            margin: 0 auto;
+            font-size: 2.0rem;
+            padding: 1.25rem 2.5rem;
+            display: block;
+            background-color: #009ac9;
+            border: 1px solid transparent;
+            color: #ffffff;
+            font-weight: 300;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        section button:hover {
+            background-color: #ffffff;
+            color: #009ac9;
+            border-color: #009ac9;
+        }
+
+    </style>
+    <div>
+        <h5>salut {{ app.user.nomComplet }} ! merci de publier votre probleme en respectant les regles d'utilisations </h5>
+        <div class="row" style="margin-left: 50px;width: auto;height: auto;margin-top: 5px">
+            {{ form_start(form,{'attr':{'enctype':'multipart/form-data'}}) }}
+            <br/>
+            <!----------------------------------------------->
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+            <script>
+
+                let map;
+                let markers = [];
+                var infowindow = new google.maps.InfoWindow();
+
+                function initMap() {
+                    const haightAshbury = {lat: 37.2720905, lng: 9.8708565};
+                    map = new google.maps.Map(document.getElementById("map"), {
+                        zoom: 10,
+                        center: haightAshbury,
+                        draggable: true
+
+                    });
+                    // This event listener will call addMarker() when the map is clicked.
+                    map.addListener("click", (event) => {
+                        addMarker(event.latLng);
+                    });
+                }
+
+                function GetAddress() {
+                    var lat = markers[0].position.lat();
+                    var lng = markers[0].position.lng();
+                    var latlng = new google.maps.LatLng(lat, lng);
+                    var geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({'latLng': latlng}, function (results, status) {
+                        if (status === google.maps.GeocoderStatus.OK) {
+                            if (results[1]) {
+                                alert("Location: " + results[1].formatted_address);
+                            }
+                        } else {
+                            alert("Location: not foound ");
+                        }
+                    });
+                }
+
+
+                // Adds a marker to the map and push to the array.
+                function addMarker(location) {
+                    deleteMarkers();
+                    const marker = new google.maps.Marker({
+                        position: location,
+                        map: map,
+                    });
+                    markers.push(marker);
+
+                    // if(markers.length===1){
+                    //     alert('Vous devez choisir un seule localisation !\nVous pouvez supprimer la localisation choisie par le bouton Delete Markers !');
+                    // }else{
+                    //     if(markers.length===0){
+                    //         const marker = new google.maps.Marker({
+                    //             position: location,
+                    //             map: map,
+                    //         });
+                    //         markers.push(marker);
+                    //     }
+                    // }
+                    console.log(markers[0].title);
+                    document.getElementById('tableau1').setAttribute("value", markers[0].position.lat());
+                    document.getElementById('tableau2').setAttribute("value", markers[0].position.lng());
+                    // console.log(geocoder.reverseGeocodeCoordinate(markers[0].position));
+                    console.log(document.getElementById('tableau1'), document.getElementById('tableau2'));
+                }
+
+                function setMapOnAll(map) {
+                    for (let i = 0; i < markers.length; i++) {
+                        markers[i].setMap(map);
+                    }
+                }
+
+                // Removes the markers from the map, but keeps them in the array.
+                function clearMarkers() {
+                    setMapOnAll(null);
+                }
+
+                // Shows any markers currently in the array.
+                function showMarkers() {
+                    setMapOnAll(map);
+                }
+
+                // Deletes all markers in the array by removing references to them.
+                function deleteMarkers() {
+                    clearMarkers();
+                    markers = [];
+                }
+
+
+            </script>
+
+
+            <!------------------------------------------------------------------->
+            <div  style="width: 800px">
+{#                {{ form_widget(form.source) }}#}
+
+                {{ form_widget(form1.contenu_pub,{'attr':{'placeholder':'Dcrire votre probleme ici ..','class':'form-control','rows':4}}) }}
+{#                {{ form_widget(form.source) }}#}
+
+
+
+{#                <br/>    <h5 class="font-weight-bold text-muted">Choisir quelque photos <br/>#}
+{#                    <br/>#}
+{#                    <label for="upload" class="btn btn-light  rounded-pill " style="width:800px;height:40px">#}
+
+{#                        <input type="file" name="files[]" id="files" multiple="multiple" />#}
+{#                    </label>#}
+{#                </h5>#}
+                <h5 class="font-weight-bold text-muted">Merci de recharger votre position</h5>
+
+            </div>
+            <br>
+            {# <div id="floating-panel"> #}
+            {# <input onclick="clearMarkers();" type="button" value="Hide Markers" /> #}
+            {# <input onclick="showMarkers();" type="button" value="Show All Markers" /> #}
+            {# <input onclick="deleteMarkers();" type="button" value="Supprimer Markeur" /> #}
+            {# </div> #}
+
+                <div id="map" style="height: 200px ">
+            </div>
+        </div>
+        <br>     <br>
+        <br>
+        <br>
+
+
+        <input type="hidden" id="tableau1" name="markers1" value="">
+        <input type="hidden" id="tableau2" name="markers2" value="">
+
+
+        {#        <a href="{{ path('newpost') }}" class="button button-a button-big button-rouded" style="margin-left: 200px">#}
+        {#            <button type="submit" style="background-color: transparent;border: navajowhite;color: white">Créer</button>#}
+       <br/>
+        <section style="margin-bottom: 120px">
+            <button type="submit" id="js-trigger-overlay" >Modifier</button>
+        </section>
+        </a>
+        {{ form_end(form1) }}
+    </div>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $("#files").on("change", function () {
+            if ($("#files")[0].files.length > 4) {
+                alert("Vous pouvez selectionner au maximum 4 images !");
+                $("#files").val([]);
+            }
+        });
+        var uploadField = document.getElementById("files");
+
+        uploadField.onchange = function () {
+            if (this.files[0].size > 307200) {
+                alert("Fichier trés volumineux !");
+                this.value = "";
+            }
+        };
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDch6NmhxtcdIgcCRjZbblh5z16CK-a2Jo&callback=initMap&libraries=&v=weekly"
+            defer></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+          integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

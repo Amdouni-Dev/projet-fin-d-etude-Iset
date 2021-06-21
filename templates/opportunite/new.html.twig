@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Opportunite{% endblock %}
+
+{% block body %}
+    <h1>Create new Opportunite</h1>
+
+    {{ include('opportunite/_form.html.twig') }}
+
+    <a href="{{ path('opportunite_index') }}">back to list</a>
+{% endblock %}

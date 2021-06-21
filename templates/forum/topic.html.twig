@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} - forum - {{ topic.name }} {% endblock %}
+
+{% block body %}
+
+<!-- Breadcrumb -->
+<div class="col-sm-12" id="breadcrumb">
+    >
+    <a href="{{ path('forum') }}"><span>Forum</span></a>
+    >
+    <span>{{ topic.name }} [#{{ topic.id }}]</span>
+</div>
+<!-- END Breadcrumb -->
+
+<div class="col-xl-12">
+    <h1 class="page-name">{{ topic.name }}</h1>
+</div>
+
+{% for message in messages %}
+    
+        <div class="col-xl-12 message">
+{#            {% if (app.user and message.idUser == app.user.id ) or ("ROLE_ADMIN"   in app.user.roles) %}#}
+                <a href="{{ path('editMessage',{id: message.id}) }}">
+                    <p class="edit-message"><i>✍</i><br/>Edit</p>
+                </a>
+{#            {% endif %}#}
+            <div class="row">
+                <div class="col-md-3 message-user" style="border: solid 1px white">
+{#                    <img src="{{ asset('img/users/'~message.username~'.png')}}" alt="{{ message.username }}' image de profile">#}
+                    <p class="message-username">
+{#                        {{ message.username }} #}
+{#                        <span class="message-role {{ message.roles }}-role">#}
+{#                            <b>{{ message.roles | title }}</b>#}
+                        </span>
+                    </p>
+                    <p>
+                        <span>{{ message.publicationDate | date('d/m/Y H:i:s') }}</span>
+                       
+                    </p>
+                </div>
+                <div class="col-md-9 message-body" style="border: solid 1px white; width: 100%;">
+                    <div class="message-content">
+                        <p>{{ message.content }}</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    
+    
+{% endfor %}
+<div class="col-xl-12 message" id="new-message">
+    {% if app.user is null %}
+        <div class="bg-danger" id="no-new-message">
+            <p class="no-form">Vous devez être connecté pour écrire un commentaire</p>
+        </div>
+    
+        {% else %}
+            <div id="new-message-form">
+                {{ form_start(form) }}
+                <label for="new_message_content" class="required">NOUVEAU commentaire: {{ topic.name }}</label>
+                {{ form_errors(form) }}
+                {{ form_rest(form) }}
+                {{ form_end(form) }}
+            </div>
+        
+    {% endif %}
+</div>
+
+{% endblock %}

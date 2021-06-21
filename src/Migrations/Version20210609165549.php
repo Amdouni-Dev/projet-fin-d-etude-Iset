@@ -1,0 +1,73 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DoctrineMigrations;
+
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+
+/**
+ * Auto-generated Migration: Please modify to your needs!
+ */
+final class Version20210609165549 extends AbstractMigration
+{
+    public function getDescription() : string
+    {
+        return '';
+    }
+
+    public function up(Schema $schema) : void
+    {
+        // this up() migration is auto-generated, please modify it to your needs
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+
+        $this->addSql('ALTER TABLE activite CHANGE publication_id publication_id INT DEFAULT NULL, CHANGE user_id user_id INT DEFAULT NULL, CHANGE association_id association_id INT DEFAULT NULL, CHANGE video video VARCHAR(255) DEFAULT NULL, CHANGE is_valid is_valid TINYINT(1) DEFAULT NULL, CHANGE is_deleted is_deleted TINYINT(1) DEFAULT NULL');
+        $this->addSql('ALTER TABLE actualite CHANGE user_id user_id INT DEFAULT NULL, CHANGE auteur auteur VARCHAR(255) DEFAULT NULL, CHANGE created_at created_at DATETIME DEFAULT NULL');
+        $this->addSql('ALTER TABLE association CHANGE user_a_id user_a_id INT DEFAULT NULL, CHANGE titre titre VARCHAR(255) DEFAULT NULL, CHANGE siege siege VARCHAR(255) DEFAULT NULL, CHANGE but but VARCHAR(5000) DEFAULT NULL, CHANGE logo logo VARCHAR(255) DEFAULT NULL, CHANGE adresse adresse VARCHAR(255) DEFAULT NULL, CHANGE nombre_membre nombre_membre INT DEFAULT NULL, CHANGE deleted deleted TINYINT(1) DEFAULT NULL, CHANGE valid valid TINYINT(1) DEFAULT NULL, CHANGE budget budget DOUBLE PRECISION DEFAULT NULL, CHANGE site_web site_web VARCHAR(255) DEFAULT NULL, CHANGE date_fondation date_fondation DATE DEFAULT NULL, CHANGE telephone telephone VARCHAR(255) DEFAULT NULL, CHANGE twitter twitter VARCHAR(255) DEFAULT NULL, CHANGE instagram instagram VARCHAR(255) DEFAULT NULL, CHANGE facebook facebook VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE blog_post CHANGE plubished_at plubished_at DATETIME DEFAULT NULL');
+        $this->addSql('ALTER TABLE categorie CHANGE categorie_parente_id categorie_parente_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE commentaire CHANGE user_id user_id INT DEFAULT NULL, CHANGE publication_id publication_id INT DEFAULT NULL, CHANGE date_comnt date_comnt DATETIME DEFAULT NULL, CHANGE contenu_comnt contenu_comnt VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE evenement CHANGE association_id association_id INT DEFAULT NULL, CHANGE user_id user_id INT DEFAULT NULL, CHANGE sujet sujet VARCHAR(255) DEFAULT NULL, CHANGE image image VARCHAR(255) DEFAULT NULL, CHANGE place place VARCHAR(255) DEFAULT NULL, CHANGE date date DATETIME DEFAULT NULL, CHANGE fin_date_annonce fin_date_annonce DATETIME DEFAULT NULL, CHANGE is_deleted is_deleted TINYINT(1) DEFAULT NULL, CHANGE is_valid is_valid TINYINT(1) DEFAULT NULL, CHANGE date_fin_evenement date_fin_evenement DATETIME DEFAULT NULL');
+        $this->addSql('ALTER TABLE historique CHANGE old_post_id old_post_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE message CHANGE id_topic_id id_topic_id INT DEFAULT NULL, CHANGE id_user_id id_user_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE mutimedia CHANGE publication_id publication_id INT DEFAULT NULL, CHANGE source source VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE old_post CHANGE published_at published_at DATETIME DEFAULT NULL');
+        $this->addSql('ALTER TABLE opportunite CHANGE lanceur_id lanceur_id INT DEFAULT NULL, CHANGE association_id association_id INT DEFAULT NULL, CHANGE titre titre VARCHAR(255) DEFAULT NULL, CHANGE image image VARCHAR(255) DEFAULT NULL, CHANGE date_limite date_limite DATETIME DEFAULT NULL, CHANGE region region VARCHAR(255) DEFAULT NULL, CHANGE domaine_concerne domaine_concerne VARCHAR(255) DEFAULT NULL, CHANGE lien_form_postul lien_form_postul VARCHAR(255) DEFAULT NULL, CHANGE type_offre type_offre VARCHAR(255) DEFAULT NULL, CHANGE is_valid is_valid TINYINT(1) DEFAULT NULL');
+        $this->addSql('ALTER TABLE participation CHANGE evenement_id evenement_id INT DEFAULT NULL, CHANGE user_id user_id INT DEFAULT NULL, CHANGE is_intersse is_intersse TINYINT(1) DEFAULT NULL');
+        $this->addSql('ALTER TABLE publication CHANGE user_id user_id INT DEFAULT NULL, CHANGE date_pub date_pub DATETIME DEFAULT NULL, CHANGE contenu_pub contenu_pub VARCHAR(200) DEFAULT NULL, CHANGE statut statut VARCHAR(1) DEFAULT NULL, CHANGE localisation localisation VARCHAR(255) DEFAULT NULL, CHANGE longitude longitude VARCHAR(255) DEFAULT NULL, CHANGE archiver archiver TINYINT(1) DEFAULT NULL, CHANGE latitude latitude VARCHAR(255) DEFAULT NULL, CHANGE is_valid is_valid TINYINT(1) DEFAULT NULL, CHANGE is_resolved is_resolved TINYINT(1) DEFAULT NULL');
+        $this->addSql('ALTER TABLE regles CHANGE user_id user_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE reset_password_request CHANGE user_id user_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE service CHANGE user_id user_id INT DEFAULT NULL, CHANGE type type VARCHAR(255) DEFAULT NULL, CHANGE is_valid is_valid TINYINT(1) DEFAULT NULL');
+        $this->addSql('ALTER TABLE specialite CHANGE type type VARCHAR(255) DEFAULT NULL, CHANGE description description VARCHAR(255) DEFAULT NULL, CHANGE is_valid is_valid TINYINT(1) DEFAULT NULL');
+        $this->addSql('ALTER TABLE topic CHANGE author_id author_id INT DEFAULT NULL, CHANGE id_consultant_id id_consultant_id INT DEFAULT NULL, CHANGE deleted deleted TINYINT(1) DEFAULT NULL, CHANGE valid valid TINYINT(1) DEFAULT NULL, CHANGE is_read is_read TINYINT(1) DEFAULT NULL');
+        $this->addSql('ALTER TABLE user CHANGE participation_id participation_id INT DEFAULT NULL, CHANGE datenaissance datenaissance DATE DEFAULT NULL, CHANGE numero_tel numero_tel VARCHAR(255) DEFAULT NULL, CHANGE nationalite nationalite VARCHAR(255) DEFAULT NULL, CHANGE logo logo VARCHAR(255) DEFAULT NULL, CHANGE region region VARCHAR(255) DEFAULT NULL, CHANGE lien_fbk lien_fbk VARCHAR(255) DEFAULT NULL, CHANGE lien_instagram lien_instagram VARCHAR(255) DEFAULT NULL, CHANGE cv cv VARCHAR(255) DEFAULT NULL, CHANGE video video VARCHAR(255) DEFAULT NULL, CHANGE validcv validcv TINYINT(1) DEFAULT NULL');
+    }
+
+    public function down(Schema $schema) : void
+    {
+        // this down() migration is auto-generated, please modify it to your needs
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+
+        $this->addSql('ALTER TABLE activite CHANGE publication_id publication_id INT DEFAULT NULL, CHANGE user_id user_id INT DEFAULT NULL, CHANGE association_id association_id INT DEFAULT NULL, CHANGE video video VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE is_valid is_valid TINYINT(1) DEFAULT \'NULL\', CHANGE is_deleted is_deleted TINYINT(1) DEFAULT \'NULL\'');
+        $this->addSql('ALTER TABLE actualite CHANGE user_id user_id INT DEFAULT NULL, CHANGE auteur auteur VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE created_at created_at DATETIME DEFAULT \'NULL\'');
+        $this->addSql('ALTER TABLE association CHANGE user_a_id user_a_id INT DEFAULT NULL, CHANGE titre titre VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE siege siege VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE but but VARCHAR(5000) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE logo logo VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE adresse adresse VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE nombre_membre nombre_membre INT DEFAULT NULL, CHANGE deleted deleted TINYINT(1) DEFAULT \'NULL\', CHANGE valid valid TINYINT(1) DEFAULT \'NULL\', CHANGE budget budget DOUBLE PRECISION DEFAULT \'NULL\', CHANGE site_web site_web VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE date_fondation date_fondation DATE DEFAULT \'NULL\', CHANGE telephone telephone VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE twitter twitter VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE instagram instagram VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE facebook facebook VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('ALTER TABLE blog_post CHANGE plubished_at plubished_at DATETIME DEFAULT \'NULL\'');
+        $this->addSql('ALTER TABLE categorie CHANGE categorie_parente_id categorie_parente_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE commentaire CHANGE user_id user_id INT DEFAULT NULL, CHANGE publication_id publication_id INT DEFAULT NULL, CHANGE date_comnt date_comnt DATETIME DEFAULT \'NULL\', CHANGE contenu_comnt contenu_comnt VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('ALTER TABLE evenement CHANGE association_id association_id INT DEFAULT NULL, CHANGE user_id user_id INT DEFAULT NULL, CHANGE sujet sujet VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE image image VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE place place VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE date date DATETIME DEFAULT \'NULL\', CHANGE fin_date_annonce fin_date_annonce DATETIME DEFAULT \'NULL\', CHANGE is_deleted is_deleted TINYINT(1) DEFAULT \'NULL\', CHANGE is_valid is_valid TINYINT(1) DEFAULT \'NULL\', CHANGE date_fin_evenement date_fin_evenement DATETIME DEFAULT \'NULL\'');
+        $this->addSql('ALTER TABLE historique CHANGE old_post_id old_post_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE message CHANGE id_topic_id id_topic_id INT DEFAULT NULL, CHANGE id_user_id id_user_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE mutimedia CHANGE publication_id publication_id INT DEFAULT NULL, CHANGE source source VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('ALTER TABLE old_post CHANGE published_at published_at DATETIME DEFAULT \'NULL\'');
+        $this->addSql('ALTER TABLE opportunite CHANGE lanceur_id lanceur_id INT DEFAULT NULL, CHANGE association_id association_id INT DEFAULT NULL, CHANGE titre titre VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE image image VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE date_limite date_limite DATETIME DEFAULT \'NULL\', CHANGE region region VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE domaine_concerne domaine_concerne VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE lien_form_postul lien_form_postul VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE type_offre type_offre VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE is_valid is_valid TINYINT(1) DEFAULT \'NULL\'');
+        $this->addSql('ALTER TABLE participation CHANGE evenement_id evenement_id INT DEFAULT NULL, CHANGE user_id user_id INT DEFAULT NULL, CHANGE is_intersse is_intersse TINYINT(1) DEFAULT \'NULL\'');
+        $this->addSql('ALTER TABLE publication CHANGE user_id user_id INT DEFAULT NULL, CHANGE date_pub date_pub DATETIME DEFAULT \'NULL\', CHANGE contenu_pub contenu_pub VARCHAR(200) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE statut statut VARCHAR(1) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE localisation localisation VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE longitude longitude VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE archiver archiver TINYINT(1) DEFAULT \'NULL\', CHANGE latitude latitude VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE is_valid is_valid TINYINT(1) DEFAULT \'NULL\', CHANGE is_resolved is_resolved TINYINT(1) DEFAULT \'NULL\'');
+        $this->addSql('ALTER TABLE regles CHANGE user_id user_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE reset_password_request CHANGE user_id user_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE service CHANGE user_id user_id INT DEFAULT NULL, CHANGE type type VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE is_valid is_valid TINYINT(1) DEFAULT \'NULL\'');
+        $this->addSql('ALTER TABLE specialite CHANGE type type VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE description description VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE is_valid is_valid TINYINT(1) DEFAULT \'NULL\'');
+        $this->addSql('ALTER TABLE topic CHANGE author_id author_id INT DEFAULT NULL, CHANGE id_consultant_id id_consultant_id INT DEFAULT NULL, CHANGE deleted deleted TINYINT(1) DEFAULT \'NULL\', CHANGE valid valid TINYINT(1) DEFAULT \'NULL\', CHANGE is_read is_read TINYINT(1) DEFAULT \'NULL\'');
+        $this->addSql('ALTER TABLE user CHANGE participation_id participation_id INT DEFAULT NULL, CHANGE datenaissance datenaissance DATE DEFAULT \'NULL\', CHANGE numero_tel numero_tel VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE nationalite nationalite VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE logo logo VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE region region VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE lien_fbk lien_fbk VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE lien_instagram lien_instagram VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE cv cv VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE video video VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE validcv validcv TINYINT(1) DEFAULT \'NULL\'');
+    }
+}

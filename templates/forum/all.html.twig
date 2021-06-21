@@ -1,0 +1,35 @@
+{% extends "admin/bars.html.twig" %}
+{% block contenpage %}
+
+<h4 style="font-family:'Times New Roman'">Salut {{ app.user.nomComplet }} ! Consulter la liste de vos conversations.</h4>
+{#    <a style="float : right ; background-color: blue ; color: white;#}
+{#  padding: 15px 25px;#}
+{#  text-align: center;#}
+{#  text-decoration: none;#}
+{#  display: inline-block;" href="{{ path('newTopic') }}"><span>Créer Une nouvelle Conversation</span></a>#}
+
+    </br>
+
+    <div style="height: 1500px" class="w3-container">
+
+
+    <div class="w3-ul w3-border">
+
+    {% for t in topics | sort|reverse %}
+
+    {% if ( t.author is same  as app.user ) %}
+    <div class="chat_list active_chat" >
+        <a href="{{ path('topic', {'id': t.id}) }}">
+        <div style="background-color: lightblue;border-bottom: 2px solid #0D3349" class="chat_people">
+            <p style="font-family: 'Comic Sans MS' ;color: #bd362f;font-size: 20px">{{ t.name }}<span style="float : right ; font-size: medium ">Creé le {{t.creationDate|date("d/m/Y") }}</span></p>
+        </div>
+        </a></div>
+ <br/>
+            {% endif %}
+
+
+
+{% endfor %}
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,1005 @@
+{% extends "admin/bars.html.twig" %}
+
+
+{% block contenpage %}
+    <br><br>
+    <style>
+
+        .my-gallery {
+            width: 100%;
+            float: left;
+        }
+
+        .my-gallery img {
+            width: 100%;
+            height: auto;
+        }
+
+        .my-gallery figure {
+            display: block;
+            float: left;
+            margin: 0 5px 5px 0;
+            width: 150px;
+        }
+
+        .my-gallery figcaption {
+            display: none;
+        }
+
+        .spliter {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #6c757d;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            margin-top: 100px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 16px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+        .modal.fade{
+            opacity:1;
+        }
+        .modal.fade .modal-dialog {
+            -webkit-transform: translate(0);
+            -moz-transform: translate(0);
+            transform: translate(0);
+        }
+        .css-typing p {
+            border-right: .15em solid orange;
+            font-family: "Courier";
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .css-typing p:nth-child(1) {
+            width: 7.3em;
+            -webkit-animation: type 2s steps(40, end);
+            animation: type 2s steps(40, end);
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+        }
+
+        .css-typing p:nth-child(2) {
+            width: 11.5em;
+            opacity: 0;
+            -webkit-animation: type2 2s steps(40, end);
+            animation: type2 2s steps(40, end);
+            -webkit-animation-delay: 2s;
+            animation-delay: 2s;
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+        }
+
+        .css-typing p:nth-child(3) {
+            width: 70.3em;
+            opacity: 0;
+            -webkit-animation: type3 5s steps(20, end), blink .5s step-end infinite alternate;
+            animation: type3 5s steps(20, end), blink .5s step-end infinite alternate;
+            -webkit-animation-delay: 400s;
+            animation-delay: 400s;
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes type {
+            0% {
+                width: 0;
+            }
+            99.9% {
+                border-right: .15em solid orange;
+            }
+            100% {
+                border: none;
+            }
+        }
+
+        @-webkit-keyframes type {
+            0% {
+                width: 0;
+            }
+            99.9% {
+                border-right: .15em solid orange;
+            }
+            100% {
+                border: none;
+            }
+        }
+
+        @keyframes type2 {
+            0% {
+                width: 0;
+            }
+            1% {
+                opacity: 1;
+            }
+            99.9% {
+                border-right: .15em solid orange;
+            }
+            100% {
+                opacity: 1;
+                border: none;
+            }
+        }
+
+        @-webkit-keyframes type2 {
+            0% {
+                width: 0;
+            }
+            1% {
+                opacity: 1;
+            }
+            99.9% {
+                border-right: .15em solid orange;
+            }
+            100% {
+                opacity: 1;
+                border: none;
+            }
+        }
+
+        @keyframes type3 {
+            0% {
+                width: 0;
+            }
+            1% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes type3 {
+            0% {
+                width: 0;
+            }
+            1% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+        @-webkit-keyframes blink {
+            50% {
+                border-color: tranparent;
+            }
+        }
+        .animated-button2{display:table;padding:10px 30px;-webkit-border-radius: 40px;-moz-border-radius: 40px;border-radius: 40px;font-size:20px;background: #0b97c4;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, dodgerblue, cornflowerblue);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, lightblue, lightskyblue); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color:#fff;border:none;outline:none;cursor:pointer;transition:all .3s linear;-webkit-transition:all .3s linear;-moz-transition:all .3s linear;
+        }
+        .animated-button2:hover{transform:scale(1.2);box-shadow:0px 0px 20px rgba(0,0,0,.2)}
+        .animated-button2 i{margin-right:20px;transition:all .3s linear;-webkit-transition:all .3s linear;-moz-transition:all .3s linear;}
+        .animated-button2:hover i{transform:rotate(360deg)}
+    </style>
+<script>
+
+
+    function modalAnimation(animation) {
+        $('.modal .modal-dialog').attr('class', 'modal-dialog  ' + animation + ' animated');
+    };
+    $('.modalAnimate').on('show.bs.modal', function (e) {
+        var anim = $(this).attr('data-animation-in');
+        modalAnimation(anim);
+    });
+    $('.modalAnimate').on('hide.bs.modal', function (e) {
+        var anim = $(this).attr('data-animation-out');
+        modalAnimation(anim);
+    });
+</script>
+    <!-- Photoswipe CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css">
+    <body>
+    <section id="work" class="portfolio-mf sect-pt4 route">
+        <div class="container">
+            <div class="row">
+                <!-- Button to Open the Modal -->
+
+                <div class="col-sm-12">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert" style="visibility: hidden"
+                         id="alert">
+                        You should login to create a post !
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                                onclick="closediv()">
+                            <span aria-hidden="true" onclick="closediv()">&times;</span>
+                        </button>
+                    </div>
+                    <div class="title-box text-center">
+
+
+                        <!-- Modal -->
+                        <div class="modal modalAnimate fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true" data-animation-in="fadeInLeft"  data-animation-out="bounceOut">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Les regles d'utilisations</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            <div id="writer"></div>
+                                            {% for r in regles %}
+                                            <p style="font-family:'Comic Sans MS' ">* {{ r.description }}</p>
+
+
+
+
+
+                                            {% endfor %}
+                                        </div>
+
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <a href="{{ path('newpost') }}">
+                                                <button  class="btn btn-light " style="font-family:'Comic Sans MS' ; float: right "> Créer une nouvelle publication
+                                                </button>
+
+                                            </a>
+{#                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>#}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if app.user %}
+                            {% if app.user.deleted!=1 %}
+{#                                <a href="{{ path('newpost') }}">#}
+{#                                    <button class="button button-big button-rouded">Créer une nouvelle publication#}
+{#                                    </button><br/>#}
+
+{#                                </a>#}
+                                <button type="button" style="float: right" class="animated-button2" data-toggle="modal" data-target="#myModal">
+                         <i class="fa fa-file-text"></i>           Ajouter une publication
+                                </button>
+                            {% else %}
+                                <a href="#" disabled="disabled"
+                                   title="Vous êtes bloqué pour le moment par un administrateur en raison de votre comportement !">
+                                    <button class="animated-button2" style="float: right" > <i class="fa fa-file-text"></i> Créer une nouvelle
+                                        publication
+                                    </button>
+                                </a>
+                            {% endif %}
+                        {% else %}
+                            <button onclick="alertinfo();" class="animated-button2" style="float:right;" > <i class="fa fa-file-text"></i> Créer une
+                                nouvelle publication
+                            </button>
+                        {% endif %}
+                        <script>
+                            function alertinfo() {
+                                $('.alert').alert();
+                                document.getElementById('alert').style.visibility = 'visible';
+                            }
+
+                            function closediv() {
+                                $().alert('dispose');
+                                document.getElementById('alert').style.visibility = 'hidden';
+                            }
+                        </script>
+                        <p class="subtitle-a">
+                        </p>
+                        <div class="line-mf">
+                        </div>
+                    </div>
+                    {% for message in app.flashes('notice') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdnbu2dKsKShoO4zqET8uFYY6EV4KapxE&callback=initMap&libraries=&v=weekly"
+            defer></script>
+
+    <style>
+        .dropdown:hover {
+            color: lightskyblue;
+        }
+
+        .dropdown-item:hover {
+            color: lightskyblue;
+        }
+
+    </style>
+    <script>
+        // $(document).ready(function() {
+        let map;
+        let markers = [];
+
+        function initMap() {
+            tab = document.querySelectorAll("div.map1");
+            tab2 = document.querySelectorAll("div.test");
+            long = tab2[0].childNodes;
+            console.log(tab2[0].childNodes);
+            console.log(long[1], long[3]);
+            for (let i = 0; i < tab.length; i++) {
+                var latit = Number(tab2[i].childNodes[3].value);
+                var long = Number(tab2[i].childNodes[1].value);
+                const haightAshbury = {lat: long, lng: latit};
+                map = new google.maps.Map(document.getElementById(tab[i].id), {
+                    zoom: 12,
+                    center: haightAshbury,
+                    draggable: true
+                });
+                new google.maps.Marker({
+                    position: haightAshbury,
+                    map,
+                    title: "Localisation",
+                });
+            }
+        }
+    </script>
+    <section style="margin-left: 20%" id="main">
+        <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "250px";
+                document.getElementById("main").style.marginLeft = "350px";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+                document.getElementById("main").style.marginLeft = "20%";
+            }
+        </script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+              integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
+              crossorigin="anonymous">
+        <div  class=" container">
+            <div  class="animated fadeIn carte " style="width: 64rem;" id="divcard">
+                {% for pub in pubs|sort((a, b) => b.datePub <=> a.datePub) %}
+                    {% if pub.statut !="R" %}
+
+                        {# <div class="carte"  style="border-radius: 20%"> #}
+                        <div style="margin: 5px " class="card-body">
+{#                            <div style="float:right " >#}
+{#                                {%  if pub.isValid %}#}
+{#                                    <p class="btn btn-success " > <i class="fa fa-check">Votre publication est verifiée par notre admin</i></p>#}
+{#                                {% else %}#}
+{#                                    <p class="btn btn-warning " > <i class="fa fa-times">Votre publication en attente de verification par notre admin</i></p>#}
+{#                                {% endif %}#}
+{#                            </div>#}
+                            <p class="x_content">
+                                <br/>
+{#                                <img width="50px" height="50px" src=" {{ asset('uploads/images/'  ~ pub.user.logo) }}"#}
+{#                                     alt="Awesome Image">#}
+<br/>
+                            <div class="dropdown">
+                                <i class="fas fa-ellipsis-h " href="#"
+                                   style="font-size:25px;float:right;margin-top: -40px" type="button"
+                                   id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false">
+                                </i>
+                                {% if app.user.deleted!=1 %}
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="delpost">
+                                        <a class="dropdown-item" href="{{ path('editPub',{'id':pub.id}) }}"><i
+                                                    class="far fa-edit"></i> Modifier</a>
+                                        <a class="dropdown-item" onclick="delpost({{ pub.id }})" href="#"><i
+                                                    class="far fa-trash-alt"></i> Supprimer</a>
+                                    </div>
+                                {% else %}
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="delpost">
+                                        <a title="Vous êtes bloqué pour le moment par un administrateur  en raison de votre comportement !"
+                                           class="dropdown-item"><i class="far fa-edit"></i> Modifier</a>
+                                        <a title="Vous êtes bloqué pour le moment par un administrateur  en raison de votre comportement !"
+                                           class="dropdown-item"><i class="far fa-trash-alt"></i> Supprimer</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <h5 style="color:#0c5460; font-family: Lobster;margin-left: 10px">
+                                 {{ pub.user.nomComplet |upper }}  ! vous avez ajouté cette publication
+
+                            <br/>
+
+                            <p style="margin-left: 490px;font-size: small;color: dodgerblue;margin-top: -35px;">
+                                le {{ pub.datePub |date('d/m/Y H:i') }}</p></h5>
+                            <div style="float:right " >
+                                {%  if pub.isValid %}
+                                    <p class="btn btn-success " > <i class="fa fa-check">Votre publication est verifiée par notre admin</i></p>
+                                {% else %}
+                                    <p class="btn btn-warning " > <i class="fa fa-times">Votre publication en attente de verification par notre admin</i></p>
+                                {% endif %}
+                            </div>
+                            <img width="50px" height="50px" src=" {{ asset('uploads/images/'  ~ pub.user.logo) }}"
+                                 alt="Awesome Image">
+{#                            <div class="dropdown">#}
+{#                                <i class="fas fa-ellipsis-h " href="#"#}
+{#                                   style="font-size:25px;float:right;margin-top: -40px" type="button"#}
+{#                                   id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"#}
+{#                                   aria-expanded="false">#}
+{#                                </i>#}
+{#                                {% if app.user.deleted!=1 %}#}
+{#                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="delpost">#}
+{#                                        <a class="dropdown-item" href="{{ path('editPub',{'id':pub.id}) }}"><i#}
+{#                                                    class="far fa-edit"></i> Modifier</a>#}
+{#                                        <a class="dropdown-item" onclick="delpost({{ pub.id }})" href="#"><i#}
+{#                                                    class="far fa-trash-alt"></i> Supprimer</a>#}
+{#                                    </div>#}
+{#                                {% else %}#}
+{#                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="delpost">#}
+{#                                        <a title="Vous êtes bloqué pour le moment par un administrateur  en raison de votre comportement !"#}
+{#                                           class="dropdown-item"><i class="far fa-edit"></i> Modifier</a>#}
+{#                                        <a title="Vous êtes bloqué pour le moment par un administrateur  en raison de votre comportement !"#}
+{#                                           class="dropdown-item"><i class="far fa-trash-alt"></i> Supprimer</a>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
+{#                            </div>#}
+{#                            {% if app.user != null %}#}
+{#                                {% if pub.datePub.diff(now).days>24 %}#}
+{#                                    {% if  pub.user.id==app.user.id %}#}
+{#                                        <br>#}
+{#                                        <div style="text-align: center">#}
+{#                                            <h6 style="color: firebrick;text-align: center">Il s'agit d'une vérification#}
+{#                                                du système à laquelle vous devez répondre ou cette publication sera#}
+{#                                                supprimée</h6>#}
+{#                                            <br><a href="{{ path('Repost',{'id':pub.id}) }}">#}
+{#                                                <button class="button button-a  button-rouded">Républier</button>#}
+{#                                            </a>#}
+{#                                            <a href="{{ path('Solve',{'id':pub.id}) }}">#}
+{#                                                <button class="button button-a  button-rouded">Résolue</button>#}
+{#                                            </a>#}
+{#                                        </div>#}
+{#                                        <br>#}
+{#                                    {% endif %}#}
+{#                                {% endif %}#}
+{#                            {% endif %}#}
+                            <div class="card-body" style="margin-top: -20px">
+                                {# <h5 > {{ pub.user.nomComplet }}</h5> #}
+
+                                <div style="height: 100px;position: relative">
+                                    <h2 style=" color:lightslategrey; font-family:'Times New Roman';"
+                                        class="d-flex align-items-center mb-3">{{ pub.contenuPub }} </h2>
+
+                                </div>
+                                <div id="{{ pub.id }}" class="map1" style="height: 200px"></div>
+                                <div class="test">
+                                    <input id="tableau1" type="hidden" value="{{ pub.longitude }}"/>
+                                    <input id="tableau2" type="hidden" value="{{ pub.latitude }}"/>
+                                </div>
+                                <br>
+                                <div class="inner">
+                                    <!--***** GALLERY *****-->
+                                    {% if pub.mutimedia | length == 4 %}
+                                        {# {% for img in pub.mutimedia %} #}
+                                        <div class="my-gallery" itemscope>
+                                            <figure itemprop="associatedMedia" itemscope>
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <figure itemprop="associatedMedia" itemscope>
+                                                                <a href="{{ asset('uploads/images/'~pub.mutimedia[0].source) }}"
+                                                                   itemprop="contentUrl" data-size="964x1024">
+                                                                    <img class="inner rounded"
+                                                                         src="{{ asset('uploads/images/'~pub.mutimedia[0].source) }}"
+                                                                         style="width: 280px;height: 200px;margin-left: 20px"
+                                                                         itemprop="thumbnail" alt="Image description"/>
+                                                                </a>
+                                                            </figure>
+                                                        </td>
+                                                        <td>
+                                                            <figure itemprop="associatedMedia" itemscope>
+                                                                <a href="{{ asset('uploads/images/'~pub.mutimedia[1].source) }}"
+                                                                   itemprop="contentUrl" data-size="964x1024">
+                                                                    <img class="inner rounded"
+                                                                         src="{{ asset('uploads/images/'~pub.mutimedia[1].source) }}"
+                                                                         style="width: 280px;height: 200px;margin-left: 150px"
+                                                                         itemprop="thumbnail" alt="Image description"/>
+                                                                </a>
+                                                            </figure>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <figure itemprop="associatedMedia" itemscope>
+                                                                <a href="{{ asset('uploads/images/'~pub.mutimedia[2].source) }}"
+                                                                   itemprop="contentUrl" data-size="964x1024">
+                                                                    <img class="inner rounded"
+                                                                         src="{{ asset('uploads/images/'~pub.mutimedia[2].source) }}"
+                                                                         style="width: 280px;height: 200px;margin-left: 20px"
+                                                                         itemprop="thumbnail" alt="Image description"/>
+                                                                </a>
+                                                            </figure>
+                                                        </td>
+                                                        <td>
+                                                            <figure itemprop="associatedMedia" itemscope>
+                                                                <a href="{{ asset('uploads/images/'~pub.mutimedia[3].source) }}"
+                                                                   itemprop="contentUrl" data-size="1000x1024">
+                                                                    <img class="inner rounded"
+                                                                         src="{{ asset('uploads/images/'~pub.mutimedia[3].source) }}"
+                                                                         style="width: 280px;height: 200px;margin-left: 150px"
+                                                                         itemprop="thumbnail" alt="Image description"/>
+                                                                </a>
+                                                            </figure>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </figure>
+                                        </div>
+                                        {# <button class="button button-a  button-rouded">  {{ pub.commentaires|length }}</button> #}
+                                    {% endif %}
+                                    {% if pub.mutimedia | length == 3 %}
+                                        <div class="my-gallery" itemscope>
+                                            <figure itemprop="associatedMedia" itemscope>
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <figure itemprop="associatedMedia" itemscope>
+                                                                <a href="{{ asset('uploads/images/'~pub.mutimedia[0].source) }}"
+                                                                   itemprop="contentUrl" data-size="964x1024">
+                                                                    <img class="inner rounded"
+                                                                         src="{{ asset('uploads/images/'~pub.mutimedia[0].source) }}"
+                                                                         style="width: 170px;height: 100px;margin-left: 20px"
+                                                                         itemprop="thumbnail" alt="Image description"/>
+                                                                </a>
+                                                            </figure>
+                                                        </td>
+                                                        <td>
+                                                            <figure itemprop="associatedMedia" itemscope>
+                                                                <a href="{{ asset('uploads/images/'~pub.mutimedia[1].source) }}"
+                                                                   itemprop="contentUrl" data-size="964x1024">
+                                                                    <img class="inner rounded"
+                                                                         src="{{ asset('uploads/images/'~pub.mutimedia[1].source) }}"
+                                                                         style="width: 160px;height: 100px;margin-left: 40px"
+                                                                         itemprop="thumbnail" alt="Image description"/>
+                                                                </a>
+                                                            </figure>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <figure itemprop="associatedMedia" itemscope
+                                                                    itemtype="http://schema.org/ImageObject">
+                                                                <a href="{{ asset('uploads/images/'~pub.mutimedia[2].source) }}"
+                                                                   itemprop="contentUrl" data-size="964x1024">
+                                                                    <img class="inner rounded"
+                                                                         src="{{ asset('uploads/images/'~pub.mutimedia[2].source) }}"
+                                                                         style="width: 250px;height: 120px;margin-left: 60px"
+                                                                         itemprop="thumbnail" alt="Image description"/>
+                                                                </a>
+                                                            </figure>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </figure>
+                                        </div>
+                                        {# <button  class="button button-a  button-rouded">  {{ pub.commentaires|length }}</button> #}
+
+                                    {% endif %}
+                                    {% if pub.mutimedia | length == 2 %}
+                                        <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+                                            <figure itemprop="associatedMedia" itemscope
+                                                    itemtype="http://schema.org/ImageObject">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <figure itemprop="associatedMedia" itemscope
+                                                                    itemtype="http://schema.org/ImageObject">
+                                                                <a href="{{ asset('uploads/images/'~pub.mutimedia[0].source) }}"
+                                                                   itemprop="contentUrl" data-size="964x1024">
+                                                                    <div class="inner">
+                                                                        <img class="inner rounded"
+                                                                             src="{{ asset('uploads/images/'~pub.mutimedia[0].source) }}"
+                                                                             style="width: 280px;height: 300px;margin-left: 7px"
+                                                                             itemprop="thumbnail"
+                                                                             alt="Image description"/>
+                                                                    </div>
+                                                                </a>
+                                                            </figure>
+                                                        </td>
+                                                        <td>
+                                                            <figure itemprop="associatedMedia" itemscope
+                                                                    itemtype="http://schema.org/ImageObject">
+                                                                <a href="{{ asset('uploads/images/'~pub.mutimedia[1].source) }}"
+                                                                   itemprop="contentUrl" data-size="964x1024">
+                                                                    <div class="inner">
+                                                                        <img class="rounded"
+                                                                             src="{{ asset('uploads/images/'~pub.mutimedia[1].source) }}"
+                                                                             style="width: 280px;height: 300px;margin-left: 130px"
+                                                                             itemprop="thumbnail"
+                                                                             alt="Image description"/>
+                                                                    </div>
+                                                                </a>
+                                                            </figure>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </figure>
+                                        </div>
+                                    {% endif %}
+                                    {% if pub.mutimedia | length == 1 %}
+                                        <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+                                            <figure itemprop="associatedMedia" itemscope
+                                                    itemtype="http://schema.org/ImageObject">
+                                                <figure itemprop="associatedMedia" itemscope
+                                                        itemtype="http://schema.org/ImageObject">
+                                                    <a href="{{ asset('uploads/images/'~pub.mutimedia[0].source) }}"
+                                                       itemprop="contentUrl" data-size="1024x1024">
+                                                        <img class="rounded"
+                                                             src="{{ asset('uploads/images/'~pub.mutimedia[0].source) }}"
+                                                             style="width: 500px;height: 390px;margin-left: 50px"
+                                                             itemprop="thumbnail" alt="Image description"/>
+                                                    </a>
+                                                </figure>
+                                            </figure>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% if app.user %}
+                                {% if app.user.deleted!=1 %}
+                                    {%  if  pub.isValid %}
+                                    <form name="form" method="get" id="{{ pub.id }}" class="comment"
+                                          action="{{ path('newcomment',{'id':pub.id}) }}">
+                                        <input type="text" placeholder="Ecrivez votre commentaire ici ..."
+                                               style="padding: 11px;width: 490px" name="aa" id="aa" class="texte">
+                                        <a href="{{ path('singleposts',{'id':pub.id}) }}"><p
+                                                    style="margin-top: -40px;margin-left:520px "><span id="count"
+                                                                                                       class="count">{{ pub.commentaires | length }}</span>
+                                                commentaires</p></a>
+                                        <br>
+                                        <div style="background-color: #F6FDFE;padding: 1px;border-radius: 20px">
+                                            <span style="font-size: medium;font-weight: bold;margin-left: 10px" id="11"
+                                                  class="c1"></span>
+                                            <p class="msg" id="msg" style="font-size: small;margin-left: 10px"></p>
+                                        </div>
+                                    </form>
+                                        {% endif %}
+                                {% else %}
+                                    <form name="form" method="get" id="{{ pub.id }}" class="comment"
+                                          action="{{ path('newcomment',{'id':pub.id}) }}">
+                                        <input onclick="boluqer()" disabled
+                                               title="Vous êtes bloqué pour le moment par un administrateur en raison de votre comportement !"
+                                               type="text" placeholder="Ecrivez votre commentaire ici ..."
+                                               style="padding: 11px;width: 490px" name="aa" id="aa" class="texte"/>
+                                        <a href="{{ path('singlepost',{'id':pub.id}) }}"><p
+                                                    style="margin-top: -40px;margin-left:520px "><span id="count"
+                                                                                                       class="count">{{ pub.commentaires | length }}</span>
+                                                commentaires</p></a>
+                                        <br>
+                                        <div style="background-color: #F6FDFE;padding: 1px;border-radius: 20px">
+                                            <span style="font-size: medium;font-weight: bold;margin-left: 100px" id="11"
+                                                  class="c1"></span>
+                                            <p class="msg" id="msg" style="font-size: small;margin-left: 10px"></p>
+                                        </div>
+                                    </form>
+                                {% endif %}
+                            {% else %}
+                                <a href="{{ path('singlepost',{'id':pub.id}) }}"><p style="margin-left:520px"><span
+                                                id="count" class="count">{{ pub.commentaires | length }}</span>
+                                        commentaires</p></a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <h5 style="color: #0056b3;margin-left:140px ">Vous ne possedez aucune publication pour le moment
+                        !</h5>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <br><br><br>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function delpost(d) {
+            console.log(d);
+            var r = confirm(" Êtes vous sure de vouloir supprimer cette publication ?");
+            if (r === true) {
+                $.ajax({
+                        url: "{{ path('supprimerpost') }}",
+                        type: 'post',
+                        data: {d: d},
+                        // dataType: 'json',
+                        success: function (da) {
+                            // if(da.test===true){
+                            $('#divcard').load(document.URL + ' #divcard');
+                            console.log("post supprimé")
+                            // }
+                        }
+                    }
+                )
+            }
+        }
+
+        function onClickBtnLike(event) {
+            event.preventDefault();
+            const url = this.action;
+            console.log(url);
+            var com = this.querySelector('.msg');
+            var span = this.querySelector('.c1');
+            var count = this.querySelector('.count');
+            var texte = this.querySelector('.texte');
+            console.log(texte);
+            let data = new FormData(this);
+            axios.post(url, data).then(function (response) {
+                // $('#count').load(document.URL +  ' #count');
+                console.log(response.data);
+                count.textContent = response.data.nbrcomments;
+                span.textContent = response.data.message;
+                {% if app.user %}
+                com.textContent = " Ajouté par {{ app.user.nomComplet |upper }} " + "  à " + "  " + response.data.dateajout;
+                {% endif %}
+                $('#aa').value = "";
+                // $('#msg').load(document.URL +  ' #msg');
+            }).catch(function (error) {
+                console.log(error)
+            })
+        }
+
+        document.querySelectorAll('form.comment').forEach(function (link) {
+            link.addEventListener('submit', onClickBtnLike)
+        });
+    </script>
+    {# {% endblock %} #}
+    <!--***** PHOTOSWIPE *****-->
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+        <div class="pswp__scroll-wrap">
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                    <div class="pswp__counter"></div>
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)">1</button>
+                    <button class="pswp__button pswp__button--share" title="Share">2</button>
+                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen">3</button>
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out">4</button>
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip">
+                    </div>
+                </div>
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+    <!-- PhotoSwipe JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js"></script>
+
+    <script>
+        var initPhotoSwipeFromDOM = function (gallerySelector) {
+            // parse slide data (url, title, size ...) from DOM elements
+            // (children of gallerySelector)
+            var parseThumbnailElements = function (el) {
+                var thumbElements = el.childNodes,
+                    numNodes = thumbElements.length,
+                    items = [],
+                    figureEl,
+                    linkEl,
+                    size,
+                    item;
+                for (var i = 0; i < numNodes; i++) {
+                    figureEl = thumbElements[i]; // <figure> element
+                    // include only element nodes
+                    if (figureEl.nodeType !== 1) {
+                        continue;
+                    }
+                    linkEl = figureEl.children[0]; // <a> element
+                    size = linkEl.getAttribute('data-size').split('x');
+                    // create slide object
+                    item = {
+                        src: linkEl.getAttribute('href'),
+                        w: parseInt(size[0], 10),
+                        h: parseInt(size[1], 10)
+                    };
+                    if (figureEl.children.length > 1) {
+                        // <figcaption> content
+                        item.title = figureEl.children[1].innerHTML;
+                    }
+                    if (linkEl.children.length > 0) {
+                        // <img> thumbnail element, retrieving thumbnail url
+                        item.msrc = linkEl.children[0].getAttribute('src');
+                    }
+                    item.el = figureEl; // save link to element for getThumbBoundsFn
+                    items.push(item);
+                }
+                return items;
+            };
+            // find nearest parent element
+            var closest = function closest(el, fn) {
+                return el && (fn(el) ? el : closest(el.parentNode, fn));
+            };
+            // triggers when user clicks on thumbnail
+            var onThumbnailsClick = function (e) {
+                e = e || window.event;
+                e.preventDefault ? e.preventDefault() : e.returnValue = false;
+                var eTarget = e.target || e.srcElement;
+                // find root element of slide
+                var clickedListItem = closest(eTarget, function (el) {
+                    return (el.tagName && el.tagName.toUpperCase() === 'FIGURE');
+                });
+                if (!clickedListItem) {
+                    return;
+                }
+                // find index of clicked item by looping through all child nodes
+                // alternatively, you may define index via data- attribute
+                var clickedGallery = clickedListItem.parentNode,
+                    childNodes = clickedListItem.parentNode.childNodes,
+                    numChildNodes = childNodes.length,
+                    nodeIndex = 0,
+                    index;
+                for (var i = 0; i < numChildNodes; i++) {
+                    if (childNodes[i].nodeType !== 1) {
+                        continue;
+                    }
+
+                    if (childNodes[i] === clickedListItem) {
+                        index = nodeIndex;
+                        break;
+                    }
+                    nodeIndex++;
+                }
+                if (index >= 0) {
+                    // open PhotoSwipe if valid index found
+                    openPhotoSwipe(index, clickedGallery);
+                }
+                return false;
+            };
+            // parse picture index and gallery index from URL (#&pid=1&gid=2)
+            var photoswipeParseHash = function () {
+                var hash = window.location.hash.substring(1),
+                    params = {};
+
+                if (hash.length < 5) {
+                    return params;
+                }
+                var vars = hash.split('&');
+                for (var i = 0; i < vars.length; i++) {
+                    if (!vars[i]) {
+                        continue;
+                    }
+                    var pair = vars[i].split('=');
+                    if (pair.length < 2) {
+                        continue;
+                    }
+                    params[pair[0]] = pair[1];
+                }
+                if (params.gid) {
+                    params.gid = parseInt(params.gid, 10);
+                }
+                return params;
+            };
+            var openPhotoSwipe = function (index, galleryElement, disableAnimation, fromURL) {
+                var pswpElement = document.querySelectorAll('.pswp')[0],
+                    gallery,
+                    options,
+                    items;
+                items = parseThumbnailElements(galleryElement);
+                // define options (if needed)
+                options = {
+                    // define gallery index (for URL)
+                    galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+                    getThumbBoundsFn: function (index) {
+                        // See Options -> getThumbBoundsFn section of documentation for more info
+                        var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
+                            pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+                            rect = thumbnail.getBoundingClientRect();
+                        return {x: rect.left, y: rect.top + pageYScroll, w: rect.width};
+                    }
+                };
+                // PhotoSwipe opened from URL
+                if (fromURL) {
+                    if (options.galleryPIDs) {
+                        // parse real index when custom PIDs are used
+                        // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
+                        for (var j = 0; j < items.length; j++) {
+                            if (items[j].pid === index) {
+                                options.index = j;
+                                break;
+                            }
+                        }
+                    } else {
+                        // in URL indexes start from 1
+                        options.index = parseInt(index, 10) - 1;
+                    }
+                } else {
+                    options.index = parseInt(index, 10);
+                }
+                // exit if index not found
+                if (isNaN(options.index)) {
+                    return;
+                }
+                if (disableAnimation) {
+                    options.showAnimationDuration = 0;
+                }
+                // Pass data to PhotoSwipe and initialize it
+                gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+                gallery.init();
+            };
+            // loop through all gallery elements and bind events
+            var galleryElements = document.querySelectorAll(gallerySelector);
+            for (var i = 0, l = galleryElements.length; i < l; i++) {
+                galleryElements[i].setAttribute('data-pswp-uid', i + 1);
+                galleryElements[i].onclick = onThumbnailsClick;
+            }
+            // Parse URL and open gallery if it contains #&pid=3&gid=1
+            var hashData = photoswipeParseHash();
+            if (hashData.pid && hashData.gid) {
+                openPhotoSwipe(hashData.pid, galleryElements[hashData.gid - 1], true, true);
+            }
+        };
+        // execute above function
+        initPhotoSwipeFromDOM('.my-gallery');
+    </script>
+{% endblock %}

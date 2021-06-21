@@ -1,0 +1,153 @@
+{% extends "admin/bars.html.twig" %}
+
+
+{% block contenpage %}
+    <style>
+        .search-result-categories>li>a {
+            color: #b6b6b6;
+            font-weight: 400
+        }
+        .search-result-categories>li>a:hover {
+            background-color: #ddd;
+            color: #555
+        }
+        .search-result-categories>li>a>.glyphicon {
+            margin-right: 5px
+        }
+        .search-result-categories>li>a>.badge {
+            float: right
+        }
+        .search-results-count {
+            margin-top: 10px
+        }
+        .search-result-item {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 4px
+        }
+        .search-result-item:after,
+        .search-result-item:before {
+            content: " ";
+            display: table
+        }
+        .search-result-item:after {
+            clear: both
+        }
+        .search-result-item .image-link {
+            display: block;
+            overflow: hidden;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px
+        }
+        @media (min-width:768px) {
+            .search-result-item .image-link {
+                display: inline-block;
+                margin: -20px 0 -20px -20px;
+                float: left;
+                width: 200px
+            }
+        }
+        @media (max-width:767px) {
+            .search-result-item .image-link {
+                max-height: 200px
+            }
+        }
+        .search-result-item .image {
+            max-width: 100%
+        }
+        .search-result-item .info {
+            margin-top: 2px;
+            font-size: 12px;
+            color: #999
+        }
+        .search-result-item .description {
+            font-size: 13px
+        }
+        .search-result-item+.search-result-item {
+            margin-top: 20px
+        }
+        @media (min-width:768px) {
+            .search-result-item-body {
+                margin-left: 200px
+            }
+        }
+        .search-result-item-heading {
+            font-weight: 400
+        }
+        .search-result-item-heading>a {
+            color: #555
+        }
+        @media (min-width:768px) {
+            .search-result-item-heading {
+                margin: 0
+            }
+        }
+        .titre { margin-left : 500px ;  }
+    </style>
+
+    <div class="x_content">
+        <hr style="  border: 0;
+
+  border-bottom: 3px solid #fff;
+  border-radius: 100%;
+  width: 100%;
+">
+        <h1 style="color:#0b97c4;font-family: 'Times New Roman'" class="text-center txt1">Discuter avec nos consultants !</h1>
+    </div>
+    {% if is_granted("ROLE_PASSOCIATION")   %}
+    <div>
+        <div>
+
+            <div>
+
+
+                {% for users in users|filter(users => not users.deleted)   %}
+                    {%  for r in users.roles %}
+                        {% if r is same as "ROLE_CONSULTANT" %}
+
+
+                            <section class="search-result-item">
+                                <a class="image-link" href="#"><img class="image" src=" {{ asset('uploads/images/'  ~ users.logo) }}">
+                                </a>
+                                <div class="search-result-item-body">
+                                    <div class="row">
+                                        <div class="col-sm-9">
+{#                                            <h1>{{ users.id }}</h1>#}
+                                            <h4 class="search-result-item-heading"><a href="#">{{ users.nomComplet }}</a></h4>
+                                            <p class="info">Consultant</p>
+                                            <p class="info">{{users.email}}</p>
+
+                                            {% for s in services | filter(services => services.isValid)  %}
+         {% if s.user.id is same as users.id %}
+                                            <p class="info"><i class="fas fa-arrow-right"></i>
+
+                                                {{s.type}}</p>
+             <p class="description">{{ s.description }}</p>
+
+         {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="col-sm-3 text-align-center">
+
+                                            <a class="btn btn-primary btn-info btn-sm" href="{{ path('newTopic' ,{'id':users.id} ) }}"> Contacter</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+
+
+
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <h1>vous n'avez pas l'accés desolé :)</h1>
+    {% endif %}
+{% endblock %}
+

@@ -1,0 +1,178 @@
+{#{% extends "admin/bars.html.twig" %}#}
+{#{% block contenpage %}#}
+{#    <h1>Salut {{ app.user.nomComplet }}</h1>#}
+
+{#</br>#}
+{#</br>#}
+{#</br>#}
+{#<h2>Liste de vos anciennes conversations</h2>#}
+
+{#    </br>#}
+{#    </br>#}
+{#    </br>#}
+{#<div class="w3-container">#}
+{#<ul class="w3-ul w3-border">#}
+
+{#    {% for t in topics|filter(topics => not topics.deleted) | sort|reverse  %}#}
+{#        {% if t.idConsultant is same as app.user %}#}
+{#            {% if t.isRead == 0 %}#}
+{#                <div style="background-color:lightcoral" >#}
+{#                <h1>cv</h1>#}
+{#    <li>#}
+{#        <span><img class="msg-img" src=" {{ asset('uploads/images/'  ~ t.author.logo) }}" alt="Awesome Image"> <h4>  {{ t.author.nomComplet }}</h4></span>#}
+{#        <h4>{{ t.name }}</h4>#}
+{#        <a style=" float : right ; background-color: red ; color: white; padding: 15px 25px;text-align: center;text-decoration: none;display: inline-block;" href="{{ path('deleteT', {'id': t.id}) }}">Supprimer</a></span>#}
+
+
+
+{#        <a style=" background-color: limegreen ; color: white; padding: 15px 25px;text-align: center;text-decoration: none;display: inline-block;" href="{{ path('topic', {'id': t.id}) }}">Répondre</a>#}
+{#    </li>#}
+
+
+{#</div>#}
+{#        </br>#}
+{#        </br>#}
+{#        </br>#}
+
+{#                {% else %}#}
+{#                    <h1>non</h1>#}
+{#                    <li>#}
+{#                        <span><img class="msg-img" src=" {{ asset('uploads/images/'  ~ t.author.logo) }}" alt="Awesome Image"> <h4>  {{ t.author.nomComplet }}</h4></span>#}
+{#                        <h4>{{ t.name }}</h4>#}
+{#                        <a style=" float : right ; background-color: red ; color: white; padding: 15px 25px;text-align: center;text-decoration: none;display: inline-block;" href="{{ path('deleteT', {'id': t.id}) }}">Supprimer</a></span>#}
+
+
+
+{#                        <a style=" background-color: limegreen ; color: white; padding: 15px 25px;text-align: center;text-decoration: none;display: inline-block;" href="{{ path('topic', {'id': t.id}) }}">Répondre</a>#}
+{#                    </li>#}
+
+
+
+{#                    </br>#}
+{#                    </br>#}
+{#                    </br>#}
+{#                    {% endif %}#}
+{#{% endif %}#}
+{#                    {% endfor %}#}
+
+{#</ul>#}
+
+{#</div>#}
+
+
+
+
+{#{% endblock %}#}
+
+
+{% extends "admin/bars.html.twig" %}
+{% block contenpage %}
+    <h3 style="font-family: 'Times New Roman'" >Salut {{ app.user.nomComplet }}</h3>
+
+    </br>
+
+    <h2>Liste de vos anciennes conversations</h2>
+    <style>
+
+        .container{ margin:auto;}
+
+        .inbox_people {
+            background: #f8f8f8 none repeat scroll 0 0;
+            float: left;
+            overflow: hidden;
+            width: 40%; border-right:1px solid #c4c4c4;
+        }
+        .chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0;}
+        .chat_ib h5 span{ font-size:13px; float:right;}
+        .chat_ib p{ font-size:14px; color:#989898; margin:auto}
+        .chat_img {
+            float: left;
+            width: 11%;
+        }
+        .chat_ib {
+            float: left;
+            padding: 0 0 0 15px;
+            width: 88%;
+        }
+        .chat_people{ overflow:hidden; clear:both;}
+        .chat_list {
+            border-bottom: 1px solid #c4c4c4;
+            margin: 0;
+            padding: 18px 16px 10px;
+        }
+        .inbox_chat { height: 550px; overflow-y: scroll;}
+        .active_chat{ background:#ebebeb;}
+        .messaging { padding: 0 0 50px 0;}
+        .read { background-color : lightred ; }
+    </style>
+    <div class="container">
+    <div class="messaging">
+
+        {% for t in topics|filter(topics => not topics.deleted) | sort|reverse  %}
+            {% if t.idConsultant is same as app.user %}
+                {% if t.isRead == 0 %}
+                    <div style="background-color: lightblue;margin-bottom: 3px;border-bottom-color: #bd362f" class="chat_list active_chat" >
+                        <div class="chat_people">
+                            <div class="chat_img"> <img class="msg-img" src=" {{ asset('uploads/images/'  ~ t.author.logo) }}" alt="Awesome Image"></div>
+                            <div class="chat_ib">
+                                <h5 style="font-weight : bold "> {{ t.author.nomComplet }} <span class="chat_date">{{t.creationDate|date("d/m/Y") }}</span></h5>
+                                <p style="font-weight : bold "><a  href="{{ path('topic', {'id': t.id}) }}">{{ t.name }}</a> </p>
+                                </br>
+                                </br>
+{#                                <a style=" background-color: red ; color: white; padding: 5px 10px;text-align: center;text-decoration: none;display: inline-block;" href="{{ path('deleteT', {'id': t.id}) }}">Supprimer</a></span>#}
+                                <form  method="post" action="{{ path('deleteT', {'id': t.id}) }}" onsubmit="return confirm('etes vous sure de supprimer cette conversation ?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ t.id) }}">
+                                    <button style=" background-color: red ; color: white; padding: 5px 10px;text-align: center;text-decoration: none;display: inline-block;">supprimer</button>
+
+                                    <a style=" background-color: limegreen ; color: white; padding: 5px 10px;text-align: center;text-decoration: none;display: inline-block;" href="{{ path('topic', {'id': t.id}) }}">Répondre</a>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                {% else %}
+
+                    <div class="chat_list active_chat">
+                        <div class="chat_people">
+                            <div class="chat_img"> <img class="msg-img" src=" {{ asset('uploads/images/'  ~ t.author.logo) }}" alt="Awesome Image"></div>
+                            <div class="chat_ib">
+                                <h5> {{ t.author.nomComplet }} <span class="chat_date">{{t.creationDate|date("d/m/Y") }}</span></h5>
+                                <p><a href="{{ path('topic', {'id': t.id}) }}">{{ t.name }}</a> </p>
+                                </br>
+                                </br>
+{#                                <a style="background-color: red ; color: white; padding: 5px 10px;text-align: center;text-decoration: none;display: inline-block;" href="{{ path('deleteT', {'id': t.id}) }}">Supprimer</a></span>#}
+{#                                <form method="post" action="{{ path('deleteT', {'id': t.id}) }}" onsubmit="return confirm('etes vous sure de supprimer cette conversation ?');">#}
+{#                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ t.id) }}">#}
+{#                                    <button class="btn btn-danger">supprimer</button>#}
+
+
+{#                                </form>#}
+{#                                <a style=" background-color: limegreen ; color: white; padding: 5px 10px;text-align: center;text-decoration: none;display: inline-block;" href="{{ path('topic', {'id': t.id}) }}">Répondre</a>#}
+{#                          #}
+                                <form  method="post" action="{{ path('deleteT', {'id': t.id}) }}" onsubmit="return confirm('etes vous sure de supprimer cette conversation ?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ t.id) }}">
+                                    <button style=" background-color: red ; color: white; padding: 5px 10px;text-align: center;text-decoration: none;display: inline-block;">supprimer</button>
+
+                                    <a style=" background-color: limegreen ; color: white; padding: 5px 10px;text-align: center;text-decoration: none;display: inline-block;" href="{{ path('topic', {'id': t.id}) }}">Répondre</a>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        </ul>
+
+    </div>
+
+
+
+
+{% endblock %}

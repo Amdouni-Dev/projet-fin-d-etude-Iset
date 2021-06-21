@@ -1,0 +1,197 @@
+{% extends "admin/bars.html.twig" %}
+
+
+{% block contenpage %}
+<style>
+
+    .image-flip:hover .backside,
+    .image-flip.hover .backside {
+        -webkit-transform: rotateY(0deg);
+        -moz-transform: rotateY(0deg);
+        -o-transform: rotateY(0deg);
+        -ms-transform: rotateY(0deg);
+        transform: rotateY(0deg);
+        border-radius: .25rem;
+    }
+
+    .image-flip:hover .frontside,
+    .image-flip.hover .frontside {
+        -webkit-transform: rotateY(180deg);
+        -moz-transform: rotateY(180deg);
+        -o-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+
+    .mainflip {
+        -webkit-transition: 1s;
+        -webkit-transform-style: preserve-3d;
+        -ms-transition: 1s;
+        -moz-transition: 1s;
+        -moz-transform: perspective(1000px);
+        -moz-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+        transition: 1s;
+        transform-style: preserve-3d;
+        position: relative;
+    }
+
+    .frontside {
+        position: relative;
+        -webkit-transform: rotateY(0deg);
+        -ms-transform: rotateY(0deg);
+        z-index: 2;
+        margin-bottom: 30px;
+    }
+
+    .backside {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: white;
+        -webkit-transform: rotateY(-180deg);
+        -moz-transform: rotateY(-180deg);
+        -o-transform: rotateY(-180deg);
+        -ms-transform: rotateY(-180deg);
+        transform: rotateY(-180deg);
+        -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+        -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+        box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    }
+
+    .frontside,
+    .backside {
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transition: 1s;
+        -webkit-transform-style: preserve-3d;
+        -moz-transition: 1s;
+        -moz-transform-style: preserve-3d;
+        -o-transition: 1s;
+        -o-transform-style: preserve-3d;
+        -ms-transition: 1s;
+        -ms-transform-style: preserve-3d;
+        transition: 1s;
+        transform-style: preserve-3d;
+    }
+
+    .frontside .card,
+    .backside .card {
+        min-height: 312px;
+    }
+
+    .backside .card a {
+        font-size: 18px;
+        color: #007b5e !important;
+    }
+
+    .frontside .card .card-title,
+    .backside .card .card-title {
+        color: #007b5e !important;
+    }
+
+    .frontside .card .card-body img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+    }
+</style>
+<div style="
+    color:orange;
+  font-family: Lobster;
+ " id="video-info-section" class="layer">
+
+    <div class="x_content">
+        <hr style="  border: 0;
+
+  border-bottom: 3px solid #fff;
+  border-radius: 100%;
+  width: 100%;
+">
+        <h1 style="color:#0b97c4;font-family: 'Times New Roman'" class="text-center txt1">Explorez l'univers des Associations en Tunisie</h1>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div style="margin-bottom: 100px" class="row">
+        <div  style="margin-top: 20px;">
+
+
+            {% for a in associations|filter(associations => not associations.deleted)| filter(associations => associations.valid)  %}
+                <a href="{{ path('UserAssoci',{"id":a.id}) }}">
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="image-flip" >
+                            <div class="mainflip flip-0">
+                                <div class="frontside">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <p><img src=" {{ asset('uploads/images/'  ~ a.logo) }}" alt="card image"></p>
+                                            <h4 style="font-family: 'Times New Roman'" class="card-title">{{ a.titre }}</h4>
+                                            <p class="card-text"><b>{{ a.userA.nomComplet }}</b>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="backside">
+                                    <div class="card">
+                                        <div class="card-body text-center mt-4">
+                                            <h4 style="font-family: 'Times New Roman'" class="card-title">{{ a.titre }}</h4>
+
+                                            <h4 style="font-family: 'Courier New, Courier, monospace' " class="card-text">{{ a.but }}</h4>
+                                            <ul class="list-inline">
+                                                {% if a.facebook %}
+                                                    <li class="list-inline-item">
+                                                        <a class="social-icon text-xs-center" target="_blank" href="{{ a.facebook }}">
+                                                            <i class="fa fa-facebook"></i>
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                                {% if a.twitter %}
+                                                    <li class="list-inline-item">
+                                                        <a class="social-icon text-xs-center" target="_blank" href="{{ a.twitter }}">
+                                                            <i class="fa fa-twitter"></i>
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                                {% if a.siteWeb %}
+                                                    <li class="list-inline-item">
+                                                        <a class="social-icon text-xs-center" target="_blank" href="{{ a.siteWeb }}">
+                                                            <i class="fa fa-sitemap"></i>
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                                {% if a.instagram %}
+                                                    <li class="list-inline-item">
+                                                        <a class="social-icon text-xs-center" target="_blank" href="{{ a.instagram }}">
+                                                            <i class="fa fa-instagram"></i>
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                    <a href="{{ path('UserAssoci',{"id":a.id}) }}" class="btn btn-primary btn-sm">voir plus d'informations</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div></a>
+            {% endfor %}
+        </div></div>
+
+
+
+
+{% endblock %}

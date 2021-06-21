@@ -1,0 +1,106 @@
+{% extends "admin/bars.html.twig" %}
+
+{% block contenpage %}
+
+
+    <div style="background-color: white" class="">
+        <div class="page-title">
+            <div class="title_left">
+
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Liste des associations</h2>
+
+                        <ul class="nav navbar-right panel_toolbox">
+                            {# <li><a href="{{ path('newAss',{'idPA':app.user.id}) }}" class="btn btn-success">NEW</a> #}
+                            {# <li><a href="{{ path('association_new') }}" class="btn btn-success">NEW</a> #}
+
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            {# <form action="{{ path('groupaction_association') }}" id="grpaction" method="post" name="grpaction"> #}
+                            {# <div class="form-group form-inline"> #}
+                            {# <select class="form-control" name="action" required id="action_select"> #}
+                            {# <option value="">Action de groupe</option> #}
+                            {# <option value="desactiver">Desactiver</option> #}
+                            {# <option value="activer">Activer</option> #}
+                            {# <option value="supprimer">Supprimer</option> #}
+                            {# </select> #}
+                            {# <button class="btn btn-primary" type="submit">Go!!</button> #}
+                            {# </div> #}
+
+                            {# </form> #}
+                            <table id="example" class="display table table-striped table-bordered dataminetables">
+                                <thead>
+                                <th><input type="checkbox" id="select_all" name="select_all"></th>
+                                <th>Titre</th>
+                                <th>Siege</th>
+                                <th>But</th>
+                                <th>logo</th>
+                                <th>Adresse</th>
+                                <th>Nombre des membres</th>
+
+
+                                <th>Ajouter une opportunité</th>
+                                <th>Ajouter une evenement</th>
+                                <th>Ajouter d'autre informations</th>
+                                {# <th>Suprimer</th> #}
+                                </thead>
+                                <tbody>
+                                {% for associations in associations|filter(associations => not associations.deleted) %}
+                                    {% if app.user.id == associations.UserA.id %}
+
+                                        <tr>
+                                            <td><input type="checkbox" class="chkgrp" name="chkgrp[]"
+                                                       value="{{ associations.id }}"></td>
+                                            <td>{{ associations.titre }}</td>
+                                            <td>{{ associations.siege }}</td>
+                                            <td>{{ associations.but }}</td>
+                                            <td><img width="50px" height="50px"
+                                                     src=" {{ asset('uploads/images/'  ~ associations.logo) }}"
+                                                     alt="Awesome Image">
+                                            </td>
+                                            <td>{{ associations.adresse }}</td>
+                                            <td>{{ associations.nombreMembre }}</td>
+                                            {# <td>{%  if categorie.categorieParente %} {{ categorie.categorieParente.libelle }} {% endif %}</td> #}
+                                            <td><a class="btn btn-primary"
+                                                   href="{{ path('OP_new',{"id":associations.id}) }}"><i
+                                                            class="fa fa-edit"></i></a></td>
+                                            <td><a class="btn btn-primary"
+                                                   href="{{ path('EV_new',{"id":associations.id}) }}"><i
+                                                            class="fa fa-edit"></i></a></td>
+                                            <td><a class="btn btn-primary"
+                                                   href="{{ path('association_ajoutInfo',{"id":associations.id}) }}"><i
+                                                            class="fa fa-plus"></i></a></td>
+
+                                            {# <td> #}
+                                            {# {%  if associations.valid %} #}
+                                            {# <a class="btn btn-success activate-link" href="{{ path('changevalidite_association', {'id': associations.id}) }}"> <i class="fa fa-check"></i></a> #}
+                                            {# {% else %} #}
+                                            {# <a class="btn btn-warning activate-link" href="{{ path('changevalidite_association', {'id': associations.id}) }}"> <i class="fa fa-times"></i></a> #}
+                                            {# {% endif %} #}
+                                            {# </td> #}
+                                            {# <td><a href="{{ path('association_deleteP', {'id': associations.id}) }}" class="btn btn-danger disable-btn del-link" type="submit" ><i class="fa fa-trash"></i></a></td> #}
+                                        </tr>
+                                    {% endif %}
+
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,676 @@
+{#{% extends "admin/bars.html.twig" %}#}
+
+
+{#{% block contenpage %}#}
+{#    <style>#}
+{#        body {#}
+{#            background: #eee;#}
+{#            color: #777;#}
+{#        }#}
+
+{#        h1 {#}
+{#            color: #333;#}
+{#            font-weight: 700;#}
+{#        }#}
+
+{#        a {#}
+{#            color: inherit;#}
+{#            text-decoration: none;#}
+{#        }#}
+
+{#        a:hover {#}
+{#            text-decoration: none;#}
+{#            color: inherit;#}
+{#        }#}
+
+{#        .summary {#}
+{#            border: solid 1px #ddd;#}
+{#            padding: 25px;#}
+{#            background: #fff;#}
+{#            box-shadow: 0 0 0.5;#}
+{#        }#}
+
+{#        .summary .title {#}
+{#            display: block;#}
+{#            padding: 0 0 15px 0;#}
+{#        }#}
+
+{#        .summary .teaser-text {#}
+{#            padding: 0 0 15px 0;#}
+{#        }#}
+
+{#        .thumbnail {#}
+{#            border: none;#}
+{#        }#}
+
+{#        .spacer-50 {#}
+{#            margin: 50px 0;#}
+{#        }#}
+{#    </style>#}
+{#    <div class="spacer-50"></div>#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col-xs-10 col-xs-offset-1 summary">#}
+{#                <div class="col-md-6">#}
+{#                    <a href="http://blog.ethanthompson.org/post/100614860941/yesterday-evening-i-got-my-first-order-from-blue">#}
+{#                        <span class="title"><h1>My first bag of Blue Bottle Coffee!</h1></span>#}
+{#                        <p class="teaser-text">Yesterday evening I got my first order from Blue Bottle Coffee Roasters! I chose their “House of Good” blend. It’s definitely an espresso blend, and to my taste buds I get hints of blackberry and almonds. I chose to try my first cup from a Chemex and I thoroughly enjoyed it.</p>#}
+{#                    </a>#}
+{#                </div>#}
+{#                <div class="col-md-6 thumbnail">#}
+{#                    <a href="#"><img src="https://41.media.tumblr.com/ed1599a374055f830db83ce9a92cc730/tumblr_ndte3xGtCk1s5zwejo4_1280.jpg" alt="" class="img-responsive" /></a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="spacer-50"></div>#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col-xs-10 col-xs-offset-1 summary">#}
+{#                <div class="col-md-6">#}
+{#                    <a href="http://blog.ethanthompson.org/post/100614860941/yesterday-evening-i-got-my-first-order-from-blue">#}
+{#                        <span class="title"><h1>My first bag of Blue Bottle Coffee!</h1></span>#}
+{#                        <p class="teaser-text">Yesterday evening I got my first order from Blue Bottle Coffee Roasters! I chose their “House of Good” blend. It’s definitely an espresso blend, and to my taste buds I get hints of blackberry and almonds. I chose to try my first cup from a Chemex and I thoroughly enjoyed it.</p>#}
+{#                    </a>#}
+{#                </div>#}
+{#                <div class="col-md-6 thumbnail">#}
+{#                    <a href="#"><img src="https://41.media.tumblr.com/ed1599a374055f830db83ce9a92cc730/tumblr_ndte3xGtCk1s5zwejo4_1280.jpg" alt="" class="img-responsive" /></a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="spacer-50"></div>#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col-xs-10 col-xs-offset-1 summary">#}
+{#                <div class="col-md-6">#}
+{#                    <a href="http://blog.ethanthompson.org/post/100614860941/yesterday-evening-i-got-my-first-order-from-blue">#}
+{#                        <span class="title"><h1>My first bag of Blue Bottle Coffee!</h1></span>#}
+{#                        <p class="teaser-text">Yesterday evening I got my first order from Blue Bottle Coffee Roasters! I chose their “House of Good” blend. It’s definitely an espresso blend, and to my taste buds I get hints of blackberry and almonds. I chose to try my first cup from a Chemex and I thoroughly enjoyed it.</p>#}
+{#                    </a>#}
+{#                </div>#}
+{#                <div class="col-md-6 thumbnail">#}
+{#                    <a href="#"><img src="https://41.media.tumblr.com/ed1599a374055f830db83ce9a92cc730/tumblr_ndte3xGtCk1s5zwejo4_1280.jpg" alt="" class="img-responsive" /></a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="spacer-50"></div>#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col-xs-10 col-xs-offset-1 summary">#}
+{#                <div class="col-md-6">#}
+{#                    <a href="http://blog.ethanthompson.org/post/100614860941/yesterday-evening-i-got-my-first-order-from-blue">#}
+{#                        <span class="title"><h1>My first bag of Blue Bottle Coffee!</h1></span>#}
+{#                        <p class="teaser-text">Yesterday evening I got my first order from Blue Bottle Coffee Roasters! I chose their “House of Good” blend. It’s definitely an espresso blend, and to my taste buds I get hints of blackberry and almonds. I chose to try my first cup from a Chemex and I thoroughly enjoyed it.</p>#}
+{#                    </a>#}
+{#                </div>#}
+{#                <div class="col-md-6 thumbnail">#}
+{#                    <a href="#"><img src="https://41.media.tumblr.com/ed1599a374055f830db83ce9a92cc730/tumblr_ndte3xGtCk1s5zwejo4_1280.jpg" alt="" class="img-responsive" /></a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="spacer-50"></div>#}
+{#{% endblock %}#}
+
+
+
+
+{#{% extends "admin/bars.html.twig" %}#}
+
+
+{#{% block contenpage %}#}
+
+{#    <style>#}
+
+{#        body {#}
+{#            background: #eee;#}
+{#            color: #777;#}
+{#        }#}
+
+{#        h1 {#}
+{#            color: #333;#}
+{#            font-weight: 700;#}
+{#        }#}
+
+{#        a {#}
+{#            color: inherit;#}
+{#            text-decoration: none;#}
+{#        }#}
+
+{#        a:hover {#}
+{#            text-decoration: none;#}
+{#            color: inherit;#}
+{#        }#}
+
+{#        .summary {#}
+{#            border: solid 1px #ddd;#}
+{#            padding: 25px;#}
+{#            background: #fff;#}
+{#            box-shadow: 0 0 0.5;#}
+{#        }#}
+
+{#        .summary .title {#}
+{#            display: block;#}
+{#            padding: 0 0 15px 0;#}
+{#        }#}
+
+{#        .summary .teaser-text {#}
+{#            padding: 0 0 15px 0;#}
+{#        }#}
+
+{#        .thumbnail {#}
+{#            border: none;#}
+{#        }#}
+
+{#        .spacer-50 {#}
+{#            margin: 50px 0;#}
+{#        }#}
+{#    </style>#}
+
+{#    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdnbu2dKsKShoO4zqET8uFYY6EV4KapxE&callback=initMap&libraries=&v=weekly" defer></script>#}
+{#    #}{#{% include 'header.html.twig' %}#}
+{#    #}{#<script src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false&extension=.js"></script>#}
+{#    <script>#}
+{#        // $(document).ready(function() {#}
+{#        let map;#}
+{#        let markers = [];#}
+{#        function initMap() {#}
+{#            tab = document.querySelectorAll("div.map1");#}
+{#            tab2 = document.querySelectorAll("div.test");#}
+{#            long = tab2[0].childNodes;#}
+{#            console.log(tab2[0].childNodes);#}
+{#            console.log(long[1],long[3]);#}
+{#            for (let i = 0; i < tab.length; i++) {#}
+{#                var latit = Number(tab2[i].childNodes[3].value);#}
+{#                var long =Number(tab2[i].childNodes[1].value);#}
+{#                const haightAshbury = {lat:long ,lng:latit};#}
+{#                map = new google.maps.Map(document.getElementById(tab[i].id), {#}
+{#                    zoom: 12,#}
+{#                    center: haightAshbury,#}
+{#                    draggable: true#}
+{#                });#}
+{#                new google.maps.Marker({#}
+{#                    position: haightAshbury,#}
+{#                    map,#}
+{#                    title: "Localisation",#}
+{#                });#}
+{#            }#}
+{#        }#}
+{#    </script>#}
+{#    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">#}
+
+
+{#    #}{#<div style="width: 500px;height: 500px" id="map"></div>#}
+
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col-sm-12">#}
+{#                <div class="alert alert-warning alert-dismissible fade show" role="alert" style="visibility: hidden" id="alert">#}
+{#                    You should login to create a post !#}
+{#                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"  onclick="closediv()">#}
+{#                        <span aria-hidden="true">&times;</span>#}
+{#                    </button>#}
+{#                </div>#}
+{#                <div class="title-box text-center">#}
+{#                    {% if app.user %}#}
+{#                        {% if app.user.deleted!=1 %}#}
+{#                            <a href="{{ path('newpost') }}"><button class="button button-a button-big button-rouded">Créer une nouvelle publication</button></a>#}
+{#                        {% else %}#}
+{#                            <a href="#"  title="Vous êtes bloqués par un admin Associations pour tous en raison de votre comportement !"><button disabled class="button button-a button-big button-rouded">Créer une nouvelle publication</button></a>#}
+{#                        {% endif %}#}
+{#                    {% else %}#}
+{#                        <button onclick="alertinfo();" class="button button-a button-big button-rouded">Créer une nouvelle publication</button>#}
+{#                    {% endif %}#}
+{#                    <script>#}
+{#                        function alertinfo(){#}
+{#                            alert("Vous devez connecter à votre compte pour pouvoir créer un post ");#}
+{#                        }#}
+{#                    </script>#}
+
+{#                    <p class="subtitle-a">#}
+{#                    </p>#}
+{#                    <div class="line-mf">#}
+{#                    </div>#}
+{#                </div>#}
+{#                {% for message in app.flashes('notice') %}#}
+{#                    <div class="alert alert-success">#}
+{#                        {{ message }}#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
+{#    <div  class=" container" >#}
+{#        <div class="animated fadeIn carte " style="width: 64rem;" id="divcard">#}
+{#            {% for pub in pubs|sort((a, b) => b.datePub <=> a.datePub) %}#}
+{#                {% if pub.statut !="R" %}#}
+{#                    <div class="card-body">#}
+
+{#                        <p class="x_content">                    <p style="margin-left: 10px;font-size: small;color: lightsteelblue">Publié par {{pub.user.nomComplet |upper}} {{ pub.user.nomComplet}}</p>#}
+{#                        <p style="margin-left: 505px;font-size: small;color: lightsteelblue;margin-top: -35px;">le {{ pub.datePub |date('d/m/Y H:i') }}</p>#}
+{#                        <div class="card-body" style="margin-top: -20px">#}
+{#                            #}{#                        <h5 > {{ pub.nom }}</h5>#}
+{#                            #}{#                        <h6 >{{ pub.sexe}}</h6>#}
+{#                            #}{#                        <h6 >{{ pub.age}} ans </h6>#}
+{#                            <div style="height: 100px;position: relative">#}
+{#                                <span style="font-size: small">{{ pub.contenuPub}}</span>#}
+{#                            </div>#}
+
+{#                            <div id="{{ pub.id }}" class="map1" style="height: 200px"></div>#}
+{#                            <div class="test">#}
+{#                                <input id="tableau1" type="hidden" value="{{ pub.longitude }}"/>#}
+{#                                <input id="tableau2" type="hidden" value="{{ pub.latitude }}"/>#}
+{#                            </div>#}
+{#                            <br>#}
+{#                            <div class="inner">#}
+{#                                <!--***** GALLERY *****-->#}
+{#                                {% if pub.mutimedia | length == 4 %}#}
+{#                                    <div class="my-gallery" itemscope >#}
+{#                                        <figure itemprop="associatedMedia" itemscope >#}
+{#                                            <table>#}
+{#                                                <tr>#}
+{#                                                    <td>#}
+{#                                                        <figure itemprop="associatedMedia" itemscope >#}
+{#                                                            <a href="{{ asset('uploads/images/'~pub.mutimedia[0].source) }}" itemprop="contentUrl" data-size="964x1024">#}
+{#                                                                <img class="inner rounded" src="{{ asset('uploads/images/'~pub.mutimedia[0].source) }}" style="width: 280px;height: 200px;margin-left: 20px" itemprop="thumbnail" alt="Image description" />#}
+{#                                                            </a>#}
+{#                                                        </figure>#}
+{#                                                    </td>#}
+{#                                                    <td>#}
+{#                                                        <figure itemprop="associatedMedia" itemscope >#}
+{#                                                            <a href="{{ asset('uploads/images/'~pub.mutimedia[1].source) }}" itemprop="contentUrl" data-size="964x1024">#}
+{#                                                                <img class="inner rounded"  src="{{ asset('uploads/images/'~pub.mutimedia[1].source) }}" style="width: 280px;height: 200px;margin-left: 150px" itemprop="thumbnail" alt="Image description" />#}
+{#                                                            </a>#}
+{#                                                        </figure>#}
+{#                                                    </td>#}
+{#                                                </tr>#}
+{#                                                <tr>#}
+{#                                                    <td >#}
+{#                                                        <figure itemprop="associatedMedia" itemscope>#}
+{#                                                            <a href="{{ asset('uploads/images/'~pub.mutimedia[2].source) }}" itemprop="contentUrl" data-size="964x1024">#}
+{#                                                                <img class="inner rounded"  src="{{ asset('uploads/images/'~pub.mutimedia[2].source) }}" style="width: 280px;height: 200px;margin-left: 20px" itemprop="thumbnail" alt="Image description" />#}
+{#                                                            </a>#}
+{#                                                        </figure>#}
+{#                                                    </td>#}
+{#                                                    <td>#}
+{#                                                        <figure itemprop="associatedMedia" itemscope >#}
+{#                                                            <a href="{{ asset('uploads/images/'~pub.mutimedia[3].source) }}" itemprop="contentUrl" data-size="1000x1024">#}
+{#                                                                <img class="inner rounded"  src="{{ asset('uploads/images/'~pub.mutimedia[3].source) }}" style="width: 280px;height: 200px;margin-left: 150px" itemprop="thumbnail" alt="Image description" />#}
+{#                                                            </a>#}
+{#                                                        </figure>#}
+{#                                                    </td>#}
+{#                                                </tr>#}
+{#                                            </table>#}
+{#                                        </figure>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
+{#                                {% if pub.mutimedia | length == 3 %}#}
+{#                                    <div class="my-gallery" itemscope>#}
+{#                                        <figure itemprop="associatedMedia" itemscope >#}
+{#                                            <table>#}
+{#                                                <tr>#}
+{#                                                    <td>#}
+{#                                                        <figure itemprop="associatedMedia" itemscope >#}
+{#                                                            <a href="{{ asset('uploads/images/'~pub.mutimedia[0].source) }}" itemprop="contentUrl" data-size="964x1024">#}
+{#                                                                <img class="inner rounded"  src="{{ asset('uploads/images/'~pub.mutimedia[0].source) }}" style="width: 170px;height: 100px;margin-left: 20px" itemprop="thumbnail" alt="Image description" />#}
+{#                                                            </a>#}
+{#                                                        </figure>#}
+{#                                                    </td>#}
+{#                                                    <td>#}
+{#                                                        <figure itemprop="associatedMedia" itemscope >#}
+{#                                                            <a href="{{ asset('uploads/images/'~pub.mutimedia[1].source) }}" itemprop="contentUrl" data-size="964x1024">#}
+{#                                                                <img class="inner rounded"  src="{{ asset('uploads/images/'~pub.mutimedia[1].source) }}" style="width: 160px;height: 100px;margin-left: 40px" itemprop="thumbnail" alt="Image description" />#}
+{#                                                            </a>#}
+{#                                                        </figure>#}
+{#                                                    </td>#}
+{#                                                </tr>#}
+{#                                                <tr>#}
+{#                                                    <td colspan="2">#}
+{#                                                        <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">#}
+{#                                                            <a href="{{ asset('uploads/images/'~pub.mutimedia[2].source) }}" itemprop="contentUrl" data-size="964x1024">#}
+{#                                                                <img class="inner rounded"  src="{{ asset('uploads/images/'~pub.mutimedia[2].source) }}" style="width: 250px;height: 120px;margin-left: 60px" itemprop="thumbnail" alt="Image description" />#}
+{#                                                            </a>#}
+{#                                                        </figure>#}
+{#                                                    </td>#}
+{#                                                </tr>#}
+{#                                            </table>#}
+{#                                        </figure>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
+{#                                {% if pub.mutimedia | length == 2 %}#}
+{#                                    <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">#}
+{#                                        <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">#}
+{#                                            <table>#}
+{#                                                <tr>#}
+{#                                                    <td>#}
+{#                                                        <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">#}
+{#                                                            <a href="{{ asset('uploads/images/'~pub.mutimedia[0].source) }}" itemprop="contentUrl" data-size="964x1024">#}
+{#                                                                <div class="inner">#}
+{#                                                                    <img class="inner rounded"  src="{{ asset('uploads/images/'~pub.mutimedia[0].source) }}" style="width: 280px;height: 300px;margin-left: 7px" itemprop="thumbnail" alt="Image description" />#}
+{#                                                                </div>#}
+{#                                                            </a>#}
+{#                                                        </figure>#}
+{#                                                    </td>#}
+{#                                                    <td>#}
+{#                                                        <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">#}
+{#                                                            <a href="{{ asset('uploads/images/'~pub.mutimedia[1].source) }}" itemprop="contentUrl" data-size="964x1024">#}
+{#                                                                <div class="inner">#}
+{#                                                                    <img class="rounded"  src="{{ asset('uploads/images/'~pub.mutimedia[1].source) }}" style="width: 280px;height: 300px;margin-left: 130px" itemprop="thumbnail" alt="Image description" />#}
+{#                                                                </div>#}
+{#                                                            </a>#}
+{#                                                        </figure>#}
+{#                                                    </td>#}
+{#                                                </tr>#}
+{#                                            </table>#}
+{#                                        </figure>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
+{#                                {% if pub.mutimedia | length == 1 %}#}
+{#                                    <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">#}
+{#                                        <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">#}
+{#                                            <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">#}
+{#                                                <a href="{{ asset('uploads/images/'~pub.mutimedia[0].source) }}" itemprop="contentUrl" data-size="1024x1024">#}
+{#                                                    <img class="rounded" src="{{ asset('uploads/images/'~pub.mutimedia[0].source) }}" style="width: 500px;height: 390px;margin-left: 50px" itemprop="thumbnail" alt="Image description" />#}
+{#                                                </a>#}
+{#                                            </figure>#}
+{#                                        </figure>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        {% if app.user %}#}
+{#                            {% if app.user.deleted!=1 %}#}
+{#                                <form  name="form" method="get" id="{{ pub.id }}" class="comment"  action="{{ path('newcomment',{'id':pub.id}) }}" >#}
+{#                                    <input  type="text" placeholder="Ecrivez votre commentaire ici ..." style="padding: 11px;width: 490px" name="aa" id="aa" class="texte" >#}
+{#                                    #}{#                                <a href="{{ path('singlepost',{'id':pub.id}) }}" > <p style="margin-top: -40px;margin-left:520px " >#}
+{#                                    <span id="count" class="count">{{ pub.commentaires | length }}</span> commentaires</p></a>#}
+{#                                    <br>#}
+{#                                    <div style="background-color: #F6FDFE;padding: 1px;border-radius: 20px">#}
+{#                                        <span style="font-size: medium;font-weight: bold;margin-left: 10px" id="11" class="c1"></span>#}
+{#                                        <p class="msg" id="msg" style="font-size: small;margin-left: 10px"></p>#}
+{#                                    </div>#}
+{#                                </form>#}
+{#                            {% else %}#}
+{#                                <form  name="form" method="get" id="{{ pub.id }}" class="comment"  action="{{ path('newcomment',{'id':pub.id}) }}" >#}
+{#                                    <input disabled type="text" placeholder="Ecrivez votre commentaire ici ..."#}
+{#                                           title="Vous êtes bloqués par un admin FINDME en raison de votre comportement !"#}
+{#                                           style="padding: 11px;width: 490px" name="aa" id="aa" class="texte" >#}
+{#                                    <a href="{{ path('singlepost',{'id':pub.id}) }}" > <p style="margin-top: -40px;margin-left:520px " ><span id="count" class="count">{{ pub.commentaires | length }}</span> commentaires</p></a>#}
+{#                                    <br>#}
+{#                                    <div style="background-color: #F6FDFE;padding: 1px;border-radius: 20px">#}
+{#                                        <span style="font-size: medium;font-weight: bold;margin-left: 10px" id="11" class="c1"></span>#}
+{#                                        <p class="msg" id="msg" style="font-size: small;margin-left: 10px"></p>#}
+{#                                    </div>#}
+{#                                </form>#}
+{#                            {% endif %}#}
+{#                        {% else %}#}
+{#                            #}{#                        <a href="{{ path('singlepost',{'id':pub.id}) }}" >#}
+{#                            <p style="margin-left:520px"><span id="count" class="count">{{ pub.commentaires | length }}</span> commentaires</p></a>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                {% endif %}#}
+{#            {% endfor %}#}
+
+{#        </div>#}
+
+{#    </div>#}
+
+
+{#    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>#}
+{#    <script>#}
+{#        // let map;#}
+{#        // let markers = [];#}
+{#        // function initMap() {#}
+{#        //     tab = document.querySelectorAll("div.map1");#}
+{#        //     console.log(tab[1].id);#}
+{#        //     for (let i = 0; i < tab.length; i++) {#}
+{#        //         const haightAshbury = {lat: 37.2720905, lng: 9.8708565};#}
+{#        //         map = new google.maps.Map(document.getElementById(tab[i].id), {#}
+{#        //             zoom: 10,#}
+{#        //             center: haightAshbury,#}
+{#        //             draggable: true#}
+{#        //         });#}
+{#        //     }#}
+{#        // }#}
+
+
+{#        function onClickBtnLike(event){#}
+{#            event.preventDefault();#}
+{#            const url = this.action;#}
+{#            console.log(url);#}
+{#            var com = this.querySelector('.msg');#}
+{#            var span = this.querySelector('.c1');#}
+{#            var count = this.querySelector('.count');#}
+{#            var texte= this.querySelector('.texte');#}
+{#            console.log(texte);#}
+{#            let data = new FormData(this);#}
+{#            axios.post(url,data).then(function(response){#}
+{#                // $('#count').load(document.URL +  ' #count');#}
+{#                console.log(response.data);#}
+{#                count.textContent = response.data.nbrcomments;#}
+{#                span.textContent = response.data.message;#}
+{#                {% if app.user %}#}
+{#                com.textContent = " Ajouté par {{ app.user.nomComplet |upper }} {{ app.user.nomComplet }}"+"  à " + "  " + response.data.dateajout;#}
+{#                {% endif %}#}
+{#                $('#aa').value="";#}
+{#                // $('#msg').load(document.URL +  ' #msg');#}
+{#            }).catch(function(error){#}
+{#                console.log(error)#}
+{#            })#}
+{#        }#}
+{#        document.querySelectorAll('form.comment').forEach(function (link) {#}
+{#            link.addEventListener('submit',onClickBtnLike)#}
+{#        })#}
+{#    </script>#}
+{#    <!--***** PHOTOSWIPE *****-->#}
+{#    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">#}
+{#        <div class="pswp__bg"></div>#}
+{#        <div class="pswp__scroll-wrap">#}
+{#            <div class="pswp__container">#}
+{#                <div class="pswp__item"></div>#}
+{#                <div class="pswp__item"></div>#}
+{#                <div class="pswp__item"></div>#}
+{#            </div>#}
+{#            <div class="pswp__ui pswp__ui--hidden">#}
+{#                <div class="pswp__top-bar">#}
+{#                    <div class="pswp__counter"></div>#}
+{#                    <button class="pswp__button pswp__button--close" title="Close (Esc)">1</button>#}
+{#                    <button class="pswp__button pswp__button--share" title="Share">2</button>#}
+{#                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen">3</button>#}
+{#                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out">4</button>#}
+{#                    <div class="pswp__preloader">#}
+{#                        <div class="pswp__preloader__icn">#}
+{#                            <div class="pswp__preloader__cut">#}
+{#                                <div class="pswp__preloader__donut">#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">#}
+{#                    <div class="pswp__share-tooltip">#}
+{#                    </div>#}
+{#                </div>#}
+{#                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>#}
+{#                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>#}
+{#                <div class="pswp__caption">#}
+{#                    <div class="pswp__caption__center"></div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
+{#    <!-- PhotoSwipe JS -->#}
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js"></script>#}
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js"></script>#}
+
+
+{#    <script>#}
+{#        var initPhotoSwipeFromDOM = function(gallerySelector) {#}
+{#            // parse slide data (url, title, size ...) from DOM elements#}
+{#            // (children of gallerySelector)#}
+{#            var parseThumbnailElements = function(el) {#}
+{#                var thumbElements = el.childNodes,#}
+{#                    numNodes = thumbElements.length,#}
+{#                    items = [],#}
+{#                    figureEl,#}
+{#                    linkEl,#}
+{#                    size,#}
+{#                    item;#}
+{#                for(var i = 0; i < numNodes; i++) {#}
+{#                    figureEl = thumbElements[i]; // <figure> element#}
+{#                    // include only element nodes#}
+{#                    if(figureEl.nodeType !== 1) {#}
+{#                        continue;#}
+{#                    }#}
+{#                    linkEl = figureEl.children[0]; // <a> element#}
+{#                    size = linkEl.getAttribute('data-size').split('x');#}
+{#                    // create slide object#}
+{#                    item = {#}
+{#                        src: linkEl.getAttribute('href'),#}
+{#                        w: parseInt(size[0], 10),#}
+{#                        h: parseInt(size[1], 10)#}
+{#                    };#}
+{#                    if(figureEl.children.length > 1) {#}
+{#                        // <figcaption> content#}
+{#                        item.title = figureEl.children[1].innerHTML;#}
+{#                    }#}
+{#                    if(linkEl.children.length > 0) {#}
+{#                        // <img> thumbnail element, retrieving thumbnail url#}
+{#                        item.msrc = linkEl.children[0].getAttribute('src');#}
+{#                    }#}
+{#                    item.el = figureEl; // save link to element for getThumbBoundsFn#}
+{#                    items.push(item);#}
+{#                }#}
+{#                return items;#}
+{#            };#}
+{#            // find nearest parent element#}
+{#            var closest = function closest(el, fn) {#}
+{#                return el && ( fn(el) ? el : closest(el.parentNode, fn) );#}
+{#            };#}
+{#            // triggers when user clicks on thumbnail#}
+{#            var onThumbnailsClick = function(e) {#}
+{#                e = e || window.event;#}
+{#                e.preventDefault ? e.preventDefault() : e.returnValue = false;#}
+{#                var eTarget = e.target || e.srcElement;#}
+{#                // find root element of slide#}
+{#                var clickedListItem = closest(eTarget, function(el) {#}
+{#                    return (el.tagName && el.tagName.toUpperCase() === 'FIGURE');#}
+{#                });#}
+{#                if(!clickedListItem) {#}
+{#                    return;#}
+{#                }#}
+{#                // find index of clicked item by looping through all child nodes#}
+{#                // alternatively, you may define index via data- attribute#}
+{#                var clickedGallery = clickedListItem.parentNode,#}
+{#                    childNodes = clickedListItem.parentNode.childNodes,#}
+{#                    numChildNodes = childNodes.length,#}
+{#                    nodeIndex = 0,#}
+{#                    index;#}
+{#                for (var i = 0; i < numChildNodes; i++) {#}
+{#                    if(childNodes[i].nodeType !== 1) {#}
+{#                        continue;#}
+{#                    }#}
+
+{#                    if(childNodes[i] === clickedListItem) {#}
+{#                        index = nodeIndex;#}
+{#                        break;#}
+{#                    }#}
+{#                    nodeIndex++;#}
+{#                }#}
+{#                if(index >= 0) {#}
+{#                    // open PhotoSwipe if valid index found#}
+{#                    openPhotoSwipe( index, clickedGallery );#}
+{#                }#}
+{#                return false;#}
+{#            };#}
+{#            // parse picture index and gallery index from URL (#&pid=1&gid=2)#}
+{#            var photoswipeParseHash = function() {#}
+{#                var hash = window.location.hash.substring(1),#}
+{#                    params = {};#}
+
+{#                if(hash.length < 5) {#}
+{#                    return params;#}
+{#                }#}
+{#                var vars = hash.split('&');#}
+{#                for (var i = 0; i < vars.length; i++) {#}
+{#                    if(!vars[i]) {#}
+{#                        continue;#}
+{#                    }#}
+{#                    var pair = vars[i].split('=');#}
+{#                    if(pair.length < 2) {#}
+{#                        continue;#}
+{#                    }#}
+{#                    params[pair[0]] = pair[1];#}
+{#                }#}
+{#                if(params.gid) {#}
+{#                    params.gid = parseInt(params.gid, 10);#}
+{#                }#}
+{#                return params;#}
+{#            };#}
+{#            var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {#}
+{#                var pswpElement = document.querySelectorAll('.pswp')[0],#}
+{#                    gallery,#}
+{#                    options,#}
+{#                    items;#}
+{#                items = parseThumbnailElements(galleryElement);#}
+{#                // define options (if needed)#}
+{#                options = {#}
+{#                    // define gallery index (for URL)#}
+{#                    galleryUID: galleryElement.getAttribute('data-pswp-uid'),#}
+{#                    getThumbBoundsFn: function(index) {#}
+{#                        // See Options -> getThumbBoundsFn section of documentation for more info#}
+{#                        var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail#}
+{#                            pageYScroll = window.pageYOffset || document.documentElement.scrollTop,#}
+{#                            rect = thumbnail.getBoundingClientRect();#}
+{#                        return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};#}
+{#                    }#}
+{#                };#}
+{#                // PhotoSwipe opened from URL#}
+{#                if(fromURL) {#}
+{#                    if(options.galleryPIDs) {#}
+{#                        // parse real index when custom PIDs are used#}
+{#                        // http://photoswipe.com/documentation/faq.html#custom-pid-in-url#}
+{#                        for(var j = 0; j < items.length; j++) {#}
+{#                            if(items[j].pid === index) {#}
+{#                                options.index = j;#}
+{#                                break;#}
+{#                            }#}
+{#                        }#}
+{#                    } else {#}
+{#                        // in URL indexes start from 1#}
+{#                        options.index = parseInt(index, 10) - 1;#}
+{#                    }#}
+{#                } else {#}
+{#                    options.index = parseInt(index, 10);#}
+{#                }#}
+{#                // exit if index not found#}
+{#                if( isNaN(options.index) ) {#}
+{#                    return;#}
+{#                }#}
+{#                if(disableAnimation) {#}
+{#                    options.showAnimationDuration = 0;#}
+{#                }#}
+{#                // Pass data to PhotoSwipe and initialize it#}
+{#                gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);#}
+{#                gallery.init();#}
+{#            };#}
+{#            // loop through all gallery elements and bind events#}
+{#            var galleryElements = document.querySelectorAll( gallerySelector );#}
+{#            for(var i = 0, l = galleryElements.length; i < l; i++) {#}
+{#                galleryElements[i].setAttribute('data-pswp-uid', i+1);#}
+{#                galleryElements[i].onclick = onThumbnailsClick;#}
+{#            }#}
+{#            // Parse URL and open gallery if it contains #&pid=3&gid=1#}
+{#            var hashData = photoswipeParseHash();#}
+{#            if(hashData.pid && hashData.gid) {#}
+{#                openPhotoSwipe( hashData.pid ,  galleryElements[ hashData.gid - 1 ], true, true );#}
+{#            }#}
+{#        };#}
+{#        // execute above function#}
+{#        initPhotoSwipeFromDOM('.my-gallery');#}
+{#    </script>#}
+{#{% endblock %}#}

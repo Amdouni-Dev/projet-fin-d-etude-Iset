@@ -1,0 +1,478 @@
+{% extends "adminbase.html.twig" %}
+
+
+{% block bars %}
+    <style>
+
+
+        .footer {
+            margin-top: 40px;
+
+            bottom: 0;
+
+            width: 100%;
+            background-color: red;
+            display: inline-flex;
+            overflow: hidden;
+            white-space: nowrap;
+
+        }
+
+        /*.text*/
+        /*{*/
+        /*    padding-top: 10px;*/
+        /*    vertical-align: middle;*/
+        /*    font-size: 25px;*/
+        /*    color: yellow;*/
+        /*    margin: 0;*/
+        /*    width:100%;*/
+        /*    animation: marquee 10s linear infinite;*/
+        /*    display: inline-block;*/
+        /*    padding-right: 10px;*/
+        /*}*/
+
+        .news {
+            height: auto;
+            background-color: Blue;
+            padding: 10px 30px 10px 30px;
+            font-size: x-large;
+            color: white;
+            z-index: 1;
+            display: block;
+        }
+
+        /*div:after {*/
+        /*    content:'';*/
+        /*    top:0;*/
+        /*    transform:translateX(100%);*/
+        /*    width:100%;*/
+        /*    height:220px;*/
+        /*    position: absolute;*/
+        /*    z-index:1;*/
+        /*    animation: slide 5s infinite;*/
+
+        /*    !**/
+        /*    CSS Gradient - complete browser support from http://www.colorzilla.com/gradient-editor/*/
+        /*    *!*/
+
+        /*}*/
+
+        /* animation */
+
+        @keyframes slide {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        #btn {
+            margin: 12px;
+            float: right;
+            background: darkgray;
+            height: 20px;
+            width: auto;
+            border: none;
+            border-radius: 10px;
+            color: lightblue;
+            font-size: 15px;
+            font-family: 'Cookie', cursive;
+
+            transition: 1s;
+            -webkit-tap-highlight-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+        }
+
+        #btn #circle {
+            width: 5px;
+            height: 5px;
+            background: transparent;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            overflow: hidden;
+            transition: 500ms;
+        }
+
+        .noselect {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        #btn:hover {
+            background: lightcoral;
+        }
+
+        #btn:hover #circle {
+            height: 50px;
+            width: 150px;
+            left: 0;
+            border-radius: 0;
+            border-bottom: 2px solid #eee;
+        }
+
+
+        @-webkit-keyframes ticker {
+            0% {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+                visibility: visible;
+            }
+            100% {
+                -webkit-transform: translate3d(-100%, 0, 0);
+                transform: translate3d(-100%, 0, 0);
+            }
+        }
+
+        @keyframes ticker {
+            0% {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+                visibility: visible;
+            }
+            100% {
+                -webkit-transform: translate3d(-100%, 0, 0);
+                transform: translate3d(-100%, 0, 0);
+            }
+        }
+
+        .ticker-wrap {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            overflow: hidden;
+            height: 4rem;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding-left: 100%;
+        }
+
+        .ticker {
+            display: inline-block;
+            height: 4rem;
+            line-height: 4rem;
+            white-space: nowrap;
+            padding-right: 100%;
+            -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+            -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+            -webkit-animation-name: ticker;
+            animation-name: ticker;
+            -webkit-animation-duration: 30s;
+            animation-duration: 30s;
+        }
+
+        .ticker_item {
+            display: inline-block;
+            padding: 0 2rem;
+            font-size: 2rem;
+            color: red;
+        }
+
+
+    </style>
+
+    <div style="background: linear-gradient(to bottom, blue 0%, #ff9900 100%)"class=" col-md-3 left_col menu_fixed">
+        <div style="background: #ff9900" class=" bg-transparent left_col  scroll-view">
+
+            <div  class="bg-transparent profile clearfix">
+                <div class="profile_pic">
+                    <aside id="sidebar" class="sidebar sidebar-default open" role="navigation">
+                        <!-- Sidebar header -->
+                        <div class="sidebar-header header-cover">
+                            <a href="{{ path('indexx') }}"> <img height="200px" width="auto"
+                                                                 src="{{ asset('img/logo.png') }}" alt="logo">
+                            </a>
+                            <!-- Top bar -->
+
+                            <!-- Sidebar brand image -->
+
+                            <!-- Sidebar brand name -->
+                        </div>
+                    </aside>
+                </div>
+            </div>
+
+
+
+
+            <!-- sidebar menu -->
+            {# <div id="sidebar-menu" class="main_menu_side hidden-print main_menu "> #}
+            <div id="sidebar-menu" class="bg-transparent page-wrapper chiller-theme toggled   "
+                 style=";height:400px;overflow: auto ;">
+                <div class="menu_section">
+                    <ul class="nav side-menu">
+                        <li><a href="{{ path('indexx') }}"><i class="fa fa-home"></i> {{ "backend.menu.home"|trans }}
+                            </a>
+                        </li>
+                        {% if not  is_granted("ROLE_SUPERUSER")  %}
+
+                        <li>
+                            <a class="nav-link js-scroll" href="{{ path('contact') }}"><i class="fa fa-send"></i>
+                                Contact</a>
+                        </li>
+                        {% endif %}
+                        {% if not is_granted("ROLE_PASSOCIATION") and not is_granted("ROLE_SUPERUSER") and not is_granted("ROLE_CONSULTANT") %}
+                            <li><a href="{{ path('association_index_user') }}"><i
+                                            class="fa fa-users"></i> Associations</a>
+                            </li>
+
+                            <li><a href="{{ path('opportunitesUser') }}"><i class="fa fa-diamond"></i> Opportunités </a>
+                            </li>
+                            <li><a href="{{ path('jeunes_index_user') }}"> <i class="fas fa-user-graduate"></i> Jeunes
+                                    Experts</a>
+                            </li>
+                            <li><a href="{{ path('user_events_index') }}"> <i class="fa fa-calendar "></i> Evenements</a>
+                            </li>
+                            <li><a href="{{ path('post') }}"><i class="fa fa-file-text "></i> Toutes les
+                                    publications</a></li>
+
+                        {% endif %}
+
+
+                        {% if is_granted("ROLE_PASSOCIATION") %}
+                            <li><a href="{{ path('consultant_index_user') }}"><i class="fa fa-briefcase"></i> Consultants</a>
+                            </li>
+                            <li><a href="{{ path('post') }}"><i class="fa fa-file-text
+"></i>publications</a></li>
+                        {% endif %}
+
+
+                        {% if is_granted("ROLE_SUPERUSER") %}
+
+                            {# <li><a><i class="glyphicon glyphicon-envelope"></i> Gérer les Conversation <span class="fa fa-chevron-down"></span></a> #}
+                            {# <ul class="nav child_menu"> #}
+                            <li><a href="{{ path('adminchats') }}"><i class="fa fa-envelope"></i> Gérer les
+                                    conversations</a></li>
+                            {# </ul> #}
+                            {# </li> #}
+
+                            {# <li><a><i class="fa fa-diamond"></i>  Gèrer les opportunités <span class="fa fa-chevron-down"></span></a> #}
+                            {# <ul class="nav child_menu"> #}
+                            <li><a href="{{ path('opportunitesAdmin') }}"><i class="fa fa-diamond"></i> Gérer les
+                                    opportunites</a></li>
+                            {# </ul> #}
+                            {# </li> #}
+                        {% endif %}
+
+                        {# <li><a><i class="fa fa-user"></i> {{ "backend.menu.user"|trans }} <span class="fa fa-chevron-down"></span></a> #}
+                        {# <ul class="nav child_menu"> #}
+                        {# <li><a href="{{ path('forums') }}">{{ "backend.menu.manage"|trans }}</a></li> #}
+                        {# </ul> #}
+                        {# </li> #}
+                        {% if is_granted("ROLE_JEXPERT") %}
+                            <li><a href="{{ path('specialite_index') }}"><i class="fa fa-suitcase"></i> Spécialites</a>
+                            </li>
+                        {% endif %}
+
+                        {% if is_granted("ROLE_JEXPERT") %}
+                            <li><a href="{{ path('jeune_edit',{"id":app.user.id}) }}"><i class="fa fa-cog"></i> Modifier
+                                    votre données</a>
+                            </li>
+
+                        {% endif %}
+                        {% if is_granted("ROLE_SUPERUSER") %}
+                            <li><a href="{{ path('specialite_index_admin') }}"><i class="fa fa-suitcase"></i> Gérer les
+                                    jeunes experts </a>
+
+                            </li>
+
+                            <li><a href="{{ path('app_admin_users') }}"><i class="fa fa-user-plus "></i> Gérer les
+                                    utilisateurs</a></li>
+
+
+                        {% endif %}
+                        {% if is_granted("ROLE_SUPERUSER") %}
+
+                            <li><a href="{{ path('association_index') }}"><i class="fa fa-users"></i> Gérer les
+                                    associations</a></li>
+
+                            <li><a href="{{ path('service_index_admin') }}"><i
+                                            class="fa fa-american-sign-language-interpreting"></i> Gerer les
+                                    services</a></li>
+
+                            <li><a href="{{ path('postAdmin') }}"><i style="size: 20px" class="fa fa-file-text "></i> Gérer les
+                                    publications</a></li>
+                            <li><a
+                                        href="{{ path('actualite_index') }}"><i style="size: 20px" class="fa fa-newspaper-o "></i> Gérer les Actualites</a></li>
+                            <li><a
+                                        href="{{ path('activiteAdmin_gerer') }}"><i style="size: 20px" class="fa fa-life-saver "></i>
+                                 Gérer les   Activites</a></li>
+
+
+                            <li><a
+                                        href="{{ path('regles_index') }}"><i style="size: 20px" class="fa fa-registered "></i> Gérer les Regles d'utilisation</a></li>
+                            <li><a
+                                        href="{{ path('evenementAdmin_gerer') }}"><i style="size: 20px" class="fa fa-calendar"></i> Gérer les Evenements</a></li>
+
+                        {% endif %}
+                        {% if is_granted("ROLE_USER") and not  is_granted("ROLE_JEXPERT") and not is_granted("ROLE_PASSOCIATION") and not is_granted("ROLE_SUPERUSER") and not is_granted("ROLE_CONSULTANT") %}
+                            <li><a><i class="fa fa-file-text"></i> Publications <span
+                                            class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="{{ path('mespublication') }}"> Mes publications</a></li>
+                                    <li><a href="{{ path('post') }}"> Toutes les publications</a></li>
+                                </ul>
+                            </li>
+
+
+                        {% endif %}
+
+                        {% if is_granted("ROLE_PASSOCIATION") %}
+
+
+                            <li><a href="{{ path('opportunite_index') }}"> <i
+                                            class="fa fa-diamond"></i> {{ "backend.menu.manage"|trans }} vos
+                                    opportunités</a></li>
+
+
+                        {% endif %}
+                        {% if is_granted("ROLE_CONSULTANT") %}
+                            <li><a href="{{ path('forumsall') }}"><i class="glyphicon glyphicon-envelope"></i>
+                                    Conversations</a>
+                            </li>
+                        {% endif %}
+                        {% if is_granted("ROLE_CONSULTANT") %}
+                            <li><a href="{{ path('service_index') }}"><i
+                                            class="fas fa-american-sign-language-interpreting"></i> Services</a>
+                            </li>
+                        {% endif %}
+                        {% if is_granted("ROLE_PASSOCIATION") %}
+
+                            <li><a href="{{ path('association_indexP') }}"><i
+                                            class="fa fa-users"></i> {{ "backend.menu.manage"|trans }} vos
+                                    associations</a></li>
+
+
+                        {% endif %}
+                        {% if is_granted("ROLE_PASSOCIATION") %}
+                            <li><a href="{{ path('forums') }}"><i class="glyphicon glyphicon-envelope"></i> Boite à
+                                    Reception </a>
+                            </li>
+                            <li><a href="{{ path('activite_gerer') }}"><i class="glyphicon glyphicon-asterisk"></i>
+                                    Gérer les activites </a>
+                            </li>
+
+                            <li><a href="{{ path('evenement_index') }}"><i class="fa fa-calendar"></i> Gérer vos
+                                    evenements </a>
+                            </li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+            <!-- /sidebar menu -->
+            <!-- /menu footer buttons -->
+        </div>
+    </div>
+    <!-- top navigation -->
+    <div class="top_nav">
+        <div class="nav_menu">
+            <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+            {% if app.user %}
+
+                <nav style="height:20px" class="navbar-right">
+
+
+                    <ul>
+{#                        {% if is_granted("ROLE_SUPERUSER") %}#}
+{#                            <li style="float: left;margin-left:3px;margin-right:3px "><a#}
+{#                                        href="{{ path('actualite_index') }}"> Actualites</a></li>#}
+{#                            <li style="float: left;margin-left:3px;margin-right:3px"><a#}
+{#                                        href="{{ path('activiteAdmin_gerer') }}">#}
+{#                                    Activites</a></li>#}
+
+
+{#                            <li style="float: left;margin-left:3px;margin-right:3px"><a#}
+{#                                        href="{{ path('regles_index') }}"> Regles d'utilisations</a></li>#}
+{#                            <li style="float: left;margin-left:3px;margin-right:3px"><a#}
+{#                                        href="{{ path('evenementAdmin_gerer') }}"> Evenements</a></li>#}
+
+{#                        {% endif %}#}
+
+                        <li class="nav-item dropdown open" style="padding-left: 150px;">
+                            <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
+                               id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                                {% if not is_granted("ROLE_SUPERUSER") %}
+                                    <img style="width: 40px; height: 30px"
+                                         src=" {{ asset('uploads/images/'  ~ app.user.logo) }}" alt="Awesome Image">
+                                {% endif %}
+                                {{ app.user.nomComplet }}
+                            </a>
+                            <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ path('changepass') }}"><i
+                                            class="fa fa-key pull-right"></i>{{ "backend.global.change_my_password"|trans }}
+                                </a>
+                                <a class="dropdown-item" href="{{ path('app_logout') }}"><i
+                                            class="fa fa-sign-out pull-right"></i>{{ "backend.global.logout"|trans }}
+                                </a>
+                                {% if not is_granted("ROLE_SUPERUSER") %}
+                                    <a class="dropdown-item" href="{{ path('userr_edit',{"id":app.user.id}) }}">Modifier
+                                        votre compte</a>
+                                {% endif %}
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+
+            {% else %}
+                <div id="btn"><a href="{{ path('register') }}"><h5 class="navbar-right"> Sign up</h5></a>
+                    <div id="circle"></div>
+                </div>
+                <div id="btn"><a href="{{ path('app_login') }}"><h5 class="navbar-right"> Se connecter</h5></a>
+                    <div id="circle"></div>
+                </div>
+
+            {% endif %}
+        </div>
+    </div>
+    <!-- page content -->
+    <div class="right_col" role="main">
+        {% for message in app.flashes("error") %}
+            <div class="alert alert-danger alert-dismissible " role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">×</span>
+                </button>
+                <strong>{{ "backend.global.error"|trans }}</strong> {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes("success") %}
+            <div class="alert alert-success alert-dismissible " role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">×</span>
+                </button>
+                <strong>{{ "backend.global.success"|trans }}</strong> {{ message }}
+            </div>
+        {% endfor %}
+        {% block contenpage %}{% endblock %}
+    </div>
+
+
+{% endblock %}
+{# swiftmailer: #}
+{# transport:        gmail #}
+{# username:         mounaamdouni213@gmail.com #}
+{# password:         Fati.1999 #}
+{# host:             localhost #}
+{# port:             465 #}
+{# encryption:       ssl #}
+{# auth-mode:        login #}
+{# spool: { type: 'memory' } #}
+{# stream_options: #}
+{# ssl: #}
+{# allow_self_signed: true #}
+{# verify_peer: false #}
+{# verify_peer_name: false #}

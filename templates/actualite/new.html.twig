@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Actualite{% endblock %}
+
+{% block body %}
+    <h1>Create new Actualite</h1>
+
+    {{ include('actualite/_form.html.twig') }}
+
+    <a href="{{ path('actualite_index') }}">back to list</a>
+{% endblock %}

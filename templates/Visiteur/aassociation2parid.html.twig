@@ -1,0 +1,679 @@
+{% extends "admin/bars.html.twig" %}
+
+
+{% block contenpage %}
+<style>
+
+    .event {
+        max-width: 440px;
+        display: flex;
+        flex-direction: column;
+        background: var(--light-clr);
+        color: var(--dark-clr);
+        font-size: 15px;
+        line-height: 1.25;
+        padding: 10px;
+        border: 2px solid lightcoral;
+        border-radius: 10px;
+        transition: 0.3s ease;
+        position: relative;
+    }
+    .event:hover {
+        box-shadow: 0 8px 8px -6px var(--v-dark-gray-clr);
+        border-color: var(--dark-clr);
+    }
+    .event:hover .event--date {
+        background: var(--dark-clr);
+        color: var(--gray-clr);
+    }
+    .event:hover .event--date span:nth-child(2) {
+        color: red;
+    }
+    .event:hover .event--content {
+        background-color:lightgreen ;
+    }
+    .event:hover .event--content-program a,
+    .event:hover .event--content-social a {
+        background: var(--bg-clr);
+    }
+    .event:hover .event--content-social a:hover {
+        background: var(--primary-clr);
+        color: var(--light-clr);
+    }
+    .event:hover .event--img img {
+        transform: scale(1.2);
+    }
+
+    .event--date {
+        display: flex;
+        justify-content: flex-start;
+        align-items: baseline;
+        flex-wrap: wrap;
+        padding: 15px;
+        color: var(--dark-gray-clr);
+        font-weight: 500;
+        text-transform: uppercase;
+        position: relative;
+        transition: .35s;
+    }
+    .event--date::after {
+        content: '';
+        height: 1px;
+        width: 100%;
+        background: var(--dark-clr);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    .event--date span + span {
+        margin-left: 5px;
+    }
+    .event--date span:nth-child(2) {
+        font-weight: 500;
+        font-size: 1.375rem;
+        color: var(--dark-clr);
+        order: -1;
+        margin-right: 5px;
+        margin-left: 0;
+    }
+    .event--date span:nth-child(3) {
+        margin-right: 12px;
+    }
+    .event--date span:nth-child(4) {
+        margin-left: 0;
+    }
+    .event--date span:nth-child(4)::before {
+        content: "\f041";
+        font-family: 'FontAwesome';
+        padding-right: 4px;
+        color: var(--secondary-clr);
+    }
+    .event--img {
+        display: block;
+        width: 100%;
+        height: 154px;
+        overflow: hidden;
+        transition: 0.3s ease;
+    }
+    .event--img img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        transition: .5s;
+    }
+    .event--content {
+        padding: 15px;
+        text-align: left;
+        background: var(--bg-clr);
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        transition: .35s;
+        position: relative;
+    }
+    .event--content > * {margin: 0; margin-bottom: 10px;}
+    .event--content > *:last-child {margin-bottom: 0;}
+
+    .event--content h2 {
+        font-weight:500;
+        font-size: 1.375rem;
+        letter-spacing: -.12px;
+    }
+    .event--content a {
+        color: inherit;
+    }
+    .event--content a:hover {
+        color: var(--primary-clr);
+    }
+    .event--content h2 > a[href]::after {
+        content: "\f08e";
+        font-family: 'FontAwesome';
+        padding: 0 3px 0 6px;
+        font-weight: normal;
+        font-size: .7em;
+    }
+    .event--content h2.canceled,
+    .event--content-canceled {
+        color: var(--secondary-clr);
+    }
+    .event--content-info {
+        line-height: 1.6;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .event--content-info > div {
+        margin-right: 16px;
+    }
+    .event--content-tickets a {
+        background: var(--primary-clr);
+        color: var(--light-clr);
+        padding: 3px 11px;
+        border-radius: 3px;
+    }
+    .event--content-tickets a:hover {
+        background: var(--bg-clr);
+    }
+    .event--content-ensemble {
+        font-weight: 500;
+        margin-top: auto;
+    }
+    .event--content-program {
+        margin-top: 6px;
+    }
+    .event--content-program a {
+        display: inline-block;
+        background: var(--light-clr);
+        padding: 6px 13px;
+        border-radius: 15px;
+    }
+    .event--content-canceled::before,
+    .event--content-program a::before,
+    .event--content-info time::before,
+    .event--content-tickets a::before,
+    .event--content-price::before {
+        font-family: 'FontAwesome';
+        padding-right: 6px;
+    }
+    .event--content-canceled::before {content: "\f273";}
+    .event--content-program a::before {content: "\f02d";}
+    .event--content-info time::before {content:"\f017";}
+    .event--content-price::before {content: "\f153";}
+    .event--content-tickets a::before {content: "\f145";}
+
+    .event--content-social {
+        font-size: 1.2rem;
+        margin-top: 10px;
+        display: flex;
+        transition: .3s;
+    }
+    .event--content-social a {
+        width: 40px;
+        height: 40px;
+        margin-right: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background: var(--light-clr);
+        border-radius: 50%;
+    }
+
+    @media (min-width:801px) {
+        .event {
+            max-width: 100%;
+            flex-direction: row;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .event--date {
+            flex-direction: column;
+            align-items: center;
+            flex-basis: 148px;
+            text-align: center;
+            font-size: .84rem;
+            line-height: 1;
+            padding: 15px 5px;
+        }
+        .event--date::after {
+            height: 100%;
+            width: 1px;
+            top: 0;
+        }
+        .event--date span + span {
+            margin: 0;
+            margin-top: 2px;
+        }
+        .event--date span:nth-child(2) {
+            order: 0;
+            margin-right: 0;
+            font-size: 3rem;
+        }
+        .event--date span.date-md {
+            font-size: 2.35rem;
+        }
+        .event--date span.date-sm {
+            font-size: 1.625rem;
+        }
+        .event--date span:nth-child(3) {
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+        .event--date span:nth-child(4) {
+            margin-top: auto;
+        }
+        .event--img {
+            order: 1;
+            margin-left: 15px;
+            width: 100px;
+            height: auto;
+            max-height: 200px;
+            max-height: max-content;
+            display: flex;
+        }
+        .event--img a {
+            display: flex;
+        }
+        .event--content {
+            flex: 2 0 0;
+            padding: 15px 20px;
+        }
+        .event--content > *:not(.event--content-social) {
+            max-width: 96%;
+        }
+        .event--content h2 {
+            font-size: 1.5rem;
+        }
+        .event--content-social {
+            position: absolute;
+            top: 0;
+            right: 15px;
+            margin-top: 0;
+            height: 100%;
+            font-size: 1rem;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .event:hover .event--content-social {
+            right: 0;
+        }
+        .event--content-social a {
+            margin: 8px 0;
+            width: 34px;
+            height: 34px;
+        }
+    }
+
+    @media (min-width:600px) and (max-width:800px) {
+        .eventWrapper {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .event {
+            width: 48%;
+            margin-bottom: 35px;
+        }
+        .event--img {
+            height: 140px;
+        }
+    }
+
+    @media (max-width:599px) {
+        .event {
+            margin: 0 auto 35px;
+        }
+    }
+
+
+    :root {
+        --bg-clr: #ebebeb;
+        --primary-clr: #006494;
+        --secondary-clr: #c2244e;
+        --light-clr: #ffffff;
+        --dark-clr: #000000;
+        --v-dark-gray-clr: #484848;
+        --dark-gray-clr: #8f8f8f;
+        --gray-clr: #b3b3b3;
+        --lgh-gray-clr: #cccccc;
+        --v-lgh-gray-clr: #d9d9d9;
+    }
+
+
+
+    #h1 {
+        display: inline-block;
+        color: lightseagreen;
+        font-family: 'Righteous', serif;
+        font-size:20px;
+        text-shadow: .03em .03em 0 hsla(230,40%,50%,1);
+    }
+    #h1:after {
+        content: attr(data-shadow);
+        position: absolute;
+        top: .06em; left: .06em;
+        z-index: -1;
+        text-shadow: none;
+        background-image:
+                linear-gradient(
+                        45deg,
+                        transparent 45%,
+                        hsla(48,20%,90%,1) 45%,
+                        hsla(48,20%,90%,1) 55%,
+                        transparent 0
+                );
+        background-size: .05em .05em;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        animation: shad-anim 15s linear infinite;
+    }
+
+    @keyframes shad-anim {
+        0% {background-position: 0 0}
+        0% {background-position: 100% -100%}
+    }
+
+</style>
+
+    <div class="container" xmlns="http://www.w3.org/1999/html">
+        <div class="main-body">
+
+            <!-- Breadcrumb -->
+
+            <!-- /Breadcrumb -->
+
+            <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                {# <img width="auto" height="222"  src=" {{ asset('uploads/images/'  ~ associations.logo) }}"alt="Awesome Image"/> #}
+
+                                <img src=" {{ asset('uploads/images/'  ~ ass.logo) }}" alt="Admin" class="rounded-circle" width="200" height="150">
+                                <div class="mt-3">
+                                    <div class="x_content">   <h1 style=" color:#0D3349; font-family: Lobster;">{{ ass.titre }}</h1></div>
+{#                                    <p class="text-secondary mb-1">Full Stack Developer</p>#}
+{#                                    <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>#}
+{#                                    <button class="btn btn-primary">Follow</button>#}
+{#                                    <button class="btn btn-outline-primary">Message</button>#}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-3">
+                        <ul class="list-group list-group-flush">
+                            <a href="{{ ass.siteweb }}">
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Website</h6>
+                                <span class="text-secondary">{{ ass.siteWeb }}</span>
+                            </li></a>
+                            <a href="ass.twitter">
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter mr-2 icon-inline text-info"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>Twitter</h6>
+                                <span class="text-secondary">{{ass.Twitter}}</span>
+                            </li></a>
+                            <a href="{{ ass.instagram }}">
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram mr-2 icon-inline text-danger"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>Instagram</h6>
+                                <span class="text-secondary">{{ ass.instagram }}</span>
+                            </li></a>
+                            <a href="{{ ass.facebook  }}">
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>Facebook</h6>
+                                <span class="text-secondary">{{ ass.facebook }}</span>
+                            </li></a>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Nom d'association</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ass.titre }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Adresse</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ass.adresse}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Nombre des participants</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ ass.nombreMembre }}
+                                </div>
+                            </div>
+
+
+
+{#                            <div class="row">#}
+{#                                <div class="col-sm-3">#}
+{#                                    <h6 class="mb-0">Budget</h6>#}
+{#                                </div>#}
+{#                                <div class="col-sm-9 text-secondary">#}
+{#                                    {{ass.budget }} Dt#}
+{#                                </div>#}
+{#                            </div>#}
+                       <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Date fondation</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+
+                                    {{ass.dateFondation | date('d/m/y') }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row gutters-sm">
+                        <div class="col-sm-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">But de </i>{{ ass.titre }}</h6>
+                                    <div class="x_content">   <h2 style=" color:#0c5460; font-family: Lobster;">{{ ass.but }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+
+                                    <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">
+                                            <img style="width: 40px; height: 30px" src=" {{ asset('uploads/images/'  ~ ass.userA.logo) }}" alt="Awesome Image"> President de </i><br/>{{ ass.titre }}</h6>
+
+                                    <small>Nom</small>
+                                   <h6>{{ ass.userA.nomComplet }}</h6>
+                                    <small>Date Naissance</small>
+                                    <h6>{{ ass.userA.datenaissance | date('d/m/y') }}</h6>
+                                    <small>Email</small>
+                                    <h6>{{ ass.userA.email }}</h6>
+                                    <small>Numero de Telephone</small>
+                                    <h6>{{ ass.userA.numeroTel }}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-3">
+        <div class="x_content">   <h1 style="margin-top: 20px" id="h1" > Voir les dernieres  opportunités   de : {{ ass.titre }}</h1></div>
+  </div>
+    <div class="row">
+    <div class="col-md-12">
+    <div class="x_panel">
+    <div class="container blog-page">
+    <div  class="row clearfix">
+    {% for o in opportunites |sort|reverse | filter(opportunites => opportunites.isValid) |sort((a, b) => a.dateLimite <=> b.dateLimite)  %}
+    {% if ass.id is same as o.association.id %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <div  class="card h-10">
+                            <div  class="card-body">
+                                                           <h2 style="
+                                    color:darkgreen;
+                                    font-family: Lobster;
+                                " id="video-info-section" class="layer" class="text-center infotxt">{{o.titre}}</h2>
+                                <span style="color:red; font-size: 12px" class="blog-date">    <i class="fa fa-bell" aria-hidden="true"></i>  Date Limite :                  {{ o.dateLimite | date('d/m/Y ') }}
+                                </span>
+
+{#                                <h5 style="#}
+{#                                    color:orange;#}
+{#                                    font-family: Lobster;#}
+{#                                " id="video-info-section" class="layer" class="text-center infotxt">{{ ass.titre }}</h5>#}
+
+                                <h2 style=" color:#0c5460; font-family: Lobster;">Domaine concerné :{{ o.domaineConcerne}}</h2>
+                                <h2 style=" color:#0c5460; font-family: Lobster;">Region concerné par cette opportunité : <i class="fa fa-map-marker "></i> {{ o.region}}</h2>
+
+                                <h2 style=" color:#0c5460; font-family: Lobster;">Type d'offre :{{ o.typeOffre }}</h2>
+                                <h2 style=" color:#0c5460; font-family: Lobster;">   Details : </h2>             <h2 style=" color:lightslategrey; font-family:'Times New Roman';" class="d-flex align-items-center mb-3">{{o.description }}  </h2>
+
+                            <div class="item-arrow">
+                                <a href="{{ o.lienFormPostul }}">
+                                    <i class="fa fa-long-arrow-right" aria-hidden="true"> <p style=" font-size:  15px"> Cliquer sur le fleche pour postuler</p></i></a>
+                            </div>
+
+                            </div>
+                        <br/>
+                        </div>
+
+
+
+
+
+
+    {% endif %}
+    {% endfor %}
+    </div>
+    </div></div></div></div>
+
+
+    <p style="margin-top: 20px" id="h1" data-shadow='evenements recentes'>Voir les evenements recentes de : {{ ass.titre }} </p>
+
+    <div class="row">
+        {% for e in events |sort|reverse | filter(events => events.isValid) %}
+            {% if ass.id is same as e.association.id %}
+            <div style="width: auto;margin: 10px;" class="event">
+                <div style="width: 80px;height: auto" class="event--img">
+                    <a href="{{ asset('uploads/images/'  ~ e.image) }}" onclick="if (!lightboxLoaded) return false" class="w-fancybox">
+                        <img src="{{ asset('uploads/images/'  ~ e.image) }}" title="{{ e.sujet }}" alt="{{ e.sujet }}">
+                    </a>
+                </div>
+                {#        <div sty class="event--date"><span>{{ e.date| date('D')   }}</span><span>{{ e.date| date('m')  }}</span><span>{{ e.date| date('Y')  }}</span><span>{{e.place}}</span></div>#}
+                <div style="width: 400px;" class="event--content">
+
+                    {#            <h2><a  href="{{ path('UserAssoci',{"id":e.association.id}) }}"  target="_blank" title="{{ e.association.titre }}">{{ e.association.titre }}</a></h2>#}
+
+                    <h5  class="event--content-hall"> <span style="font-family: 'Comic Sans MS'" ><b> {{e.sujet}} </b></span> </h5>
+                    <h4 style="font-family: 'Times New Roman'" > Evenement crée le {{ e.date| date('y/m/d')   }}
+                    </h4>
+                    <div class="event--content-info">
+                        <div><time style="color: red" >{{ e.date| date(' H:i ')  }} - {{ e.dateFinEvenement| date(' H:i ')  }}</time></div>
+                        {#                    <div class="event--content-price">12</div>#}
+                        {#                    <div class="event--content-tickets"><a href="#" target="_blank" title="Tickets">Tickets</a></div>#}
+                    </div>
+                    {#            <p style="font-family: 'Comic Sans MS'" class="event--content-ensemble">{{e.description}}</p>#}
+                    {% if app.user %}
+                        <p class="event--content-program"><a href="{{ path('user_participer_events',{"id":e.id}) }}"  title="participer">Participer</a></p>
+
+                        {% if is_granted("ROLE_USER") and not is_granted("ROLE_PASSOCIATION") and not is_granted("ROLE_SUPERUSER") and not is_granted("ROLE_CONSULTANT") %}
+
+
+                            {% for p in  e.participants %}
+                                {#<h1>{{ p.id }} </h1>#}
+
+                                {% if  app.user.id != p.id and  p.id != e.user.id    %}
+                                    <p class="event--content-program"><a href="{{ path('user_participer_events',{"id":e.id}) }}"  title="participer">Participer</a></p>
+
+                                    {#        {% else %}#}
+                                    {#            {% if app.user != p %}#}
+                                    {#ok c bon#}
+                                    {#            {% endif %}#}
+                                {% endif %}
+                                {% if app.user.id ==p.id  %}
+                                    <a class="btn btn-success activate-link"
+                                       href="#">
+                                        <i class="fa fa-check"></i>{{ app.user.nomComplet}} ! vous etes deja participé !<br/> merci de venir à l'heure</a>
+
+                                {% endif %}
+
+                            {% endfor %}
+                        {% endif %}
+                    {% else %}
+                        <div class="btn btn-light"
+                             href="#"  >
+                            <i class="fa fa-angellist"></i>
+                            Cher utilisateur ! pour participer à cette evenement<br/> merci de vous <a style="color: lightseagreen" href="{{ path('app_login') }}">connecter </a> .
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+
+
+            </div>
+{% endif %}
+        {% endfor %}
+    </div>
+
+{#<div class="row">#}
+{#    <div class="col-md-12">#}
+
+{#            <div class="container blog-page">#}
+{#                <div  class="row clearfix">#}
+
+
+{#    {% for o in opportunites |sort|reverse %}#}
+{#    {% if ass.id is same as o.association.id %}#}
+
+{#        <div  class="card">#}
+
+{#        <div  class="card h-10">#}
+{#            <div  class="card-body">#}
+
+
+{#                <header>#}
+
+
+{#                <div class="title">{{o.titre}}<br/>  <span style="color:red; font-size: 12px" class="blog-date">    <i class="fa fa-bell" aria-hidden="true"></i>  Date Limite :                  {{ o.dateLimite | date('d/m/Y ') }}#}
+{#</span></div>#}
+{#            </header>#}
+{#                <div class="body">#}
+{#            <img#}
+{#                 src=" {{ asset('uploads/images/'  ~ o.image) }}" alt="sample32"/>#}
+
+{#                <p class="x_content">  <h2 style=" color:#0c5460; font-family: Lobster;">Lancé par :<a href="{{ path('UserAssoci',{"id":o.association.id}) }}"> {{ o.association.titre}}</a></h2>#}
+{#                <h2 style=" color:#0c5460; font-family: Lobster;">Domaine concerné :{{ o.domaineConcerne}}</h2>#}
+{#                <h2 style=" color:#0c5460; font-family: Lobster;">Region concerné par cette opportunité : <i class="fa fa-map-marker "></i> {{ o.region}}</h2>#}
+
+{#                <h2 style=" color:#0c5460; font-family: Lobster;">Type d'offre :{{ o.typeOffre }}</h2>#}
+{#                <h2 style=" color:#0c5460; font-family: Lobster;">   Details : </h2>             <h2 style=" color:lightslategrey; font-family:'Times New Roman';" class="d-flex align-items-center mb-3">{{o.description }}  </h2>#}
+
+
+{#                <a href="{{ o.lienFormPostul }}">#}
+{#                        <i class="fa fa-long-arrow-right" aria-hidden="true"> <p style=" font-size:  15px"> Cliquer sur le fleche pour postuler</p></i></a>#}
+
+{#            </div>#}
+
+{#        </div>#}
+{#        </div>#}
+{#{% endif %}#}
+{#{% endfor %}#}
+{#    </div>#}
+{#                </div></div></div>#}
+{% endblock %}

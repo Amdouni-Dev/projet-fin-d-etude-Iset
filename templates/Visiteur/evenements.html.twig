@@ -1,0 +1,560 @@
+{% extends "admin/bars.html.twig" %}
+
+
+{% block contenpage %}
+<style>
+
+    /* general structure
+==============================*/
+
+    :root {
+        --bg-clr: #ebebeb;
+        --primary-clr: #006494;
+        --secondary-clr: #c2244e;
+        --light-clr: #ffffff;
+        --dark-clr: #000000;
+        --v-dark-gray-clr: #484848;
+        --dark-gray-clr: #8f8f8f;
+        --gray-clr: #b3b3b3;
+        --lgh-gray-clr: #cccccc;
+        --v-lgh-gray-clr: #d9d9d9;
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+
+
+    h2.border-line::after, h3.border-line::after {
+        content: '';
+        display: inline-block;
+        width: 100%;
+        background-color: #ccc;
+        margin-right: -100%;
+        margin-left: 20px;
+        vertical-align: middle;
+    }
+    a {
+        color: var(--primary-clr);
+        text-decoration: none;
+        transition: all 0.2s ease-in-out;
+    }
+    a:hover { color: #971c3d; }
+
+    /*img {max-width: 100%;}*/
+
+
+
+    .wsite-button {font-size:14px;}
+
+    .spacer-toc { height: 1.5em; }
+    .spacer-toc .fa { font-size: 1.4em; color: #ccc; }
+
+    @media (max-width: 992px) {
+        .spacer-toc { height: 80px; }
+        .spacer-toc .fa { font-size: 2.5em; }
+    }
+
+    /* event card
+    ============================*/
+
+    .event {
+        max-width: 440px;
+        display: flex;
+        flex-direction: column;
+        background: var(--light-clr);
+        color: var(--dark-clr);
+        font-size: 15px;
+        line-height: 1.25;
+        padding: 10px;
+        border: 1px solid var(--lgh-gray-clr);
+        border-radius: 3px;
+        transition: 0.3s ease;
+        position: relative;
+    }
+    .event:hover {
+        box-shadow: 0 8px 8px -6px var(--v-dark-gray-clr);
+        border-color: var(--dark-clr);
+    }
+    .event:hover .event--date {
+        background: var(--dark-clr);
+        color: red;
+    }
+    .event:hover .event--date span:nth-child(2) {
+        color: red;
+    }
+    .event:hover .event--content {
+        background: var(--light-clr);
+    }
+    .event:hover .event--content-program a,
+    .event:hover .event--content-social a {
+        background: lightgreen;
+    }
+    .event:hover .event--content-social a:hover {
+        background: var(--primary-clr);
+        color: var(--light-clr);
+    }
+    .event:hover .event--img img {
+        transform: scale(1.2);
+    }
+
+    .event--date {
+        display: flex;
+        justify-content: flex-start;
+        align-items: baseline;
+        flex-wrap: wrap;
+        padding: 15px;
+        color: var(--dark-gray-clr);
+        font-weight: 500;
+        text-transform: uppercase;
+        position: relative;
+        transition: .35s;
+    }
+    .event--date::after {
+        content: '';
+        height: 1px;
+        width: 100%;
+        background: var(--dark-clr);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    .event--date span + span {
+        margin-left: 5px;
+    }
+    .event--date span:nth-child(2) {
+        font-weight: 500;
+        font-size: 1.375rem;
+        color: var(--dark-clr);
+        order: -1;
+        margin-right: 5px;
+        margin-left: 0;
+    }
+    .event--date span:nth-child(3) {
+        margin-right: 12px;
+    }
+    .event--date span:nth-child(4) {
+        margin-left: 0;
+    }
+    .event--date span:nth-child(4)::before {
+        content: "\f041";
+        font-family: 'FontAwesome';
+        padding-right: 4px;
+        color: var(--secondary-clr);
+    }
+    .event--img {
+        display: block;
+        width: 100%;
+        height: 154px;
+        overflow: hidden;
+        transition: 0.3s ease;
+    }
+    .event--img img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        transition: .5s;
+    }
+    .event--content {
+        padding: 15px;
+        text-align: left;
+        background: var(--bg-clr);
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        transition: .35s;
+        position: relative;
+    }
+    .event--content > * {margin: 0; margin-bottom: 10px;}
+    .event--content > *:last-child {margin-bottom: 0;}
+
+    .event--content h2 {
+        font-weight:500;
+        font-size:25px;
+        letter-spacing: -.12px;
+        color:blue;
+        font-family: "Times New Roman";
+    }
+    .event--content h5 {
+        font-weight:500;
+        font-size: 20px;
+        letter-spacing: -.12px;
+        color:#bd362f;
+        font-family: "Times New Roman";
+
+    }
+    .event--content a {
+        color: inherit;
+    }
+    .event--content a:hover {
+        color: var(--primary-clr);
+    }
+    .event--content h2 > a[href]::after {
+        content: "\f08e";
+        font-family: 'FontAwesome';
+        padding: 0 3px 0 6px;
+        font-weight: normal;
+        font-size: .7em;
+    }
+    .event--content h2.canceled,
+    .event--content-canceled {
+        color: var(--secondary-clr);
+    }
+    .event--content-info {
+        line-height: 1.6;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .event--content-info > div {
+        margin-right: 16px;
+    }
+    .event--content-tickets a {
+        background: var(--primary-clr);
+        color: var(--light-clr);
+        padding: 3px 11px;
+        border-radius: 3px;
+    }
+    .event--content-tickets a:hover {
+        background: var(--bg-clr);
+    }
+    .event--content-ensemble {
+        font-weight: 500;
+        margin-top: auto;
+    }
+    .event--content-program {
+        margin-top: 6px;
+    }
+    .event--content-program a {
+        display: inline-block;
+        background: var(--light-clr);
+        padding: 6px 13px;
+        border-radius: 15px;
+    }
+    .event--content-canceled::before,
+    .event--content-program a::before,
+    .event--content-info time::before,
+    .event--content-tickets a::before,
+    .event--content-price::before {
+        font-family: 'FontAwesome';
+        padding-right: 6px;
+    }
+    .event--content-canceled::before {content: "\f273";}
+    .event--content-program a::before {content: "\f02d";}
+    .event--content-info time::before {content:"\f017";}
+    .event--content-price::before {content: "\f153";}
+    .event--content-tickets a::before {content: "\f145";}
+
+    .event--content-social {
+        font-size: 1.2rem;
+        margin-top: 10px;
+        display: flex;
+        transition: .3s;
+    }
+    .event--content-social a {
+        width: 40px;
+        height: 40px;
+        margin-right: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background: var(--light-clr);
+        border-radius: 50%;
+    }
+
+    @media (min-width:801px) {
+        .event {
+            max-width: 100%;
+            flex-direction: row;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .event--date {
+            flex-direction: column;
+            align-items: center;
+            flex-basis: 148px;
+            text-align: center;
+            font-size: .84rem;
+            line-height: 1;
+            padding: 15px 5px;
+        }
+        .event--date::after {
+            height: 100%;
+            width: 1px;
+            top: 0;
+        }
+        .event--date span + span {
+            margin: 0;
+            margin-top: 2px;
+        }
+        .event--date span:nth-child(2) {
+            order: 0;
+            margin-right: 0;
+            font-size: 3rem;
+        }
+        .event--date span.date-md {
+            font-size: 2.35rem;
+        }
+        .event--date span.date-sm {
+            font-size: 1.625rem;
+        }
+        .event--date span:nth-child(3) {
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+        .event--date span:nth-child(4) {
+            margin-top: auto;
+        }
+        .event--img {
+            order: 1;
+            margin-left: 15px;
+            width: 100px;
+            height: auto;
+            max-height: 200px;
+            max-height: max-content;
+            display: flex;
+        }
+        .event--img a {
+            display: flex;
+        }
+        .event--content {
+            flex: 2 0 0;
+            padding: 15px 20px;
+        }
+        .event--content > *:not(.event--content-social) {
+            max-width: 96%;
+        }
+        .event--content h2 {
+            font-size: 1.5rem;
+        }
+        .event--content-social {
+            position: absolute;
+            top: 0;
+            right: 15px;
+            margin-top: 0;
+            height: 100%;
+            font-size: 1rem;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .event:hover .event--content-social {
+            right: 0;
+        }
+        .event--content-social a {
+            margin: 8px 0;
+            width: 34px;
+            height: 34px;
+        }
+    }
+
+    @media (min-width:600px) and (max-width:800px) {
+        .eventWrapper {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .event {
+            width: 48%;
+            margin-bottom: 35px;
+        }
+        .event--img {
+            height: 140px;
+        }
+    }
+
+    @media (max-width:599px) {
+        .event {
+            margin: 0 auto 35px;
+        }
+    }
+
+</style>
+
+<div class="container">
+{#    {% for p in participations %}#}
+{#        {% for u in p.user %}#}
+{#{% if app.user.id == p.id %}#}
+{#<h1>yess</h1>#}
+{#{% endif %}#}
+{#            {% endfor %}#}
+{#    {% endfor %}#}
+{#    {% for e in events %}#}
+{#        <h1>{{ e.id }} </h1>#}
+{#    {% endfor %}#}
+
+
+    <!-- TIMELINE -->
+
+{#    <div id="2020" class="spacer-toc"><i class="fa fa-calendar"></i></div>#}
+{#    <h2 class="border-line">2020</h2>#}
+
+    <!-- 2020 -->
+
+
+<!-- end eventWrapper  -->
+
+{#    <div><a href="#top-toc"><i class="fa fa-angle-up fa-2x"></i></a></div>#}
+
+{#    <div class="wsite-spacer" style="height:4rem;"></div>#}
+
+{#    <div id="2019" class="spacer-toc"><i class="fa fa-calendar"></i></div>#}
+{#    <h2 class="border-line">2021</h2>#}
+
+    <!-- 2019 -->
+    <div class="x_content">
+        <hr style="  border: 0;
+
+  border-bottom: 3px solid #fff;
+  border-radius: 100%;
+  width: 100%;
+">
+        <h1 style="color:#0b97c4;font-family: 'Times New Roman'" class="text-center txt1">Consulter tous les evenements publiés et <b>participer</b></h1>
+    </div>
+    <br/><br/>
+    <div class="eventWrapper">
+
+
+        {% for e in evenements |sort|reverse %}
+            {% if e.isValid %}
+{#            {% if app.user is not same as e.user %}#}
+{#                <p class="event--content-program"><a href="{{ path('user_participer_events',{"id":e.id}) }}"  title="participer">Participer</a></p>#}
+
+{#            {% endif %}#}
+
+
+        <div class="event">
+            <div class="event--img">
+                <a href="{{ asset('uploads/images/'  ~ e.image) }}" onclick="if (!lightboxLoaded) return false" class="w-fancybox">
+                    <img src="{{ asset('uploads/images/'  ~ e.image) }}" title="{{ e.sujet }}" alt="{{ e.sujet }}">
+                </a>
+            </div>
+            <div class="event--date"><span>{{ e.date| date('D')   }}</span><span>{{ e.date| date('m')  }}</span><span>{{ e.date| date('Y')  }}</span><span>{{e.place}}</span></div>
+            <div class="event--content">
+                <h2><a  href="{{ path('UserAssoci',{"id":e.association.id}) }}"  target="_blank" title="{{ e.association.titre }}">{{ e.association.titre }}</a></h2>
+                <h5 class="event--content-hall">{{e.sujet}}</h5>
+                <div class="event--content-info">
+                    <div><time>{{ e.date| date(' H:i ')  }} - {{ e.dateFinEvenement| date(' H:i ')  }}</time></div>
+{#                    <div class="event--content-price">12</div>#}
+{#                    <div class="event--content-tickets"><a href="#" target="_blank" title="Tickets">Tickets</a></div>#}
+                </div>
+                <p style="font-family: 'Comic Sans MS'" class="event--content-ensemble">{{e.description}}</p>
+{#                <p class="event--content-program"><a href="{{ path('user_participer_events',{"id":e.id}) }}"  title="participer">Participer</a></p>#}
+{#                <p class="event--content-program"><a href="{{ path('user_participer_events',{"id":e.id}) }}"  title="participer" disabled>Participer</a></p>#}
+
+
+{#{% if app.user %}#}
+{#                    <p class="event--content-program"><a href="{{ path('user_participer_events',{"id":e.id}) }}"  title="participer">Participer</a></p>#}
+{#{% endif %}#}
+                    {#                    {% for k in r.participations %}#}
+{#                    {% for s in k.id %}#}
+{#                {% if    app.user is not same as p.user    %}#}
+{#                {% if app.user.id == s.id %}#}
+{#                    <p class="event--content-program"><a href="{{ path('user_participer_events',{"id":e.id}) }}"  title="participer">Participer</a></p>#}
+{#{% endif %}#}
+{#                    {% if app.user  is not same as  e.participants   %}#}
+
+{#                        <p class="event--content-program"><a href="{{ path('user_participer_events',{"id":e.id}) }}"  title="participer" disabled>Participer</a></p>#}
+
+{#                    {% endif %}#}
+{#                {% for p in participations  %}#}
+{#                    {% if  app.user.id == p.user.id  %}#}
+{#                    <a class="btn btn-success activate-link"#}
+{#                       href="#">#}
+{#                        <i class="fa fa-check"></i> vous etes deja participé ! merci de venir à l'heure</a>#}
+{#                        <p class="event--content-program"><a href="{{ path('user_participer_events',{"id":e.id}) }}"  title="participer" disabled>Participer</a></p>#}
+
+{#               {% endif %}#}
+{#              {% if app.user.id == p.user.id and p.isIntersse == 1 %}#}
+{#              <h2>okkkk</h2>#}
+{#              {% endif %}#}
+
+
+{#                {% if app.user is not same as p.user and p.isIntersse != 1 %}#}
+{#                    <a class="btn btn-success activate-link"#}
+{#                       href="#">#}
+{#                        <i class="fa fa-check"></i> vous etes deja participé ! merci de venir à l'heure</a>#}
+
+{#                    #}{#                        {% endfor %}#}
+{#{% if app.user %}#}
+{#                {% if  p.isIntersse ==0   %}#}
+{#{% if app.user is not same as p.user  %}#}
+{#                <p class="event--content-program"><a href="{{ path('user_participer_events',{"id":e.id}) }}"  title="participer">Participer</a></p>#}
+{#   {% endif %}#}
+{#          {% endif %}#}
+
+{#                    {% endif %}#}
+{#                        {% endfor %}#}
+{#                {% endfor %}#}
+
+
+
+
+
+{% if app.user %}
+    <p class="event--content-program"><a href="{{ path('user_participer_events',{"id":e.id}) }}"  title="participer">Participer</a></p>
+
+                {% if is_granted("ROLE_USER") and not is_granted("ROLE_PASSOCIATION") and not is_granted("ROLE_SUPERUSER") and not is_granted("ROLE_CONSULTANT") %}
+
+
+                {% for p in  e.participants %}
+                    {#<h1>{{ p.id }} </h1>#}
+
+                    {% if  app.user.id != p.id and  p != e.user    %}
+                        <p class="event--content-program"><a href="{{ path('user_participer_events',{"id":e.id}) }}"  title="participer">Participer</a></p>
+
+                        {#        {% else %}#}
+                        {#            {% if app.user != p %}#}
+                        {#ok c bon#}
+                        {#            {% endif %}#}
+                    {% endif %}
+                    {% if app.user.id ==p.id  %}
+                        <a class="btn btn-success activate-link"
+                           href="#">
+                            <i class="fa fa-check"></i> Cher {{ app.user.nomComplet}} ! vous etes deja participé ! merci de venir à l'heure</a>
+
+                    {% endif %}
+
+                {% endfor %}
+                {% endif %}
+{% else %}
+    <div class="btn btn-light"
+       href="#">
+        <i class="fa fa-angellist"></i> Cher utilisateur ! pour participer à cette evenement merci de vous <a style="color: lightseagreen" href="{{ path('app_login') }}">connecter </a> .</div>
+
+{% endif %}
+
+
+                <div class="event--content-social">
+                    {% if e.association.facebook %}
+                    <a class="fa fa-facebook" href=" {{ e.association.facebook }} " target="_blank" title="facebook {{ e.association.titre }}"></a>
+                   {% endif %}
+                    {% if e.association.instagram %}
+                    <a class="fa fa-instagram" href="{{ e.association.instagram }}" target="_blank" title="instagram {{ e.association.titre }}"></a>
+                    {% endif %}
+                    {% if e.association.siteWeb %}
+                    <a class="fa fa-globe" href="{{ e.association.siteWeb }}" target="_blank" title="website {{ e.association.titre }}"></a>
+                    {% endif %}
+{#                    {% for p in participations %}#}
+{#                    {% if p.evenement.id == e.id %}#}
+{#                        <p#}
+{#                                style="margin-top: -40px;margin-left:520px "><span id="count"#}
+{#                                                                                   class="count">{{ e.user | length }}</span>#}
+{#                            commentaires</p>#}
+{#                    {% endif %}#}
+{#                    {% endfor %}#}
+                </div>
+
+            </div>
+        </div>
+{% endif %}
+{% endfor %}
+    </div><!-- end eventWrapper  -->
+
+    <div><a href="#top-toc"><i class="fa fa-angle-up fa-2x"></i></a></div>
+
+    <div class="wsite-spacer" style="height:4rem;"></div>
+
+</div><!-- container -->
+
+{% endblock %}

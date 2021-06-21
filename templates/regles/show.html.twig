@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Regles{% endblock %}
+
+{% block body %}
+    <h1>Regles</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ regle.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ regle.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('regles_index') }}">back to list</a>
+
+    <a href="{{ path('regles_edit', {'id': regle.id}) }}">edit</a>
+
+    {{ include('regles/_delete_form.html.twig') }}
+{% endblock %}

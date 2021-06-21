@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FindMe</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <!-- Favicons -->
+    <link href="{{asset("assets/img/favicon.png")}}" rel="icon">
+    <link href="{{asset("assets/img/apple-touch-icon.png")}}" rel="apple-touch-icon">
+    <!-- Bootstrap CSS File -->
+    <link href="  {{asset("assets/lib/bootstrap/css/bootstrap.min.css")}}" rel="stylesheet">
+    <!-- Libraries CSS Files -->
+    <link href="{{asset("assets/lib/font-awesome/css/font-awesome.min.css")}}" rel="stylesheet">
+    <link href="{{asset("assets/lib/animate/animate.min.css")}}">
+    <link href="{{asset("assets/lib/ionicons/css/ionicons.min.css")}}">
+    <link href="{{asset("assets/lib/owlcarousel/assets/owl.carousel.min.css")}}" rel="stylesheet">
+    <link href="{{asset("assets/lib/lightbox/css/lightbox.min.css")}}" rel="stylesheet">
+    <!-- Main Stylesheet File -->
+    <link href=" {{asset("assets/css/style.css")}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+
+</head>
+
+<body id="page-top">
+
+<!--/ Nav Star /-->
+<nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav">
+    <div class="container">
+
+        <a class="navbar-brand js-scroll" href="#page-top">
+            <!--img src="{/{asset("assets/img/favicon.png")}}"  alt="gg"--></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
+                aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
+            {% if app.user %}
+            <ul class="navbar-nav">
+                <li class="nav-item">
+{#                    <a class="nav-link js-scroll active" href="{{ path('home') }}"><i class="fas fa-home"></i> Home</a>#}
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll" href="{{ path('post') }}">Toutes les publications</a>
+                </li>
+                <li class="nav-item">
+{#                    <a class="nav-link js-scroll" href="{{path('contact')}}"><i class="far fa-comment-dots"></i> Contact</a>#}
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll" href="{{ path('mespublication') }}">Mes Publications</a>
+                </li>
+                <li class="nav-item">
+{#                    <a class="nav-link js-scroll" href="{{ path('calcul') }}"><i class="fas fa-chart-line"></i> Statistique</a>#}
+                </li>
+                <li class="nav-item">
+{#                    <a class="nav-link js-scroll" href="{{ path('modifiercompte') }}"><i class="far fa-user"></i> Compte</a>#}
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i></a>
+                </li>
+            </ul>
+            {% else %}
+            <ul class="navbar-nav">
+                <li class="nav-item">
+{#                    <a class="nav-link js-scroll active" href="{{ path('home') }}"><i class="fas fa-home"></i> Home</a>#}
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll" href="{{ path('post') }}">Toutes les publications</a>
+                </li>
+                <li class="nav-item">
+{#                    <a class="nav-link js-scroll" href="{{ path('calcul') }}"><i class="fas fa-chart-line"></i> Statistique</a>#}
+                </li>
+                <li class="nav-item">
+{#                    <a class="nav-link js-scroll" href="{{ path('app_register') }}">Inscription</a>#}
+                </li>
+                <li class="nav-item">
+{#                    <a class="nav-link js-scroll" href="{{ path('app_login') }}">connexion</a>#}
+                </li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+<!--/ Nav End /-->
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+<div id="preloader"></div>
+<!-- JavaScript Libraries -->
+<script src="{{ asset("assets/lib/jquery/jquery.min.js") }}"></script>
+<script src="{{ asset("assets/lib/jquery/jquery-migrate.min.js") }}"></script>
+<script src="{{ asset("assets/lib/popper/popper.min.js") }}"></script>
+<script src="{{ asset("assets/lib/bootstrap/js/bootstrap.min.js") }}"></script>
+<script src="{{ asset("assets/lib/easing/easing.min.js") }}"></script>
+<script src="{{ asset("assets/lib/counterup/jquery.waypoints.min.js") }}"></script>
+<script src="{{ asset("assets/lib/counterup/jquery.counterup.js") }}"></script>
+<script src="{{ asset("assets/lib/owlcarousel/owl.carousel.min.js") }}"></script>
+<script src="{{ asset("assets/lib/lightbox/js/lightbox.min.js") }}"></script>
+<script src="{{ asset("assets/lib/typed/typed.min.js") }}"></script>
+<!-- Contact Form JavaScript File -->
+
+
+
+<!-- Template Main Javascript File -->
+
+<script src="{{ asset("assets/js/main.js") }}"></script>

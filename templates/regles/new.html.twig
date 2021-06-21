@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Regles{% endblock %}
+
+{% block body %}
+    <h1>Create new Regles</h1>
+
+    {{ include('regles/_form.html.twig') }}
+
+    <a href="{{ path('regles_index') }}">back to list</a>
+{% endblock %}

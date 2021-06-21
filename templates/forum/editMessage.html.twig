@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Modifier le message {% endblock %}
+
+{% block body %}
+
+
+
+
+<div class="col-md-12">
+	<h1 class="page-name">Modifier le message</h1>
+</div>
+
+<br/>
+
+<div class="col-md-12" id="pdetails-form">
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}

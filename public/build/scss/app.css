@@ -1,0 +1,18 @@
+body {
+  background-color: lightgray;
+}
+
+.account-link {
+  float: right;
+}
+
+.login-form-title {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.form-background {
+  background-color: #ffffff;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9hcHAuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFJQTtFQUNFO0FBSEY7O0FBS0E7RUFDRTtBQUZGOztBQUlBO0VBQ0U7RUFDQSxnQkFYVTtBQVVaOztBQUdBO0VBRUU7QUFERixDIiwiZmlsZSI6InNjc3MvYXBwLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIlxyXG4kdGl0bGUtc2l6ZToyNXB4O1xyXG4kZm9ybS1wYWRkaW5nOjVweDtcclxuXHJcbmJvZHkge1xyXG4gIGJhY2tncm91bmQtY29sb3I6IGxpZ2h0Z3JheTtcclxufVxyXG4uYWNjb3VudC1saW5rIHtcclxuICBmbG9hdDogcmlnaHQ7XHJcbn1cclxuLmxvZ2luLWZvcm0tdGl0bGUge1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICBtYXJnaW4tdG9wOiAkdGl0bGUtc2l6ZTtcclxufVxyXG4uZm9ybS1iYWNrZ3JvdW5kXHJcbntcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmZmZmO1xyXG59XHJcbiJdLCJzb3VyY2VSb290IjoiIn0=*/

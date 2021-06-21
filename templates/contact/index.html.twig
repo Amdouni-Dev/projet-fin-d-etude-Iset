@@ -1,0 +1,20 @@
+{% extends "admin/bars.html.twig" %}
+{% block contenpage %}
+    <style>
+        .titre { margin-left : 500px ;  }
+    </style>
+
+    <h1 class="titre"> Contact </h1>
+
+    <div  style="height: 550px" >
+        {{ form_start(our_form) }}
+        {{ form_widget(our_form) }}
+
+        <input type="submit" value="Envoyer" class="btn btn-primary" />
+
+        {{ form_end(our_form) }}
+    </div>
+
+
+
+{% endblock %}

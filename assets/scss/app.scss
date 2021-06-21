@@ -1,0 +1,18 @@
+
+$title-size:25px;
+$form-padding:5px;
+
+body {
+  background-color: red;
+}
+.account-link {
+  float: right;
+}
+.login-form-title {
+  text-align: center;
+  margin-top: $title-size;
+}
+.form-background
+{
+  background-color: #ffffff;
+}

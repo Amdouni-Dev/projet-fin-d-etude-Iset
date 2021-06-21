@@ -1,0 +1,128 @@
+<?php
+
+
+namespace App\Form;
+
+
+use App\Entity\Role;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
+class EditUAdmin extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $this->translator = $options['translator'];
+
+        $builder
+            ->add("role", EntityType::class, [
+                "mapped" => false,
+                "class" => Role::class,
+                "required" => true,
+                "placeholder" => $this->translator->trans('backend.role.choice_role'),
+                "constraints" => [
+                    new NotBlank(["message" => $this->translator->trans('backend.global.must_not_be_empty')]),
+                ]
+            ])
+
+
+
+
+
+
+            ->add("username", TextType::class, ["label" => $this->translator->trans('backend.user.username'),
+                'required'=>true,'constraints'=>[
+                    new Length([
+                        'min' => 5,
+                        'max' => 15,
+                        'exactMessage'=>'Username entre 5 et 15 caractères',
+                    ]),]
+
+
+            ])
+            ->add('email',EmailType::class,["label"=>"tapez l\'adresse e-mail",'required'=>true,'constraints'=>[
+                new Email(['mode' => 'strict']),
+            ]])
+//            ->add("nomComplet", TextType::class, ["label" => $this->translator->trans('backend.user.name')])
+            ->add('nomComplet',null,["label"=>'tapez le nom Complet ','required'=>true,'constraints'=>[
+                new Length([
+                    'min' => 3,
+                    'max' => 20,
+                    'exactMessage'=>'Nom entre 3 et 20 caractères',
+                ]),]])
+//
+//            ->add('plainPassword', RepeatedType::class, [
+//                'type' => PasswordType::class,
+//                'invalid_message' => 'Les champs de mot de passe doivent correspondre',
+//                'options' => ['attr' => ['class' => 'password-field','style'=> 'padding :20px']],
+//                'required' => true,
+//                'first_options' => ['label' => 'tapez un mot de passe : '],
+//                'second_options' => ['label' => 'Confirmer le mot de passe : '],
+//                // instead of being set onto the object directly,
+//                // this is read and encoded in the controller
+//                'mapped' => false,
+//                'constraints' => [
+//                    new NotBlank([
+//                        'message' => 's\'il vous plait tapez un mot de passe' ,
+//                    ]),
+//                    new Length([
+//                        'min' => 6,
+//                        'minMessage' => 'votre mot de passe doit contenir au moins {{ limit }} caracteres ',
+//                        // max length allowed by Symfony for security reasons
+//                        'max' => 4096,
+//                    ]),
+//                ],
+//            ])
+
+
+//            ->add("justpassword", TextType::class, [
+//                "label" => $this->translator->trans('backend.user.password'),
+//                "required" => true,
+//                "mapped" => false,
+//                "constraints" => [
+//                    new NotBlank(["message" => $this->translator->trans('backend.global.must_not_be_empty')])
+//                ]
+//            ])
+
+//                        ->add("role", EntityType::class, [
+//                "mapped" => false,
+//                "class" => Role::class,
+//                "required" => true,
+//
+//                "constraints" => [
+//                    new NotBlank(["message" => $this->translator->trans('backend.global.must_not_be_empty')]),
+//                ]
+//            ])
+
+
+//            ->add("role", EntityType::class, [
+//                "mapped" => false,
+//                "class" => Role::class,
+//                "required" => true,
+//                "placeholder" => $this->translator->trans('backend.role.choice_role'),
+//                "constraints" => [
+//                    new NotBlank(["message" => $this->translator->trans('backend.global.must_not_be_empty')]),
+//                ]
+//            ])
+        ;
+
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setRequired('translator');
+        $resolver->setDefaults([
+            'data_class' => User::class
+        ]);
+    }
+}

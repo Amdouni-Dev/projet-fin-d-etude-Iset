@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Activite{% endblock %}
+
+{% block body %}
+    <h1>Activite</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ activite.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ activite.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('activite_index') }}">back to list</a>
+
+    <a href="{{ path('activite_edit', {'id': activite.id}) }}">edit</a>
+
+    {{ include('activite/_delete_form.html.twig') }}
+{% endblock %}

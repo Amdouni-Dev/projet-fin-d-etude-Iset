@@ -1,0 +1,29 @@
+{% extends "admin/bars.html.twig" %}
+{% block title %}nouveau forum{% endblock %}
+
+{% block contenpage %}
+
+<style>
+
+</style>
+
+
+    {% if  is_granted("ROLE_PASSOCIATION") %}
+<div style="height:700px ">
+
+<div class="col-xl-12">
+    <h2 style="margin: 5px;font-family: 'Comic Sans MS'; text-align: center;color: lightskyblue" class="page-name">Commencez à chatter avec votre consultant !</h2>
+<br/>
+</div>
+
+<div class="col-md-12" id="pdetails-form">
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+</div>
+</div>
+    {% else %}
+    <h2>404 ! Désolé  vous n'avez pas d'accés</h2>
+    {% endif %}
+{% endblock %}

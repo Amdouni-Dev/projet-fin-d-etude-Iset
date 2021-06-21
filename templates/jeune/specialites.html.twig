@@ -55,7 +55,7 @@
                                     <th>Suprimer</th>
                                     </thead>
                                     <tbody>
-                                    {% for s in specialites %}
+                                    {% for s in specialites |sort|reverse %}
                                         {% if ( s.user is same  as app.user ) %}
                                             <tr>
                                                 <td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ s.id }}"></td>
@@ -63,6 +63,13 @@
                                                 <td>{{ s.description }}</td>
 
                                                 <td><a class="btn btn-primary" href="{{ path('specialite_edit',{"id":s.id}) }}"><i class="fa fa-edit"></i></a></td>
+                                                <td>
+                                                    {% if s.isValid ==1 %}
+                                                        <i  class="btn btn-success  fa fa-check"></i>
+                                                    {% else %}
+                                                        <i class=" btn btn-warning  fa fa-times"></i>
+                                                    {% endif %}
+                                                </td>
                                                 <td>
 {#                                                    <a class="btn btn-danger" href="{{ path('Delete__specialite',{"id":s.id}) }}"><i class="fa fa-trash"></i></a>#}
                                                     {{ include('jeune/_delete_form.html.twig') }}

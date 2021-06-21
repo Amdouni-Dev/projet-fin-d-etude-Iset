@@ -89,8 +89,9 @@
                                             {# <td><a class="btn btn-primary" href="{{ path('association_edit',{"id":opportunite.id}) }}"><i class="fa fa-edit"></i></a></td> #}
 
                                             {# <td><a href="{{ path('dd', {'id': opportunite.id}) }}" class="btn btn-danger disable-btn del-link" type="submit" ><i class="fa fa-trash"></i></a></td> #}
-                                            <td><a href="{{ path('Delete__specialite',{"id":s.id}) }}"
-                                                   class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></a>
+                                            <td>
+                                                {#                                                    <a class="btn btn-danger" href="{{ path('Delete__specialite',{"id":s.id}) }}"><i class="fa fa-trash"></i></a>#}
+                                                {{ include('jeune/_delete_form.html.twig') }}
                                             </td>
 
                                         </tr>

@@ -326,7 +326,7 @@ class PostController extends AbstractController
             return $this->redirectToRoute("newpost");
 
         }
-        return $this->render('publicationsU/newpub.html.twig', ['form' => $form->createView(), 'form1' => $form1->createView()]);
+        return $this->render('publicationsU/newPub.html.twig', ['form' => $form->createView(), 'form1' => $form1->createView()]);
         }catch (\Exception $e){
             echo "Exception Found - " . $e->getMessage() . "<br/>";
         }

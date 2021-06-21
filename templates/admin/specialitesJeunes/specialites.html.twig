@@ -42,6 +42,7 @@
 
                                     <th>Jeune Expert</th>
                                     <th>Type specialite</th>
+                                    <th>Description de la specialité</th>
                                     <th>CV</th>
                                     <th>Num Tel</th>
 
@@ -60,6 +61,7 @@
 
                                             <td>{{ s.user.nomComplet }}</td>
                                             <td>{{ s.type }}</td>
+                                            <td>{{ s.description }}</td>
                                             <td><a class="btn btn-primary btn-info btn-sm" href="{{ asset('uploads/cvs/'  ~ s.user.cv) }}">Voir le CV</a>
                                             </td>
                                             <td>{{ s.user.numerotel }} </td>

@@ -125,8 +125,16 @@ class EvenementController extends AbstractController
     /////////////////////// Proprietaire Association/////////////////////
     /**
      * @Route("/newEV/{id}", name="EV_new", methods={"GET","POST"})
+     * @param $id
+
+     * @param AssociationRepository $associationRepository
+
+     * @param UserInterface $user
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
      */
-    public function newPR($id,Association $association,AssociationRepository $associationRepository,EvenementRepository $evenementRepository,UserInterface $user,Request $request,EntityManagerInterface $manager): Response
+    public function newPR($id,AssociationRepository $associationRepository,UserInterface $user,Request $request,EntityManagerInterface $manager): Response
     {
         $evenement=new Evenement();
         $association=new Association();
@@ -212,7 +220,7 @@ class EvenementController extends AbstractController
 //            'form' => $form->createView(),
 //
 //        ]);
-        return $this->render('proprietaireassociation/evenements/formevenement.html.twig', [
+        return $this->render('proprietaireAssociation/evenements/formEvenement.html.twig', [
             'evenementform'=>$form->createView(),
             'evenement' => $evenement,
 

@@ -97,6 +97,7 @@ class OpportuniteController extends AbstractController
                         $fileName
                     );
                 } catch (FileException $e) {
+                    $e->getMessage();
                     // ... handle exception if something happens during file upload
                 }
                 $opportunite->setImage($fileName);
@@ -111,9 +112,9 @@ class OpportuniteController extends AbstractController
 
             ]);
         }catch (\Exception $e){
-            echo "Exception Found - " . $e->getMessage() . "<br/>";
+            echo "probléme : " . $e->getMessage() . "<br/>";
         }
-    } 
+    }
 //
 //    /**
 //     * @Route("/dd/{id}", name="opportunite_deleteee", methods={"POST"})

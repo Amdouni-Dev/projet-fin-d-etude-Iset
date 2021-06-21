@@ -210,13 +210,18 @@ $ass=$associationRepository->find($id);
             $file=$form->get('image')->getData();
             $fileName=md5(uniqid()).'.'.$file->guessExtension();
             try {
-                $file->move(
-                    $this->getParameter('images_directory'),
-                    $fileName
-                );
-            } catch (FileException $e) {
-                $e->getMessage();
-                // ... handle exception if something happens during file upload
+                try {
+                    $file->move(
+                        $this->getParameter('images_directory'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    $e->getMessage();
+                    // ... handle exception if something happens during file upload
+                }
+            } catch(\Exception $exception)
+            {
+             return   $exception->getCode();
             }
             $opportunite->setImage($fileName);
             $opportunite->setLanceur($user);

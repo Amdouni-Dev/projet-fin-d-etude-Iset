@@ -274,6 +274,7 @@ dd($u->getAssociations()->getValues());
 
 
     }
+
     /**
      * @Route("/deleteAct/{id}",name="deleteActiv")
 

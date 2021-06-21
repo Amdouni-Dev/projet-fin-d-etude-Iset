@@ -64,10 +64,19 @@
 
                                             <td>{{ opportunite.region }}</td>
                                             <td>
-                                                {%  if opportunite.isValid %}
-                                                    <a class="btn btn-success activate-link" href="{{ path('changevalidite_opportunite', {'id': opportunite.id}) }}"> <i class="fa fa-check"></i></a>
+                                                {% if not opportunite.isDeleted %}
+                                                    {% if opportunite.isValid %}
+
+                                                        <a class="btn btn-success activate-link"
+                                                           href="{{ path('changevalidite_opportunite', {'id': opportunite.id}) }}">
+                                                            <i class="fa fa-check"></i></a>
+                                                    {% else %}
+                                                        <a class="btn btn-warning activate-link"
+                                                           href="{{ path('changevalidite_opportunite', {'id': opportunite.id}) }}">
+                                                            <i class="fa fa-times"></i></a>
+                                                    {% endif %}
                                                 {% else %}
-                                                    <a class="btn btn-warning activate-link" href="{{ path('changevalidite_opportunite', {'id': opportunite.id}) }}"> <i class="fa fa-times"></i></a>
+                                                    deja supprimé
                                                 {% endif %}
                                             </td>
                                             {# <td><a class="btn btn-primary" href="{{ path('association_edit',{"id":opportunite.id}) }}"><i class="fa fa-edit"></i></a></td> #}

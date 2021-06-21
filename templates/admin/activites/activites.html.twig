@@ -65,6 +65,7 @@
                                             <td>
                                                 {% if not a.isDeleted %}
                                                 {% if a.isValid %}
+
                                                     <a class="btn btn-success activate-link"
                                                        href="{{ path('changevalidite_activite', {'id': a.id}) }}">
                                                         <i class="fa fa-check"></i></a>

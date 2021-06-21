@@ -52,7 +52,7 @@
                                     <th>Image</th>
 
                                     <th>Mettre En Ligne ?</th>
-                                    <th>Modifier</th>
+
 
                                     <th>Suprimer</th>
                                     </thead>
@@ -79,18 +79,19 @@
                                                     <td>      <a href="{{ asset('uploads/images/'  ~ e.image) }}">voir l'image</a>
                                                     <td>
                                                         {% if not e.isDeleted %}
-                                                        {% if e.isValid %}
-                                                            <a class="btn btn-success activate-link"
-                                                               href="{{ path('changevalidite_evenement', {'id': e.id}) }}">
-                                                                <i class="fa fa-check"></i></a>
-                                                        {% else %}
-                                                            <a class="btn btn-warning activate-link"
-                                                               href="{{ path('changevalidite_evenement', {'id': e.id}) }}">
-                                                                <i class="fa fa-times"></i></a>
-                                                        {% endif %}
-                                                        {% else %}
-                                                            déja supprimé
+                                                            {% if e.isValid %}
+
+                                                                <a class="btn btn-success activate-link"
+                                                                   href="{{ path('changevalidite_evenement', {'id': e.id}) }}">
+                                                                    <i class="fa fa-check"></i></a>
+                                                            {% else %}
+                                                                <a class="btn btn-warning activate-link"
+                                                                   href="{{ path('changevalidite_evenement', {'id': e.id}) }}">
+                                                                    <i class="fa fa-times"></i></a>
                                                             {% endif %}
+                                                        {% else %}
+                                                            deja supprimé
+                                                        {% endif %}
                                                     </td>
 {#                                                    <td><a class="btn btn-primary" href="{{ path('evenement_edit',{"id":e.id}) }}"><i class="fa fa-edit"></i></a></td>#}
 

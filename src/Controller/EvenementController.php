@@ -281,8 +281,7 @@ class EvenementController extends AbstractController
         $evenement = $evenementRepository->changeValidite($evenement);
 
         return    $this->json(["message"=>"success","value"=>$evenement->getIsValid()]);
-//        $this->addFlash('success', 'validité changé .');
-//        return $this->redirectToRoute('activiteAdmin_gerer');
+
 
 
     }

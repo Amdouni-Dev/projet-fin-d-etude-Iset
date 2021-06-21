@@ -58,7 +58,7 @@
                                     <th>Suprimer</th>
                                     </thead>
                                     <tbody>
-                                    {% for e in evenements %}
+                                    {% for e in evenements  |sort|reverse %}
                                         {% if app.user.id is same as e.user.id %}
                                         {% if e.isDeleted !=1 %}
                                             <tr>

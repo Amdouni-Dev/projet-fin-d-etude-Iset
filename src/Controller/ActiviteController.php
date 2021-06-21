@@ -148,6 +148,8 @@ class ActiviteController extends AbstractController
 
     /**
      * @Route("/Resoudre/{id}/{id1}", name="resoudre")
+     * @param $id1
+     * @param UserRepository $userRepository
      * @param AssociationRepository $associationRepository
      * @param ActiviteRepository $activiteRepository
      * @param $id
@@ -158,6 +160,7 @@ class ActiviteController extends AbstractController
      */
     public function resoudre($id1,UserRepository $userRepository,AssociationRepository $associationRepository,ActiviteRepository $activiteRepository,$id,Request $request, UserInterface $user,PublicationRepository $publicationRepository): Response
     {
+
         $activite=new Activite();
         $pub=$publicationRepository->find($id);
 
@@ -222,7 +225,7 @@ class ActiviteController extends AbstractController
 
 
         }
-        return $this->render('proprietaireassociation/activites/activiteform.html.twig', [
+        return $this->render('proprietaireAssociation/activites/activiteform.html.twig', [
             'activiteform'=>$form->createView(),
 //'activites'=>$activiteRepository->find($user),
 //        'ass'=>$associationRepository->getAssociations($id1),

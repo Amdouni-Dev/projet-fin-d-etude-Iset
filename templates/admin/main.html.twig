@@ -2210,7 +2210,7 @@ permet aux jeunes  d'avoir des chances egales a travers la mise en ligne de leur
 
     <div class="row">
 
-        {% for o in opportunitesAll| filter(opportunites => opportunites.isValid) | filter(opportunites => not opportunites.isDeleted)|sort((a, b) => a.dateLimite <=> b.dateLimite)  %}
+        {% for o in opportunitesAll| filter(opportunites => opportunites.isValid) |sort((a, b) => a.dateLimite <=> b.dateLimite)  %}
 
         <div   style="margin-left: 20px;">
             <div>

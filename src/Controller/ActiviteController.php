@@ -160,7 +160,7 @@ class ActiviteController extends AbstractController
      */
     public function resoudre($id1,UserRepository $userRepository,AssociationRepository $associationRepository,ActiviteRepository $activiteRepository,$id,Request $request, UserInterface $user,PublicationRepository $publicationRepository): Response
     {
-
+try{
         $activite=new Activite();
         $pub=$publicationRepository->find($id);
 
@@ -233,7 +233,9 @@ class ActiviteController extends AbstractController
             'activite' => $activite,
 
         ]);
-
+}catch (\Exception $e){
+    echo "Exception Found - " . $e->getMessage() . "<br/>";
+}
     }
 
     /**

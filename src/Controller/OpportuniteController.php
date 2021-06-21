@@ -116,19 +116,19 @@ class OpportuniteController extends AbstractController
 
     }
 //
-//    /**
-//     * @Route("/dd/{id}", name="opportunite_deleteee", methods={"POST"})
-//     */
-//    public function delete(Request $request, Opportunite $opportunite): Response
-//    {
-//        if ($this->isCsrfTokenValid('delete'.$opportunite->getId(), $request->request->get('_token'))) {
-//            $entityManager = $this->getDoctrine()->getManager();
-//            $entityManager->remove($opportunite);
-//            $entityManager->flush();
-//        }
-//
-//        return $this->redirectToRoute('opportunite_index');
-//    }
+    /**
+     * @Route("/dd/{id}", name="opportunite_delete", methods={"POST"})
+     */
+    public function delete(Request $request, Opportunite $opportunite): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$opportunite->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($opportunite);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('opportunite_index');
+    }
 
 //    /**
 //     * @Route("/deleter/{id}",name="rdelete")
@@ -345,7 +345,7 @@ class OpportuniteController extends AbstractController
     /**
      * @Route("/{id}", name="opp_delete", methods={"POST"})
      */
-    public function delete(Request $request, Opportunite $opportunite): Response
+    public function delete2(Request $request, Opportunite $opportunite): Response
     {
         if ($this->isCsrfTokenValid('delete'.$opportunite->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();

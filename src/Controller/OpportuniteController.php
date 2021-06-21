@@ -240,7 +240,7 @@ class OpportuniteController extends AbstractController
 //            'form' => $form->createView(),
 //
 //        ]);
-            return $this->render('proprietaireassociation/opportunites/formOpportunite.html.twig', [
+            return $this->render('proprietaireAssociation/opportunites/formOpportunite.html.twig', [
                 'opportuniteform' => $form->createView(),
                 'opportunite' => $opportunite,
 

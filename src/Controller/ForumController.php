@@ -449,6 +449,7 @@ $topics=$topicRepository->findAll();
     {
         if ($this->isCsrfTokenValid('delete'.$topic->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($topic->getMessages());
             $entityManager->remove($topic);
             $entityManager->flush();
         }

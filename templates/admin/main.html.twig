@@ -1965,7 +1965,7 @@ permet aux jeunes  d'avoir des chances egales a travers la mise en ligne de leur
                     {% for u in usersAll |filter(u =>  u.valid) |filter(u => not u.deleted)  %}
                         <div>
 
-                        <img class="card2"  src=" {{ asset('uploads/images/'  ~ u.logo) }}" alt="Awesome Image">
+                        <img class="card2"  src=" {{ asset('uploads/images/'  ~ u.logo) }}" alt="{{ u.nomComplet }}">
 
                             <h4 style="font-family: 'Times New Roman';color: lightcoral" >{{ u.nomComplet }}</h4></div>
                 

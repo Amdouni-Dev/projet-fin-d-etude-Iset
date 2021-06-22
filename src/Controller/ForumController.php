@@ -400,6 +400,7 @@ $topics=$topicRepository->findAll();
     {
 //$t=$topicRepository->find($topic);
 //$m=$t->getMessages();
+        try{
         $entityManager = $this->getDoctrine()->getManager();
         $message= $entityManager->getRepository(Message::class)->find($topic);
 //        dd($message);
@@ -413,6 +414,9 @@ $topics=$topicRepository->findAll();
 
         $entityManager->flush();
         return $this->redirectToRoute('adminchats');
+        }catch (\Exception $e){
+            echo "Exception Found - " . $e->getMessage() . "<br/>";
+        }
 //dd($t->getMessages());
     }
 

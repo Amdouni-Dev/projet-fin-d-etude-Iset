@@ -193,18 +193,15 @@ class ServiceController extends AbstractController
     /**
      * @Route("/deleteeService/{id}",name="Delete__service")
      */
-    public function deleteS($id)
+    public function deleteS(Request $request, Service $service)
     {
 //  $op=$opportuniteRepository->find($id);
 
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $service= $entityManager->getRepository(Service::class)->find($id);
-        $entityManager->remove($service);
-        $this->addFlash('success', 'Service bien été supprimé.');
-
-
-        $entityManager->flush();
+        if ($this->isCsrfTokenValid('delete'.$service->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($service);
+            $entityManager->flush();
+        }
         return $this->redirectToRoute('service_index');
 
 

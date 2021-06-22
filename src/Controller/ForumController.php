@@ -239,11 +239,16 @@ $topic->setIsRead(false);
      */
     public function indexM(UserInterface $user,Topic $topic = null,TopicRepository $topicRepository,MessageRepository $messageRepository)
     {
+        try {
+
 
 $topics=$topicRepository->findAll();
 
 
         return $this->render('forum/all.html.twig',['topics'=>$topics]);
+        }catch (\Exception $e){
+            echo "Exception Found - " . $e->getMessage() . "<br/>";
+        }
     }
 
 

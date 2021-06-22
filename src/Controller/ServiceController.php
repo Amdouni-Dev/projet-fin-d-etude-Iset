@@ -88,6 +88,7 @@ class ServiceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $service->setIsValid(0);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('service_index');

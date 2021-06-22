@@ -40,6 +40,8 @@
                                     <thead>
                                     <th><input type="checkbox" id="select_all" name="select_all"></th>
                                     <th>Type service</th>
+                                    <th>Description</th>
+
                                     <th>Consultant</th>
 
 
@@ -55,6 +57,7 @@
                                                        value="{{ s.id }}"></td>
 
                                             <td>{{ s.type }}</td>
+                                            <td>{{ s.description }}</td>
                                             <td>{{ s.user.nomComplet }}</td>
 
                                             <td>
@@ -71,8 +74,13 @@
                                             {# <td><a class="btn btn-primary" href="{{ path('association_edit',{"id":opportunite.id}) }}"><i class="fa fa-edit"></i></a></td> #}
 
                                             {# <td><a href="{{ path('dd', {'id': opportunite.id}) }}" class="btn btn-danger disable-btn del-link" type="submit" ><i class="fa fa-trash"></i></a></td> #}
-                                            <td><a href="{{ path('Delete__service',{"id":s.id}) }}"
-                                                   class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></a>
+                                            <td>
+                                                <form method="post" action="{{ path('Delete__serviceadmin', {'id': s.id}) }}" onsubmit="return confirm('etes vous sure de supprimer ce service?');">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ s.id) }}">
+                                                    <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+
+
+                                                </form>
                                             </td>
 
                                         </tr>

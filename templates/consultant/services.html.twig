@@ -53,7 +53,7 @@
 
 
                                     <th>Modifier</th>
-
+<th>Etat</th>
                                     <th>Suprimer</th>
                                     </thead>
                                     <tbody>
@@ -66,6 +66,13 @@
 
                                             <td><a class="btn btn-primary" href="{{ path('service_edit',{"id":s.id}) }}"><i class="fa fa-edit"></i></a></td>
 {#                                            <td><a class="btn btn-danger" href="{{ path('Delete__service',{"id":s.id}) }}"><i class="fa fa-trash"></i></a></td>#}
+                                            <td>
+                                                {% if s.isValid ==1 %}
+                                                    <i  class="btn btn-success  fa fa-check"></i>
+                                                {% else %}
+                                                    <i class=" btn btn-warning  fa fa-times"></i>
+                                                {% endif %}
+                                            </td>
                                             <td>
                                                 <form method="post" action="{{ path('Delete__service', {'id': s.id}) }}" onsubmit="return confirm('etes vous sure de supprimer ce service?');">
                                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ s.id) }}">

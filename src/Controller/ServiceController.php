@@ -206,6 +206,27 @@ class ServiceController extends AbstractController
 
 
     }
+
+
+
+    /**
+     * @Route("/deleteeServiceAdmin/{id}",name="Delete__serviceadmin")
+     */
+    public function deleteSA(Request $request, Service $service)
+    {
+//  $op=$opportuniteRepository->find($id);
+
+        if ($this->isCsrfTokenValid('delete'.$service->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($service);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('service_index_admin');
+
+
+    }
+
+
     /**
      * @Route("/changevalidite/{id}",name="changevalidite_service",methods={"post"})
      * @IsGranted("ROLE_SUPERUSER")

@@ -443,7 +443,7 @@ $topics=$topicRepository->findAll();
     }
 
     /**
-     * @Route("/{id}", name="chou_delete", methods={"POST"})
+     * @Route("/sup/{id}", name="chou_delete", methods={"POST"})
      */
     public function deletech(Request $request, Topic $topic): Response
     {

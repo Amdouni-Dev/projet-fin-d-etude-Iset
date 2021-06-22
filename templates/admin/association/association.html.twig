@@ -61,7 +61,7 @@
                                 <th>Suprimer</th>
                                 </thead>
                                 <tbody>
-                                                                {% for associations in associations|filter(associations => not associations.deleted)  %}
+                                                                {% for associations in associations|filter(associations => not associations.deleted)|sort |reverse  %}
                                                                     <tr>
                                                                         <td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ associations.id }}"></td>
                                                                         <td>{{ associations.titre }}</td>

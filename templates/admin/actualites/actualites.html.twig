@@ -46,7 +46,7 @@
                                     <th>Suprimer</th>
                                     </thead>
                                     <tbody>
-                                    {% for a in actualites %}
+                                    {% for a in actualites |sort |reverse %}
                                         <tr>
                                             <td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ a.id }}"></td>
                                             <td>{{ a.auteur }}</td>

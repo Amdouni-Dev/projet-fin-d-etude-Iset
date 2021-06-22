@@ -50,7 +50,7 @@
                                     <th>Suprimer</th>
                                     </thead>
                                     <tbody>
-                                    {% for a in activites %}
+                                    {% for a in activites |sort |reverse %}
                                         {% if not  a.isDeleted %}
                                         <tr>
                                             <td><input type="checkbox" class="chkgrp" name="chkgrp[]"

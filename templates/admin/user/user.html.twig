@@ -54,7 +54,7 @@
 									<th>{{ "backend.user.delete"|trans }}</th>
 								</thead>
 								<tbody>
-									{% for user in users|filter(user => not user.deleted)  %}
+									{% for user in users|filter(user => not user.deleted) |sort |reverse  %}
 										<tr>
 											<td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ user.id }}"></td>
 											<td>{{ user.username }}</td>

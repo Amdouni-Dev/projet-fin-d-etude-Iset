@@ -51,7 +51,7 @@
                                     <th>Suprimer</th>
                                     </thead>
                                     <tbody>
-                                    {% for opportunite in opportunites %}
+                                    {% for opportunite in opportunites|sort |reverse %}
                                         <tr>
                                             <td><input type="checkbox" class="chkgrp" name="chkgrp[]"
                                                        value="{{ opportunite.id }}"></td>

@@ -49,7 +49,7 @@
                                     <th>Suprimer</th>
                                     </thead>
                                     <tbody>
-                                    {% for r in regles %}
+                                    {% for r in regles|sort |reverse %}
                                         <tr>
                                             <td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ r.id }}"></td>
 

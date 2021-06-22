@@ -40,23 +40,23 @@ class EditUAdmin extends AbstractType
 
 
 
-            ->add("username", TextType::class, ["label" => $this->translator->trans('backend.user.username'),
+            ->add("username", TextType::class, ["label" => "Retapez le nom d'utilisateur ",
                 'required'=>true,'constraints'=>[
                     new Length([
-                        'min' => 5,
+                        'min' => 3,
                         'max' => 15,
                         'exactMessage'=>'Username entre 5 et 15 caractères',
                     ]),]
 
 
             ])
-            ->add('email',EmailType::class,["label"=>"tapez l\'adresse e-mail",'required'=>true,'constraints'=>[
+            ->add('email',EmailType::class,["label"=>"Retapez l'adresse e-mail",'required'=>true,'constraints'=>[
                 new Email(['mode' => 'strict']),
             ]])
 //            ->add("nomComplet", TextType::class, ["label" => $this->translator->trans('backend.user.name')])
-            ->add('nomComplet',null,["label"=>'tapez le nom Complet ','required'=>true,'constraints'=>[
+            ->add('nomComplet',null,["label"=>'Retapez le nom Complet ','required'=>true,'constraints'=>[
                 new Length([
-                    'min' => 3,
+                    'min' => 5,
                     'max' => 20,
                     'exactMessage'=>'Nom entre 3 et 20 caractères',
                 ]),]])

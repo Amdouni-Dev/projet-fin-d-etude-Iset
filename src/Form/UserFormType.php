@@ -50,7 +50,7 @@ class UserFormType extends AbstractType
 
 
             ])
-            ->add('email',EmailType::class,["label"=>"tapez l'adresse e-mail d'utilisateur ",'required'=>true,'constraints'=>[
+            ->add('email',EmailType::class,["label"=>"Tapez l'adresse e-mail d'utilisateur ",'required'=>true,'constraints'=>[
                 new Email(['mode' => 'strict']),
             ]])
 //            ->add("nomComplet", TextType::class, ["label" => $this->translator->trans('backend.user.name')])

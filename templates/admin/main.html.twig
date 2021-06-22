@@ -1962,7 +1962,7 @@ permet aux jeunes  d'avoir des chances egales a travers la mise en ligne de leur
 
 
                 <main>
-                    {% for u in usersAll |filter(u =>  u.valid) %}
+                    {% for u in usersAll |filter(u =>  u.valid) |filter(u => not u.deleted)  %}
                         <div>
 
                         <img class="card2"  src=" {{ asset('uploads/images/'  ~ u.logo) }}" alt="Awesome Image">
@@ -2082,7 +2082,7 @@ permet aux jeunes  d'avoir des chances egales a travers la mise en ligne de leur
                     </div>
                     <a href="{{path('user_events_index') }}">
                         <div class="card-footer bg-light text-danger">
-                            <span class="float-left">Voir toutes les evenements</span>
+                            <span class="float-left">Voir tous les evenements</span>
                             <span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
                             <div class="clearfix"></div>
                         </div>
@@ -2397,3 +2397,4 @@ permet aux jeunes  d'avoir des chances egales a travers la mise en ligne de leur
 
 
 {% endblock %}
+  

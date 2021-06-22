@@ -2141,7 +2141,7 @@ permet aux jeunes  d'avoir des chances egales a travers la mise en ligne de leur
         <div  style="margin-top: 20px;">
 
 
-            {% for a in associationsAll|filter(associations => not associations.deleted)| filter(associations => associations.valid)  %}
+            {% for a in associationsAll|filter(associationsAll => not associationsAll.deleted)| filter(associationsAll => associationsAll.valid)  %}
             <a href="{{ path('UserAssoci',{"id":a.id}) }}">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="image-flip" >

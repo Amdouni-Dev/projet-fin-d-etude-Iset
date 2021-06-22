@@ -76,14 +76,22 @@
 
 </td>
                                             <td>
-
-                                                <form method="post" action="{{ path('mmmm', {'id': c.id}) }}" onsubmit="return confirm('Etes vous sure de supprimer cette conversation ?');">
+                                                <form method="post" action="{{ path('chou_delete', {'id': c.id}) }}" onsubmit="return confirm('etes vous sure de supprimer cette conversation?');">
                                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ c.id) }}">
-                                                    <button class="btn">Delete</button>
+                                                    <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+
+
                                                 </form>
+                                            </td>
+{#                                            <td>#}
+
+{#                                                <form method="post" action="{{ path('mmmm', {'id': c.id}) }}" onsubmit="return confirm('Etes vous sure de supprimer cette conversation ?');">#}
+{#                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ c.id) }}">#}
+{#                                                    <button class="btn">Delete</button>#}
+{#                                                </form>#}
 
 
-                                                {#                                                <form method="post" action="{{ path('Delete_Chat', {'id': c.id}) }}" onsubmit="return confirm('etes vous sure de supprimer cette conversation?');">#}
+{#                                                #}{#                                                <form method="post" action="{{ path('Delete_Chat', {'id': c.id}) }}" onsubmit="return confirm('etes vous sure de supprimer cette conversation?');">#}
 {#                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ c.id) }}">#}
 {#                                                    <button class="btn btn-danger"><i class="fa fa-trash"></i></button>#}
 
@@ -91,7 +99,7 @@
 {#                                                </form>#}
 {#                                                <a href="{{ path('Delete_Chat', {'id': c.id}) }}" class="btn btn-danger" type="submit" ><i class="fa fa-trash"></i></a>#}
 
-                                            </td>
+{#                                            </td>#}
                                         </tr>
                                     {% endfor %}
                                     </tbody>

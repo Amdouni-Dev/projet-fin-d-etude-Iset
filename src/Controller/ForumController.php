@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Activite;
 use App\Entity\Association;
 use App\Entity\Categorie;
+use App\Entity\Evenement;
 use App\Entity\Regles;
 use App\Entity\Service;
 use App\Entity\Specialite;
@@ -439,5 +440,19 @@ $topics=$topicRepository->findAll();
         return $this->redirectToRoute('service_index');
 
 
+    }
+
+    /**
+     * @Route("/{id}", name="chou_delete", methods={"POST"})
+     */
+    public function deletech(Request $request, Topic $topic): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$topic->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($topic);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('evenementAdmin_gerer');
     }
 }

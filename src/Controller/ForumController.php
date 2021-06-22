@@ -444,20 +444,21 @@ $topics=$topicRepository->findAll();
 
     /**
      * @Route("/sup/{id}", name="chou_delete", methods={"POST"})
+     * @param $id
+     * @return Response
      */
-    public function deletech(Request $request, Topic $topic): Response
+    public function deletech($id): Response
     {
-        try{
-        if ($this->isCsrfTokenValid('delete'.$topic->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($topic->getMessages());
-            $entityManager->remove($topic);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('evenementAdmin_gerer');
-        }catch (\Exception $e){
-            echo "Exception Found - " . $e->getMessage() . "<br/>";
-        }
+       $em=$this->getDoctrine()->getManager();
+       $topic=$this->getDoctrine()->getManager()->getRepository(Topic::class)->find($id);
+       if($topic=== null){
+           throw $this->createNotFoundException('ce sujet n\'existe pas');
+       }
+       else{
+           $em->remove($topic->getMessages());
+           $em->remove($topic);
+           $em->flush();
+       }
+       return new Response('supprimé');
     }
 }

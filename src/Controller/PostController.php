@@ -134,12 +134,12 @@ class PostController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function singlepost($id, PublicationRepository $repository, Request $request): Response
+    public function singlepost($id,ReglesRepository $reglesRepository, PublicationRepository $repository, Request $request): Response
     {
         $pub = $repository->find($id);
         $commentaire = new Commentaire();
         $form = $this->createForm(CommentType::class, $commentaire);
-        return $this->render('publicationsU/singlepost.html.twig', ['pub' => $pub, 'form' => $form->createView()]);
+        return $this->render('publicationsU/singlepost.html.twig', ['regles'=>$reglesRepository->findAll(),'pub' => $pub, 'form' => $form->createView()]);
     }
 
 

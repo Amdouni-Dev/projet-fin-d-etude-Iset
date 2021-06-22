@@ -14,6 +14,7 @@ use App\Form\SpecialiteType;
 
 use App\Repository\ActualiteRepository;
 use App\Repository\SpecialiteRepository;
+use Doctrine\DBAL\Driver\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -50,9 +51,16 @@ class SpecialiteController extends AbstractController
      */
     public function indexSpAdmin(SpecialiteRepository $specialiteRepository): Response
     {
+        try {
+
+
         return $this->render('admin/specialitesJeunes/specialites.html.twig', [
             'specialites' => $specialiteRepository->findAll(),
         ]);
+
+        }catch (\Exception $e){
+            echo "Exception Found - " . $e->getMessage() . "<br/>";
+        }
     }
 
 

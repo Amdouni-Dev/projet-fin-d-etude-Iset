@@ -394,7 +394,13 @@ $topics=$topicRepository->findAll();
 //    }
 
     /**
-     * @Route("/ttttt/{id}", name="mmmm")
+     * @Route("/SupprimerConversationAdmin/{id}", name="mmmm")
+     * @param $id
+     * @param Request $request
+     * @param Topic $topic
+     * @param TopicRepository $topicRepository
+     * @param Message $message
+     * @return Response
      */
     public function delete($id,Request $request, Topic $topic,TopicRepository $topicRepository,Message $message): Response
     {
@@ -402,12 +408,13 @@ $topics=$topicRepository->findAll();
 //$m=$t->getMessages();
         try{
         $entityManager = $this->getDoctrine()->getManager();
-        $message= $entityManager->getRepository(Message::class)->find($topic);
+//        $message= $entityManager->getRepository(Message::class)->find($topic);
 //        dd($message);
 
-        $topic= $entityManager->getRepository(Topic::class)->find($id);
-        $entityManager->remove($message);
-        $entityManager->remove($topic);
+//        $topic= $entityManager->getRepository(Topic::class)->find($id);
+        $t=$topicRepository->find($id);
+//        $entityManager->remove($message);
+        $entityManager->remove($t);
 
         $this->addFlash('success', 'Conversation bien été supprimée.');
 

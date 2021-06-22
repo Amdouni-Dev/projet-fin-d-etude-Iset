@@ -1941,7 +1941,7 @@ permet aux jeunes  d'avoir des chances egales a travers la mise en ligne de leur
             display: inline-block;
             padding-right: 10px;" class="text">
                     <marquee direction = "left">
-                        {% for a in actualites %}
+                        {% for a in actualites |sort|reverse %}
                             <span> &nbsp;• {{ a.auteur}} : {{ a.description }}</span>  {% endfor %}
                         {#                                        <span>• Coronavirus pandemic is going to get worse and worse and worse: WHO chieft</span>#}
                         {#                                        <span> &nbsp;• ‘Everyone is lying’: Trump undercuts public health officials in fresh attacks</span>#}
@@ -2141,7 +2141,7 @@ permet aux jeunes  d'avoir des chances egales a travers la mise en ligne de leur
         <div  style="margin-top: 20px;">
 
 
-            {% for a in associationsAll|filter(associationsAll => not associationsAll.deleted)| filter(associationsAll => associationsAll.valid)|sort |reverse  %}
+            {% for a in associationsAll|filter(associationsAll => not associationsAll.deleted)| filter(associationsAll => associationsAll.valid)  %}
             <a href="{{ path('UserAssoci',{"id":a.id}) }}">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="image-flip" >

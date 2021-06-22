@@ -461,8 +461,11 @@ $topics=$topicRepository->findAll();
        }
        $em->flush();
 
+            $this->addFlash('success', 'Conversation bien été supprimée.');
 
-       return new Response('supprimé');
+
+            $em->flush();
+            return $this->redirectToRoute('adminchats');
         }catch (\Exception $e){
             echo "Exception Found - " . $e->getMessage() . "<br/>";
         }

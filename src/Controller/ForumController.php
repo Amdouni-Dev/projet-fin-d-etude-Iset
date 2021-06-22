@@ -449,6 +449,9 @@ $topics=$topicRepository->findAll();
      */
     public function deletech($id): Response
     {
+        try {
+
+
        $em=$this->getDoctrine()->getManager();
        $topic=$this->getDoctrine()->getManager()->getRepository(Topic::class)->find($id);
        if($topic=== null){
@@ -460,5 +463,9 @@ $topics=$topicRepository->findAll();
            $em->flush();
        }
        return new Response('supprimé');
-    }
+        }catch (\Exception $e){
+            echo "Exception Found - " . $e->getMessage() . "<br/>";
+        }
+        }
+
 }

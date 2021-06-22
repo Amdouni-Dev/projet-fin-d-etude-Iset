@@ -402,11 +402,11 @@ $topics=$topicRepository->findAll();
 //$m=$t->getMessages();
         try{
         $entityManager = $this->getDoctrine()->getManager();
-        $message= $entityManager->getRepository(Message::class)->find($topic);
+//        $message= $entityManager->getRepository(Message::class)->find($topic);
 //        dd($message);
 
         $topic= $entityManager->getRepository(Topic::class)->find($id);
-        $entityManager->remove($message);
+//        $entityManager->remove($message);
         $entityManager->remove($topic);
 
         $this->addFlash('success', 'Conversation bien été supprimée.');

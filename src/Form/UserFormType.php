@@ -40,23 +40,23 @@ class UserFormType extends AbstractType
 
 
 
-            ->add("username", TextType::class, ["label" => $this->translator->trans('backend.user.username'),
+            ->add("username", TextType::class, ["label" => "Taper le nom d'utilisateur",
                 'required'=>true,'constraints'=>[
                     new Length([
-                        'min' => 5,
+                        'min' => 3,
                         'max' => 15,
                         'exactMessage'=>'Username entre 5 et 15 caractères',
                     ]),]
 
 
             ])
-            ->add('email',EmailType::class,["label"=>"tapez l\'adresse e-mail",'required'=>true,'constraints'=>[
+            ->add('email',EmailType::class,["label"=>"tapez l'adresse e-mail d'utilisateur ",'required'=>true,'constraints'=>[
                 new Email(['mode' => 'strict']),
             ]])
 //            ->add("nomComplet", TextType::class, ["label" => $this->translator->trans('backend.user.name')])
-            ->add('nomComplet',null,["label"=>'tapez le nom Complet ','required'=>true,'constraints'=>[
+            ->add('nomComplet',null,["label"=>'Tapez le nom Complet ','required'=>true,'constraints'=>[
                 new Length([
-                    'min' => 3,
+                    'min' => 5,
                     'max' => 20,
                     'exactMessage'=>'Nom entre 3 et 20 caractères',
                 ]),]])
@@ -66,7 +66,7 @@ class UserFormType extends AbstractType
                 'invalid_message' => 'Les champs de mot de passe doivent correspondre',
                 'options' => ['attr' => ['class' => 'password-field','style'=> 'padding :20px']],
                 'required' => true,
-                'first_options' => ['label' => 'tapez un mot de passe : '],
+                'first_options' => ['label' => 'Tapez un mot de passe : '],
                 'second_options' => ['label' => 'Confirmer le mot de passe : '],
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller

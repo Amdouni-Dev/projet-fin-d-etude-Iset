@@ -36,40 +36,40 @@ class UserInscritFormType extends AbstractType
 
 
 //            ->add("username", TextType::class, ["label" => $this->translator->trans('backend.user.username')])
-            ->add('username',null,["label"=>'tapez votre nom ','required'=>true,'constraints'=>[
+            ->add('username',null,["label"=>'Tapez votre nom ','required'=>true,'constraints'=>[
                 new Length([
-                    'min' => 5,
+                    'min' => 3,
                     'max' => 15,
                     'exactMessage'=>'Username entre 5 et 15 caractères',
                 ]),]])
 //            ->add("email", EmailType::class)
 
-            ->add('nomComplet',null,["label"=>'tapez votre nom Complet ','required'=>true,'constraints'=>[
+            ->add('nomComplet',null,["label"=>'Tapez votre nom Complet ','required'=>true,'constraints'=>[
                 new Length([
-                    'min' => 3,
+                    'min' => 5,
                     'max' => 20,
-                    'exactMessage'=>'Nom entre 3 et 20 caractères',
+                    'exactMessage'=>'votre nom doit etre entre formé de 3 caractères',
                 ]),]])
-            ->add('email',EmailType::class,["label"=>"tapez votre adresse e-mail",'required'=>true,'constraints'=>[
+            ->add('email',EmailType::class,["label"=>"Tapez votre adresse e-mail",'required'=>true,'constraints'=>[
                 new Email(['mode' => 'strict']),
             ]])
-            ->add('numeroTel',TelType::class,["label"=>'tapez votre numéro de Téléphone : ','required'=>true, 'constraints'=>[
+            ->add('numeroTel',TelType::class,["label"=>'Tapez votre numéro de Téléphone : ','required'=>true, 'constraints'=>[
                 new Length([
                     'min' => 8,
                     'max' => 8,
                     'exactMessage'=>'Le numéro de téléphone doit contenir exactement {{ limit }}  chiffres',
                 ]),]])
-            ->add('lienFbk',null,["label"=>'tapez votre lien Facebook ','required'=>false,'constraints'=>[
+            ->add('lienFbk',null,["label"=>'Tapez votre lien Facebook ','required'=>false,'constraints'=>[
                 new Length([
                     'min' => 10,
 
-                    'exactMessage'=>'taper votre lien facebook correctement',
+                    'exactMessage'=>'Taper votre lien facebook correctement',
                 ]),]])
             ->add('lienInstagram',null,["label"=>'tapez votre lien Instagrem ','required'=>false,'constraints'=>[
                 new Length([
                     'min' => 10,
 
-                    'exactMessage'=>'taper votre lien instagram correctement',
+                    'exactMessage'=>'Taper votre lien instagram correctement',
                 ]),]])
 //            ->add("nomComplet", TextType::class, ["label" => $this->translator->trans('backend.user.name')])
 //            ->add("justpassword", TextType::class, [
@@ -104,11 +104,11 @@ class UserInscritFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 's\'il vous plait tapez un mot de passe' ,
+                        'message' => "s'il vous plait tapez un mot de passe" ,
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'votre mot de passe doit contenir au moins {{ limit }} caracteres',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
@@ -131,7 +131,7 @@ class UserInscritFormType extends AbstractType
                             'image/jpeg',
                             'image/png',
                         ],
-                        'mimeTypesMessage' => 's\'il vous plait chargez une image de type jpeg ou png. ',
+                        'mimeTypesMessage' => "s'il vous plait chargez une image de type jpeg ou png. ",
                     ])
                 ],
             ])

@@ -30,18 +30,18 @@
                         </div>
                         <div class="x_content">
                             <div class="row">
-                                <form action="{{ path('groupaction_association') }}" id="grpaction" method="post" name="grpaction">
-                                    <div class="form-group form-inline">
-                                        <select class="form-control" name="action" required id="action_select">
-                                            <option value="">Action de groupe</option>
-                                            <option value="desactiver">Desactiver</option>
-                                            <option value="activer">Activer</option>
-                                            <option value="supprimer">Supprimer</option>
-                                        </select>
-                                        <button class="btn btn-primary" type="submit">Go!!</button>
-                                    </div>
+{#                                <form action="{{ path('groupaction_association') }}" id="grpaction" method="post" name="grpaction">#}
+{#                                    <div class="form-group form-inline">#}
+{#                                        <select class="form-control" name="action" required id="action_select">#}
+{#                                            <option value="">Action de groupe</option>#}
+{#                                            <option value="desactiver">Desactiver</option>#}
+{#                                            <option value="activer">Activer</option>#}
+{#                                            <option value="supprimer">Supprimer</option>#}
+{#                                        </select>#}
+{#                                        <button class="btn btn-primary" type="submit">Go!!</button>#}
+{#                                    </div>#}
 
-                                </form>
+{#                                </form>#}
                                 <table id="example" class="display table table-striped table-bordered dataminetables" >
                                     <thead>
                                     <th><input type="checkbox" id="select_all" name="select_all"></th>
@@ -65,7 +65,7 @@
                                             <td>{{ s.description }}</td>
 
                                             <td><a class="btn btn-primary" href="{{ path('service_edit',{"id":s.id}) }}"><i class="fa fa-edit"></i></a></td>
-                                            <td><a class="btn btn-danger" href="{{ path('Delete__service',{"id":s.id}) }}"><i class="fa fa-trash"></i></a></td>
+                                            <td><a class="btn btn-danger" href="{{ path('Delete__service',{"id":s.id}) }}" onsubmit="return confirm('etes vous sure de supprimer cette opportunité?');><i class="fa fa-trash"></i></a></td>
 
                                             {#                                                                        <td>{%  if categorie.categorieParente %} {{ categorie.categorieParente.libelle }} {% endif %}</td>#}
                                            </tr>

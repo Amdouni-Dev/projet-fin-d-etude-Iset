@@ -23,7 +23,7 @@ class UserChecker implements UserCheckerInterface
 
         if ($user->isDeleted()) {
             // the message passed to this exception is meant to be displayed to the user
-            throw new CustomUserMessageAccountStatusException('Your user account no longer exists.');
+            throw new CustomUserMessageAccountStatusException('votre compte est supprimé a cause de votre comportement , tu peux conatcter notre admin.');
         }
     }
 
@@ -35,7 +35,7 @@ class UserChecker implements UserCheckerInterface
 
         // user account is expired, the user may be notified
         if (!$user->isValid()) {
-            throw new AccountExpiredException('Your user account is disabled');
+            throw new AccountExpiredException('votre compte est bloqué a cause de votre comportement , tu peux contacter notre admin.');
         }
     }
 }

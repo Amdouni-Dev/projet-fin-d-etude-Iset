@@ -395,12 +395,6 @@ $topics=$topicRepository->findAll();
 
     /**
      * @Route("/SupprimerConversationAdmin/{id}", name="mmmm")
-     * @param $id
-     * @param Request $request
-     * @param Topic $topic
-     * @param TopicRepository $topicRepository
-     * @param Message $message
-     * @return Response
      */
     public function delete($id,Request $request, Topic $topic,TopicRepository $topicRepository,Message $message): Response
     {
@@ -412,9 +406,12 @@ $topics=$topicRepository->findAll();
 //        dd($message);
 
 //        $topic= $entityManager->getRepository(Topic::class)->find($id);
-        $t=$topicRepository->find($id);
+       $t=$topicRepository->find($id);
+       $tm=$t->getMessages();
 //        $entityManager->remove($message);
-        $entityManager->remove($t);
+            $entityManager->remove($tm);
+
+            $entityManager->remove($t);
 
         $this->addFlash('success', 'Conversation bien été supprimée.');
 

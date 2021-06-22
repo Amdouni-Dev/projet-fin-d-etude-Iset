@@ -454,14 +454,14 @@ $topics=$topicRepository->findAll();
 
        $em=$this->getDoctrine()->getManager();
        $topic=$this->getDoctrine()->getManager()->getRepository(Topic::class)->find($id);
-       if($topic=== null){
-           throw $this->createNotFoundException('ce sujet n\'existe pas');
+     $em->remove($topic);
+       $messages=$topic->getMessages();
+       foreach ($messages as $message){
+           $em->remove($message);
        }
-       else{
-           $em->remove($topic->getMessages());
-           $em->remove($topic);
-           $em->flush();
-       }
+       $em->flush();
+
+
        return new Response('supprimé');
         }catch (\Exception $e){
             echo "Exception Found - " . $e->getMessage() . "<br/>";

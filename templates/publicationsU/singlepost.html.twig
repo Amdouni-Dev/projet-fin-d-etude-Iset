@@ -116,7 +116,42 @@
 <!-- Photoswipe CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css">
-<section id="work" class="portfolio-mf sect-pt4 route" >
+    <div class="modal modalAnimate fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true" data-animation-in="fadeInLeft"  data-animation-out="bounceOut">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Les regles d'utilisations</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div id="writer"></div>
+                        {% for r in regles %}
+                            <p style="font-family:'Comic Sans MS' ">* {{ r.description }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Modal footer -->
+
+                    <div class="modal-footer">
+                        <a href="{{ path('newpost') }}">
+                            <button class="btn-light " style="font-family:'Comic Sans MS' ">Créer une nouvelle publication
+                            </button>
+
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section id="work" class="portfolio-mf sect-pt4 route" >
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
@@ -129,12 +164,15 @@
                 <div class="title-box text-center">
                     {% if app.user %}
                         {% if app.user.deleted!=1 %}
-                            <a href="{{ path('newpost') }}"><button class="button button-a button-big button-rouded">Créer une nouvelle publication</button></a>
+                            {#                    <a href="{{ path('newpost') }}"><button class="button button-a button-big button-rouded">Créer une nouvelle publication</button></a>#}
+                            <button style="float: right" type="button" class="animated-button2" data-toggle="modal" data-target="#myModal">
+                                <i class="fa fa-file-text"></i> Ajouter une publication
+                            </button>
                         {% else %}
-                            <a href="#" disabled="disabled" title="Vous êtes bloqué pour le moment par un administrateur en raison de votre comportement !"><button class="button button-a button-big button-rouded">Créer une nouvelle publication</button></a>
+                            <a href="#"  title="Vous êtes bloqué par un admin Associations pour tous en raison de votre comportement !"><button disabled class="animated-button2"><i class="fa fa-file-text"></i> Créer une nouvelle publication</button></a>
                         {% endif %}
                     {% else %}
-                        <button onclick="alertinfo();" class="button button-a button-big button-rouded">Créer une nouvelle publication</button>
+                        <button onclick="alertinfo();" style="float:right" class="animated-button2"><i class="fa fa-file-text"></i> Créer une nouvelle publication</button>
                     {% endif %}
                         <script>
                             function alertinfo(){

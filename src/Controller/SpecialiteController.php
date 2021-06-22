@@ -199,4 +199,21 @@ class SpecialiteController extends AbstractController
 
         return $this->redirectToRoute('specialite_index');
     }
+
+    /**
+     * @Route("/AdmindeleteSpecialite/{id}", name="deletespAdmin", methods={"POST"})
+     * @param Request $request
+     * @param Specialite $specialite
+     * @return Response
+     */
+    public function deletespAdmin(Request $request, Specialite $specialite): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$specialite->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($specialite);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('specialite_index_admin');
+    }
 }

@@ -447,6 +447,7 @@ $topics=$topicRepository->findAll();
      */
     public function deletech(Request $request, Topic $topic): Response
     {
+        try{
         if ($this->isCsrfTokenValid('delete'.$topic->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($topic->getMessages());
@@ -455,5 +456,8 @@ $topics=$topicRepository->findAll();
         }
 
         return $this->redirectToRoute('evenementAdmin_gerer');
+        }catch (\Exception $e){
+            echo "Exception Found - " . $e->getMessage() . "<br/>";
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Activite;
 use App\Entity\Association;
 use App\Entity\Categorie;
+use App\Entity\Opportunite;
 use App\Entity\Regles;
 use App\Entity\Service;
 use App\Entity\Specialite;
@@ -395,24 +396,25 @@ $topics=$topicRepository->findAll();
 
     /**
      * @Route("/SupprimerConversationAdmin/{id}", name="mmmm")
+     * @param $id
+     * @return Response
      */
-    public function delete($id,Request $request, Topic $topic,TopicRepository $topicRepository,Message $message): Response
+    public function delete($id): Response
     {
 //$t=$topicRepository->find($topic);
 //$m=$t->getMessages();
         try{
-        $entityManager = $this->getDoctrine()->getManager();
-//        $message= $entityManager->getRepository(Message::class)->find($topic);
-//        dd($message);
-
+//        $entityManager = $this->getDoctrine()->getManager();
+////        $message= $entityManager->getRepository(Message::class)->find($topic);
+////        dd($message);
+//
 //        $topic= $entityManager->getRepository(Topic::class)->find($id);
-       $t=$topicRepository->find($id);
-       $tm=$t->getMessages();
-//        $entityManager->remove($message);
-            $entityManager->remove($tm);
+////        $entityManager->remove($message);
+//        $entityManager->remove($topic);
+            $entityManager = $this->getDoctrine()->getManager();
 
-            $entityManager->remove($t);
-
+            $op = $entityManager->getRepository(Topic::class)->find($id);
+            $entityManager->remove($op);
         $this->addFlash('success', 'Conversation bien été supprimée.');
 
 

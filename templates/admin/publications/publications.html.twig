@@ -57,7 +57,7 @@
                                     <th>Suprimer</th>
                                     </thead>
                                     <tbody>
-                                    {% for p in pubs  %}
+                                    {% for p in pubs |sort |reverse  %}
                                         <tr>
                                             <td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ p.id }}"></td>
                                             <td>{{ p.user.nomComplet }}</td>

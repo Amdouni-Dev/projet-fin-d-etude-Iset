@@ -3,7 +3,7 @@
 # **SETUP**
 1 - Install all dependencies :
 
-~~~
+~
     composer install
 ~~~
 
